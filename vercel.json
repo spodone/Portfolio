@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/kyb-fuib", "destination": "/kyb-fuib.html" },
+    { "source": "/token-staking-dappradar", "destination": "/token-staking-dappradar.html" },
+    { "source": "/rankings-dappradar", "destination": "/rankings-dappradar.html" },
+    { "source": "/white-label-openware", "destination": "/white-label-openware.html" }
+  ]
+}
