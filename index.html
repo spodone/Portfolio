@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EUGENE TREIHER — UX/Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Bricolage+Grotesque:wght@200;300;400;500;600&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0f;
+  --text:#f0ede8;
+  --muted:#6b6b66;
+  --muted2:#9a9990;
+  --accent:#c9a84c;
+  --line:rgba(240,237,232,0.07);
+  --serif:'Inter',system-ui,sans-serif;
+  --sans:'Inter',system-ui,sans-serif;
+}
+html{background:var(--bg);scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;overflow-x:hidden}
+
+/* ── BLOB CANVAS ── */
+#blob-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;height:100%}
+
+.page{display:none;position:relative;z-index:1}
+.page.active{display:block}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 52px;
+}
+.nav-inner{
+  width:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  background:rgba(10,10,15,0.6);backdrop-filter:blur(20px);
+  border:1px solid var(--line);border-radius:100px;
+  padding:12px 24px 12px 28px;
+}
+.nav-right{display:flex;align-items:center;gap:16px;justify-content:flex-end}
+.nav-logo{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:400;color:var(--text);text-decoration:none;letter-spacing:.02em;cursor:pointer}
+.nav-links{display:flex;gap:28px;list-style:none;justify-content:center}
+.nav-links a{color:var(--muted2);text-decoration:none;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;transition:color .2s;cursor:pointer}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#0a0a0f;border:none;padding:8px 20px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--sans);letter-spacing:0.02em;transition:opacity .2s}
+.nav-cta:hover{opacity:.82}
+.nav-linkedin{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);text-decoration:none;transition:color .2s}
+.nav-linkedin:hover{color:var(--text)}
+.nav-back{display:none;align-items:center;gap:8px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted2);cursor:pointer;background:none;border:none;font-family:var(--sans);transition:color .2s}
+.nav-back:hover{color:var(--text)}
+.case-nav .nav-links{display:none}
+/* case nav keeps CTA visible, hides back from nav */
+
+/* back arrow in case page layout */
+.case-back{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);cursor:pointer;
+  margin:48px 0 48px 52px;
+  transition:color .2s;
+  background:none;border:none;font-family:var(--sans);
+  padding:0;
+}
+.case-back:hover{color:var(--text)}
+.case-back::before{content:'←';font-size:14px;transition:transform .2s}
+.page.case-page{padding-top:80px}
+
+s{padding:0 52px}
+
+/* ── AI NATIVE ── */
+.hero-eyebrow{
+  display:flex;flex-direction:column;align-items:center;
+  gap:14px;margin-bottom:32px;
+}
+.ai-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:16px;letter-spacing:.06em;text-transform:uppercase;
+  border:none;
+  padding:8px 20px;border-radius:100px;
+  color:var(--text);
+  opacity:.9;
+}
+.hero-eyebrow-sub{
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);
+}
+.hero-tags{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+  margin-top:28px;
+}
+.hero-tag{
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(240,237,232,.5);
+  padding:6px 14px;border-radius:100px;
+  transition:color .2s;
+}
+.hero-tag:hover{color:var(--text)}
+
+
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:space-between;align-items:stretch;
+  padding:130px 52px 72px;
+  border-bottom:1px solid var(--line);
+  position:relative;
+}
+.hero-main{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+}
+.hero-eyebrow::before{display:none}
+.hero-headline{
+  font-family:'Bricolage Grotesque', sans-serif;
+  font-weight:300;
+  font-size:clamp(56px,6vw,80px);
+  line-height:1.05;letter-spacing:-.01em;
+  text-transform:none;
+  color:var(--text);
+  margin-bottom:0;text-align:center;
+  position:relative;cursor:default;
+}
+.hero-headline em{font-style:normal;color:var(--accent)}
+
+/* ── CLIP REVEAL ── */
+.hero-headline .line{
+  display:block;overflow:hidden;
+  padding-bottom:.08em; /* prevent descender clip */
+}
+.hero-headline .line-inner{
+  display:block;
+  transform:translateY(110%);
+  opacity:0;
+  transition:transform .9s cubic-bezier(.16,1,.3,1), opacity .01s linear;
+}
+.hero-headline.revealed .line-inner{
+  transform:translateY(0);
+  opacity:1;
+}
+.hero-headline.revealed .line:nth-child(1) .line-inner{transition-delay:.05s}
+.hero-headline.revealed .line:nth-child(2) .line-inner{transition-delay:.18s}
+.hero-headline.revealed .line:nth-child(3) .line-inner{transition-delay:.31s}
+
+.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;padding-top:40px;border-top:1px solid var(--line)}
+.hero-desc{font-size:14px;color:var(--muted2);max-width:320px;line-height:1.8}
+.hero-stats{display:flex;gap:48px}
+.stat-num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--text);display:block;letter-spacing:-.02em}
+.stat-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;display:block}
+
+/* ── LOGOS ── */
+.logos-section{
+  padding:48px 0;
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+.logos-label{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:32px;text-align:left;padding:0 52px;
+}
+.logos-track-wrap{overflow:hidden;mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%)}
+.logos-track{
+  display:flex;white-space:nowrap;will-change:transform;
+}
+.logos-track:hover .logo-item{opacity:.9}
+.logo-item{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:0 36px;
+  flex-shrink:0;
+  opacity:.4;
+  transition:opacity .3s;
+  height:28px;
+}
+.logo-item:hover{opacity:.85}
+.logo-item img{
+  max-height:18px;height:auto;width:auto;
+  filter:brightness(0) invert(1);
+  display:block;
+  object-fit:contain;
+}
+.logo-item.logo-sm img{
+  max-height:13px;
+}
+@keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── WORK ── */
+.work-section{
+  padding:0 0 80px 0;
+  border-bottom:1px solid var(--line);
+  background:rgba(8,8,12,0.82);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  position:relative;
+  z-index:2;
+}
+.sec-header{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:24px 52px;
+  position:sticky;top:0;z-index:90;
+  border-bottom:1px solid var(--line);
+  margin-bottom:0;
+}
+.sec-num{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* luxury case list */
+.case-list{display:flex;flex-direction:column;position:relative;padding:0 52px}
+.case-row{
+  display:grid;
+  grid-template-columns:48px 1fr auto 80px;
+  align-items:center;gap:32px;
+  padding:28px 0;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+  position:relative;
+  transition:opacity .3s;
+}
+.case-list:hover .case-row{opacity:.4}
+.case-list:hover .case-row:hover{opacity:1}
+.case-row:first-child{border-top:1px solid var(--line)}
+.case-idx{
+  font-size:11px;color:var(--muted);
+  letter-spacing:.06em;font-variant-numeric:tabular-nums;
+  align-self:flex-start;padding-top:4px;
+}
+.case-row-name{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:300;
+  font-size:clamp(22px,2.8vw,36px);
+  color:var(--text);letter-spacing:-.01em;line-height:1.1;
+  transition:transform .4s cubic-bezier(.22,1,.36,1);
+}
+.case-row-desc{
+  display:block;
+  font-family:'Inter',sans-serif;
+  font-size:14px;font-weight:300;
+  color:var(--muted);letter-spacing:.02em;
+  line-height:1.5;margin-top:6px;
+}
+.case-accent{
+  font-style:normal;
+  color:var(--accent);
+}
+.case-row:hover .case-row-name{transform:translateX(6px)}
+.case-row-tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.case-row-tag{
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--line);
+  padding:5px 12px;border-radius:100px;
+  transition:border-color .3s,color .3s;
+}
+.case-row:hover .case-row-tag{border-color:var(--accent);color:var(--accent)}
+.case-row-year{font-size:11px;color:var(--muted);letter-spacing:.04em;text-align:right;white-space:nowrap}
+
+/* hover preview image */
+.case-preview{
+  position:fixed;
+  width:280px;height:360px;
+  border-radius:16px;overflow:hidden;
+  pointer-events:none;
+  opacity:0;
+  transform:scale(.92) rotate(-2deg);
+  transition:opacity .4s cubic-bezier(.22,1,.36,1), transform .4s cubic-bezier(.22,1,.36,1);
+  z-index:50;
+  box-shadow:0 24px 64px rgba(0,0,0,.6);
+}
+.case-preview img,.case-preview svg{width:100%;height:100%;object-fit:cover;display:block}
+.case-preview.visible{opacity:1;transform:scale(1) rotate(-1deg)}
+
+/* ── ABOUT ── */
+.about-section{padding:80px 52px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-headline{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:clamp(56px,6vw,80px);line-height:1.05;letter-spacing:-.025em;color:var(--text);margin-bottom:28px}
+.about-headline em{font-style:italic;color:var(--accent)}
+.about-text{font-size:15px;color:var(--muted2);line-height:1.85;margin-bottom:18px}
+.exp-list{display:flex;flex-direction:column}
+.exp-item{display:flex;justify-content:space-between;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--line)}
+.exp-item:first-child{border-top:1px solid var(--line)}
+.exp-co{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:22px;letter-spacing:-.01em;color:var(--text)}
+.exp-role{font-size:12px;color:var(--muted);margin-top:3px}
+.exp-yr{font-size:12px;color:var(--muted);white-space:nowrap}
+
+/* ── CONTACT ── */
+.contact-section{padding:96px 52px;overflow:hidden}
+.contact-big{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:clamp(56px,6vw,80px);line-height:.96;letter-spacing:-.03em;color:var(--text);margin-bottom:64px}
+.contact-big em{font-style:italic;color:var(--accent)}
+.contact-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:32px;padding-top:48px;border-top:1px solid var(--line)}
+.contact-email{font-family:var(--serif);font-size:clamp(18px,2.2vw,28px);color:var(--text);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:3px;transition:border-color .2s;letter-spacing:-.01em}
+.contact-email:hover{border-color:var(--accent)}
+.contact-socials{display:flex;gap:24px}
+.contact-socials a{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);text-decoration:none;transition:color .2s}
+.contact-socials a:hover{color:var(--text)}
+
+footer{padding:22px 52px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
+.loc{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted)}
+.locdot{width:5px;height:5px;background:#4caf50;border-radius:50%;animation:pulse 2.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ── CASE ── */
+.case-hero{padding:0 52px 0}
+.case-eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;display:flex;align-items:center;gap:14px}
+.case-eyebrow::before{content:'';width:24px;height:1px;background:var(--muted);display:block}
+.case-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1.02;letter-spacing:-.02em;color:var(--text);max-width:840px;margin-bottom:48px}
+.case-meta{display:flex;gap:52px;padding-bottom:52px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cml{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.cmv{font-family:'Inter',sans-serif;font-size:14px;font-weight:400;color:var(--text);margin-top:5px}
+.case-cover{width:100%;height:520px;overflow:hidden;margin-top:52px;border-radius:10px;border:1px solid var(--line)}
+.case-cover svg{width:100%;height:100%;display:block}
+.case-body{padding:80px 52px 96px;display:grid;grid-template-columns:200px 1fr;gap:72px;align-items:start;border-bottom:1px solid var(--line)}
+.case-sidebar{position:sticky;top:110px}
+.csl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+.cst{font-size:13px;color:var(--muted);padding:7px 0 7px 16px;border-left:1px solid var(--line);cursor:pointer;transition:all .2s;display:block}
+.cst:hover,.cst.active{color:var(--text);border-left-color:var(--accent)}
+.case-content{display:flex;flex-direction:column;gap:60px}
+.csh{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:clamp(26px,2.8vw,36px);line-height:1.1;color:var(--text);margin-bottom:18px}
+.csp{color:var(--muted2);font-size:15px;line-height:1.88;font-family:'Inter',sans-serif;font-weight:300}
+.csp+.csp{margin-top:16px}
+.csq{border-left:2px solid var(--accent);padding:20px 28px;margin-top:26px;background:rgba(201,168,76,.04);border-radius:0 6px 6px 0}
+.csq p{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:300;line-height:1.5;color:var(--text);font-style:italic}
+.crg{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.crc{background:var(--bg);padding:30px}
+.crn{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:50px;color:var(--accent);line-height:1;display:block;margin-bottom:10px;letter-spacing:-.02em}
+.crl{font-size:13px;color:var(--muted2);line-height:1.55;font-family:'Inter',sans-serif}
+.case-next{padding:68px 52px 88px;display:flex;justify-content:space-between;align-items:center}
+.cnl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.cnt{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:clamp(28px,3vw,40px);color:var(--text);letter-spacing:-.02em}
+.cnb{border:1px solid var(--line);padding:13px 30px;border-radius:100px;color:var(--text);font-size:11px;font-family:var(--sans);cursor:pointer;background:transparent;transition:all .2s;letter-spacing:.08em;text-transform:uppercase}
+.cnb:hover{border-color:var(--accent);color:var(--accent)}
+
+@media(max-width:768px){
+  nav{padding:14px 16px}
+  .hero,.work-section,.about-section,.contact-section,.case-hero,.case-body,.case-next,footer{padding-left:20px;padding-right:20px}
+  .hero-bottom{flex-direction:column;gap:28px;align-items:flex-start}
+  .hero-stats{gap:32px}
+  .cards-grid{grid-template-columns:1fr}
+  .case-row{grid-template-columns:32px 1fr 60px}
+  .case-row-tags{display:none}
+  .about-section{grid-template-columns:1fr;gap:48px}
+  .case-body{grid-template-columns:1fr}
+  .case-sidebar{display:none}
+  .crg{grid-template-columns:1fr}
+  .case-next{flex-direction:column;gap:24px;align-items:flex-start}
+}
+
+/* ── LOADER ── */
+#loader{
+  position:fixed;inset:0;z-index:999;
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+  transition:opacity 1s cubic-bezier(.4,0,.2,1), visibility 1s ease;
+}
+#loader.done{opacity:0;visibility:hidden}
+.loader-name{
+  display:flex;overflow:hidden;
+  font-family:'Bricolage Grotesque', sans-serif;font-size:48px;font-weight:300;color:var(--text);
+  letter-spacing:.12em;line-height:1;text-transform:uppercase;}
+.loader-char{
+  display:inline-block;
+  opacity:0;transform:translateY(60px) rotateX(40deg);
+  animation:charIn .9s cubic-bezier(.22,1,.36,1) forwards;
+  transform-origin:bottom center;
+  backface-visibility:hidden;
+}
+.loader-char.space{width:.28em}
+@keyframes charIn{
+  0%{opacity:0;transform:translateY(60px) rotateX(40deg)}
+  60%{opacity:1}
+  100%{opacity:1;transform:translateY(0) rotateX(0)}
+}
+.loader-tagline{
+  font-family:'Inter', sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text);margin-top:20px;opacity:0;
+  animation:taglineIn .8s cubic-bezier(.22,1,.36,1) 1.2s forwards;
+}
+.loader-tagline2{
+  font-family:'Inter', sans-serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);margin-top:8px;opacity:0;
+  animation:taglineIn .8s cubic-bezier(.22,1,.36,1) 1.45s forwards;
+}
+@keyframes taglineIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.loader-bar{
+  position:absolute;bottom:0;left:0;height:20px;
+  background:#c9a84c;width:0%;
+  animation:loaderBar 1.6s cubic-bezier(.4,0,.2,1) .2s forwards;
+}
+@keyframes loaderBar{0%{width:0%}60%{width:72%}100%{width:100%}}
+
+
+.reveal{
+  opacity:0;transform:translateY(32px);
+  transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1);
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.08s}
+.reveal-delay-2{transition-delay:.18s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.42s}
+/* stagger children */
+.reveal-children > *{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+}
+.reveal-children.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:.05s}
+.reveal-children.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:.15s}
+.reveal-children.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:.25s}
+.reveal-children.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:.35s}
+
+/* clip-path shutter — only for text blocks */
+.clip-reveal{
+  overflow:hidden;
+}
+.clip-reveal-inner{
+  transform:translateY(100%);
+  transition:transform .9s cubic-bezier(.16,1,.3,1);
+}
+.clip-reveal.visible .clip-reveal-inner{transform:translateY(0)}
+
+/* counter */
+.stat-num[data-target]{display:block}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-name" id="loader-name"></div>
+  <div class="loader-tagline">AI Native Product Designer</div>
+  <div class="loader-tagline2">Fintech · Web3 · Trading</div>
+  <div class="loader-bar"></div>
+</div>
+
+<canvas id="blob-canvas"></canvas>
+
+<nav id="main-nav">
+  <div class="nav-inner">
+    <span class="nav-logo" onclick="showPage('home')">Eugene T.</span>
+    <ul class="nav-links">
+      <li><a onclick="goHome('work')">Work</a></li>
+      <li><a onclick="goHome('about')">About</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://www.linkedin.com/in/yevhen-t-9b0225137/" target="_blank" class="nav-linkedin">LinkedIn</a>
+      <button class="nav-cta" onclick="goHome('contact')">Get in touch</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ HOME ══════════ -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <div class="hero-main">
+      <div class="hero-eyebrow reveal reveal-delay-1">
+        <div class="ai-badge">AI Native Product Designer</div>
+      </div>
+      <h1 class="hero-headline reveal reveal-delay-2">
+        <span class="line"><span class="line-inner">Turning complex</span></span>
+        <span class="line"><span class="line-inner">financial products</span></span>
+        <span class="line"><span class="line-inner">into <em>experiences</em></span></span>
+      </h1>
+      <div class="hero-tags reveal reveal-delay-3">
+        <span class="hero-tag">Fintech</span>
+        <span class="hero-tag">Web3</span>
+        <span class="hero-tag">Trading</span>
+      </div>
+    </div>
+    <div class="hero-bottom reveal reveal-delay-3">
+      <p class="hero-desc">9+ years designing for Fintech, Web3 and crypto trading. I make products people actually understand — and come back to.</p>
+      <div class="hero-stats reveal-children">
+        <div><span class="stat-num" data-target="9" data-suffix="+">0</span><span class="stat-label">Years</span></div>
+        <div><span class="stat-num" data-target="50" data-suffix="+">0</span><span class="stat-label">Projects</span></div>
+        <div><span class="stat-num" data-target="20" data-suffix="M+">0</span><span class="stat-label">Users reached</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGOS SECTION -->
+  <section class="logos-section reveal">
+    <p class="logos-label">Experience Across</p>
+    <div class="logos-track-wrap">
+      <div class="logos-track" id="logos-track">
+        <span class="logo-item"><img src="logo-dappradar.svg" alt="DappRadar"></span>
+        <span class="logo-item"><img src="logo-quni.svg" alt="Quni"></span>
+        <span class="logo-item"><img src="logo-jmy.svg" alt="JMY"></span>
+        <span class="logo-item"><img src="logo-cell.svg" alt="Cell"></span>
+        <span class="logo-item"><img src="logo-towe.svg" alt="Towe"></span>
+        <span class="logo-item"><img src="logo-openex.svg" alt="OpenEx"></span>
+        <span class="logo-item"><img src="logo-mirex.svg" alt="Mirex"></span>
+        <span class="logo-item logo-sm"><img src="logo-tokenman.svg" alt="Tokenman"></span>
+        <span class="logo-item"><img src="logo-opendax.svg" alt="Opendax"></span>
+        <span class="logo-item"><img src="logo-tradplus.svg" alt="TradPlus"></span>
+        <span class="logo-item"><img src="logo-mark.svg" alt="Brand"></span>
+        <span class="logo-item"><img src="logo-uxnews.svg" alt="UX News"></span>
+        <span class="logo-item"><img src="logo-nairaex.svg" alt="NairaEX"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="work-section" id="work">
+    <div class="sec-header reveal">
+      <span class="sec-num">02 — Selected work</span>
+      <span class="sec-num">4 projects</span>
+    </div>
+
+    <div class="case-preview" id="case-preview">
+      <img id="case-preview-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:none;">
+      <video id="case-preview-vid" muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:none;"></video>
+    </div>
+
+    <div class="case-list reveal">
+      <div class="case-row" onclick="showCase('dappradar')" data-preview="case1.png">
+        <span class="case-idx">01</span>
+        <div class="case-row-name">KYB Verification Service @FUIB Bank<span class="case-row-desc">Saved up to <em class="case-accent">$1.1M</em> in estimated operational costs within the first 6 months.</span></div>
+        <div class="case-row-tags">
+          <span class="case-row-tag">Fintech</span>
+          <span class="case-row-tag">Banking</span>
+        </div>
+        <span class="case-row-year">2023 — 2024</span>
+      </div>
+      <div class="case-row" onclick="showCase('yellow')" data-preview="case2.png">
+        <span class="case-idx">02</span>
+        <div class="case-row-name">Token Staking UX @DappRadar<span class="case-row-desc"><em class="case-accent">5M+</em> tokens staked · <em class="case-accent">100+</em> new PRO subscribers in the first month.</span></div>
+        <div class="case-row-tags">
+          <span class="case-row-tag">Web3</span>
+          <span class="case-row-tag">DeFi</span>
+        </div>
+        <span class="case-row-year">2022 — 2023</span>
+      </div>
+      <div class="case-row">
+        <span class="case-idx">03</span>
+        <div class="case-row-name">Rankings Experience @DappRadar<span class="case-row-desc">Increased engaged sessions by <em class="case-accent">16%</em> by redesigning DappRadar's core discovery experience.</span></div>
+        <div class="case-row-tags">
+          <span class="case-row-tag">Web3</span>
+          <span class="case-row-tag">UX</span>
+        </div>
+        <span class="case-row-year">2022 — 2023</span>
+      </div>
+      <div class="case-row" onclick="showCase('openware')" data-preview="case3.png">
+        <span class="case-idx">04</span>
+        <div class="case-row-name">White-label Exchange @Openware<span class="case-row-desc">Designed an open-source crypto trading UI kit used by <em class="case-accent">7K+</em> designers and developers.</span></div>
+        <div class="case-row-tags">
+          <span class="case-row-tag">Fintech</span>
+          <span class="case-row-tag">B2B</span>
+        </div>
+        <span class="case-row-year">2019 — 2021</span>
+      </div>
+    </div>
+  </section>
+
+    <section class="about-section" id="about">
+    <div class="reveal">
+      <h2 class="about-headline">Senior designer.<br><em>Problem solver.</em></h2>
+      <p class="about-text">I'm Yevhen — a product designer based in Barcelona. 6 years at the intersection of complex technology and everyday people, mostly in Web3 and Fintech.</p>
+      <p class="about-text">I believe the best product design is invisible. My job is to make the complex feel obvious.</p>
+    </div>
+    <div class="exp-list reveal reveal-delay-2">
+      <div class="exp-item"><div><div class="exp-co">DappRadar</div><div class="exp-role">Lead Product Designer</div></div><span class="exp-yr">2022 — now</span></div>
+      <div class="exp-item"><div><div class="exp-co">Yellow Network</div><div class="exp-role">Senior UX Designer</div></div><span class="exp-yr">2021 — 2022</span></div>
+      <div class="exp-item"><div><div class="exp-co">Openware</div><div class="exp-role">UX/UI Designer</div></div><span class="exp-yr">2019 — 2021</span></div>
+      <div class="exp-item"><div><div class="exp-co">Freelance</div><div class="exp-role">Product Designer</div></div><span class="exp-yr">2018 — 2019</span></div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <div class="contact-big reveal">Got a project<br><em>in mind?</em></div>
+    <div class="contact-row reveal reveal-delay-2">
+      <a href="mailto:yevhen@treiher.com" class="contact-email">yevhen@treiher.com</a>
+      <div class="contact-socials">
+        <a href="https://www.linkedin.com/in/yevhen-t-9b0225137/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer><span>© 2026 EUGENE TREIHER</span><div class="loc"><div class="locdot"></div><span>Dubai</span></div></footer>
+</div>
+
+<!-- ══════════ CASE: DAPPRADAR ══════════ -->
+<div id="page-dappradar" class="page case-page">
+  <button class="case-back" onclick="showPage('home')">Back</button>
+  <section class="case-hero">
+    <div class="case-eyebrow">Web3 · Analytics · 2022 — Present</div>
+    <h1 class="case-title">Making blockchain data feel human</h1>
+    <div class="case-meta">
+      <div><div class="cml">Role</div><div class="cmv">Lead Product Designer</div></div>
+      <div><div class="cml">Company</div><div class="cmv">DappRadar</div></div>
+      <div><div class="cml">Year</div><div class="cmv">2022 — Present</div></div>
+      <div><div class="cml">Scope</div><div class="cmv">Product design, Design system</div></div>
+    </div>
+    <div class="case-cover">
+      <svg viewBox="0 0 1200 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="1200" height="520" fill="#0b1116"/><defs><radialGradient id="cc1" cx="50%" cy="65%" r="60%"><stop offset="0%" stop-color="#0f3d20" stop-opacity="0.8"/><stop offset="100%" stop-color="#0b1116" stop-opacity="0"/></radialGradient></defs>
+        <rect width="1200" height="520" fill="url(#cc1)"/>
+        <rect x="40" y="32" width="1120" height="456" rx="14" fill="#111820" stroke="#1e2d3a" stroke-width="1"/>
+        <rect x="40" y="32" width="1120" height="48" rx="14" fill="#0d151e"/><rect x="40" y="68" width="1120" height="12" fill="#0d151e"/>
+        <circle cx="72" cy="56" r="7" fill="#ff5f57" opacity="0.9"/><circle cx="96" cy="56" r="7" fill="#febc2e" opacity="0.9"/><circle cx="120" cy="56" r="7" fill="#28c840" opacity="0.9"/>
+        <rect x="200" y="44" width="360" height="24" rx="6" fill="#161f28"/>
+        <rect x="40" y="80" width="200" height="408" fill="#0d1520" opacity="0.6"/><line x1="240" y1="80" x2="240" y2="488" stroke="#1a2534" stroke-width="1"/>
+        <rect x="60" y="100" width="120" height="10" rx="4" fill="#63dc80" opacity="0.8"/>
+        <rect x="60" y="122" width="95" height="8" rx="3" fill="#fff" opacity="0.12"/><rect x="60" y="142" width="110" height="8" rx="3" fill="#fff" opacity="0.1"/><rect x="60" y="162" width="85" height="8" rx="3" fill="#fff" opacity="0.1"/><rect x="60" y="182" width="100" height="8" rx="3" fill="#fff" opacity="0.1"/>
+        <rect x="260" y="96" width="210" height="84" rx="10" fill="#141e28" stroke="#1e2d3d" stroke-width="1"/>
+        <rect x="278" y="112" width="70" height="7" rx="3" fill="#63dc80" opacity="0.55"/><rect x="278" y="128" width="110" height="18" rx="4" fill="#fff" opacity="0.88"/><rect x="278" y="154" width="80" height="7" rx="3" fill="#63dc80" opacity="0.3"/>
+        <rect x="488" y="96" width="210" height="84" rx="10" fill="#141e28" stroke="#1e2d3d" stroke-width="1"/>
+        <rect x="506" y="112" width="55" height="7" rx="3" fill="#63dc80" opacity="0.55"/><rect x="506" y="128" width="95" height="18" rx="4" fill="#fff" opacity="0.88"/><rect x="506" y="154" width="65" height="7" rx="3" fill="#fff" opacity="0.15"/>
+        <rect x="716" y="96" width="210" height="84" rx="10" fill="#63dc80" stroke="#63dc80" fill-opacity="0.1" stroke-width="1" stroke-opacity="0.4"/>
+        <rect x="734" y="112" width="60" height="7" rx="3" fill="#63dc80" opacity="0.9"/><rect x="734" y="128" width="105" height="18" rx="4" fill="#63dc80" opacity="0.95"/><rect x="734" y="154" width="70" height="7" rx="3" fill="#63dc80" opacity="0.45"/>
+        <rect x="944" y="96" width="176" height="84" rx="10" fill="#141e28" stroke="#1e2d3d" stroke-width="1"/>
+        <rect x="962" y="112" width="65" height="7" rx="3" fill="#63dc80" opacity="0.55"/><rect x="962" y="128" width="90" height="18" rx="4" fill="#fff" opacity="0.88"/><rect x="962" y="154" width="75" height="7" rx="3" fill="#fff" opacity="0.15"/>
+        <rect x="260" y="196" width="664" height="236" rx="10" fill="#0f1820" stroke="#1a2534" stroke-width="1"/>
+        <rect x="278" y="212" width="100" height="8" rx="3" fill="#fff" opacity="0.4"/><rect x="278" y="228" width="150" height="16" rx="4" fill="#63dc80" opacity="0.9"/>
+        <line x1="278" y1="400" x2="904" y2="400" stroke="#1a2534" stroke-width="1"/>
+        <line x1="278" y1="365" x2="904" y2="365" stroke="#fff" stroke-width="0.5" opacity="0.04"/><line x1="278" y1="330" x2="904" y2="330" stroke="#fff" stroke-width="0.5" opacity="0.04"/><line x1="278" y1="295" x2="904" y2="295" stroke="#fff" stroke-width="0.5" opacity="0.04"/>
+        <polyline points="278,395 340,376 400,382 460,350 520,363 580,325 640,338 700,302 760,316 820,280 870,292 904,272" stroke="#63dc80" stroke-width="2.5" fill="none" opacity="0.95"/>
+        <polygon points="278,395 340,376 400,382 460,350 520,363 580,325 640,338 700,302 760,316 820,280 870,292 904,272 904,415 278,415" fill="#63dc80" opacity="0.07"/>
+        <rect x="940" y="196" width="220" height="236" rx="10" fill="#0f1820" stroke="#1a2534" stroke-width="1"/>
+        <rect x="956" y="212" width="90" height="8" rx="3" fill="#fff" opacity="0.3"/><line x1="940" y1="232" x2="1160" y2="232" stroke="#1a2534" stroke-width="1"/>
+        <rect x="956" y="244" width="64" height="7" rx="3" fill="#fff" opacity="0.65"/><rect x="1080" y="244" width="50" height="7" rx="3" fill="#63dc80" opacity="0.8"/>
+        <rect x="956" y="262" width="70" height="7" rx="3" fill="#fff" opacity="0.45"/><rect x="1080" y="262" width="42" height="7" rx="3" fill="#63dc80" opacity="0.6"/>
+        <rect x="956" y="280" width="58" height="7" rx="3" fill="#fff" opacity="0.45"/><rect x="1080" y="280" width="48" height="7" rx="3" fill="#ff6060" opacity="0.55"/>
+        <rect x="956" y="298" width="66" height="7" rx="3" fill="#fff" opacity="0.35"/><rect x="1080" y="298" width="44" height="7" rx="3" fill="#63dc80" opacity="0.5"/>
+        <rect x="956" y="316" width="54" height="7" rx="3" fill="#fff" opacity="0.35"/><rect x="1080" y="316" width="52" height="7" rx="3" fill="#63dc80" opacity="0.45"/>
+      </svg>
+    </div>
+  </section>
+  <section class="case-body">
+    <div class="case-sidebar"><div class="csl">Contents</div><div class="cst active">Overview</div><div class="cst">Problem</div><div class="cst">Process</div><div class="cst">Results</div></div>
+    <div class="case-content">
+      <div><h2 class="csh">Overview</h2><p class="csp">DappRadar is the world's largest dapp store — a platform where 2M+ monthly users discover and track blockchain applications, NFTs, and DeFi protocols across 50+ chains. I joined as Lead Product Designer to help the platform grow from a data-heavy tool into something approachable for mainstream Web3 users.</p></div>
+      <div><h2 class="csh">The problem</h2><p class="csp">Blockchain data is inherently complex. The existing UI prioritized information density over clarity, which worked for power users but created high drop-off for newcomers. Research showed 70% of new users left within the first session without completing a meaningful action.</p><div class="csq"><p>"People wanted to understand their portfolio at a glance — not decode a spreadsheet."</p></div></div>
+      <div><h2 class="csh">Process</h2><p class="csp">I ran discovery interviews with both power users and newcomers to map their mental models. The key insight: experienced users valued density, new users needed progressive disclosure. I prototyped three navigation architectures, tested with 18 participants, landed on a layered approach — simple surface, depth on demand.</p></div>
+      <div><h2 class="csh">Results</h2><div class="crg"><div class="crc"><span class="crn">+34%</span><span class="crl">Increase in session depth for new users after redesign</span></div><div class="crc"><span class="crn">2M+</span><span class="crl">Monthly active users on the redesigned platform</span></div><div class="crc"><span class="crn">−28%</span><span class="crl">Drop in first-session abandonment rate</span></div><div class="crc"><span class="crn">50+</span><span class="crl">Blockchain networks in unified UI</span></div></div></div>
+    </div>
+  </section>
+  <section class="case-next"><div><div class="cnl">Next project</div><div class="cnt">Yellow Network</div></div><button class="cnb" onclick="showCase('yellow')">View case study →</button></section>
+  <footer><span>© 2026 EUGENE TREIHER</span><div class="loc"><div class="locdot"></div><span>Dubai</span></div></footer>
+</div>
+
+<!-- ══════════ CASE: YELLOW ══════════ -->
+<div id="page-yellow" class="page case-page">
+  <button class="case-back" onclick="showPage('home')">Back</button>
+  <section class="case-hero">
+    <div class="case-eyebrow">Fintech · DEX · 2021 — 2022</div>
+    <h1 class="case-title">Designing trust into decentralized trading</h1>
+    <div class="case-meta">
+      <div><div class="cml">Role</div><div class="cmv">Senior UX Designer</div></div>
+      <div><div class="cml">Company</div><div class="cmv">Yellow Network</div></div>
+      <div><div class="cml">Year</div><div class="cmv">2021 — 2022</div></div>
+      <div><div class="cml">Scope</div><div class="cmv">Trading UI, Onboarding</div></div>
+    </div>
+    <div class="case-cover">
+      <svg viewBox="0 0 1200 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="1200" height="520" fill="#06060f"/><defs><radialGradient id="cc2" cx="42%" cy="55%" r="55%"><stop offset="0%" stop-color="#2e2200" stop-opacity="0.9"/><stop offset="100%" stop-color="#06060f" stop-opacity="0"/></radialGradient></defs>
+        <rect width="1200" height="520" fill="url(#cc2)"/>
+        <rect x="40" y="32" width="1120" height="456" rx="14" fill="#0c0c1e" stroke="#1c1c38" stroke-width="1"/>
+        <rect x="40" y="32" width="1120" height="48" rx="14" fill="#080818"/><rect x="40" y="68" width="1120" height="12" fill="#080818"/>
+        <circle cx="72" cy="56" r="7" fill="#ff5f57" opacity="0.9"/><circle cx="96" cy="56" r="7" fill="#febc2e" opacity="0.9"/><circle cx="120" cy="56" r="7" fill="#28c840" opacity="0.9"/>
+        <text x="160" y="62" font-size="11" fill="#ffc828" font-family="sans-serif" letter-spacing="1.5" opacity="0.95">TRADE</text><line x1="160" y1="80" x2="216" y2="80" stroke="#ffc828" stroke-width="2"/>
+        <text x="232" y="62" font-size="11" fill="#fff" font-family="sans-serif" letter-spacing="1.5" opacity="0.22">PORTFOLIO</text>
+        <text x="344" y="62" font-size="11" fill="#fff" font-family="sans-serif" letter-spacing="1.5" opacity="0.22">MARKETS</text>
+        <text x="980" y="60" font-size="13" fill="#ffc828" font-family="sans-serif" opacity="0.75">BTC / USDT  ·  42,381.50</text>
+        <text x="60" y="132" font-size="48" fill="#fff" font-family="sans-serif" font-weight="300" opacity="0.95">42,381.50</text>
+        <rect x="300" y="110" width="72" height="24" rx="5" fill="#1a3d1a"/><text x="312" y="126" font-size="11" fill="#63dc80" font-family="sans-serif" font-weight="500">+2.34%</text>
+        <rect x="60" y="164" width="220" height="296" rx="8" fill="#0d0d1e" stroke="#1a1a32" stroke-width="1"/>
+        <text x="76" y="184" font-size="9" fill="#fff" font-family="sans-serif" opacity="0.25" letter-spacing="2">ASKS</text>
+        <rect x="76" y="192" width="170" height="8" rx="2" fill="#ff4040" opacity="0.18"/><rect x="76" y="204" width="130" height="8" rx="2" fill="#ff4040" opacity="0.22"/><rect x="76" y="216" width="155" height="8" rx="2" fill="#ff4040" opacity="0.16"/><rect x="76" y="228" width="95" height="8" rx="2" fill="#ff4040" opacity="0.2"/><rect x="76" y="240" width="140" height="8" rx="2" fill="#ff4040" opacity="0.14"/>
+        <line x1="60" y1="258" x2="280" y2="258" stroke="#ffc828" stroke-width="0.8" opacity="0.4"/>
+        <text x="76" y="275" font-size="9" fill="#fff" font-family="sans-serif" opacity="0.25" letter-spacing="2">BIDS</text>
+        <rect x="76" y="282" width="160" height="8" rx="2" fill="#63dc80" opacity="0.2"/><rect x="76" y="294" width="120" height="8" rx="2" fill="#63dc80" opacity="0.25"/><rect x="76" y="306" width="175" height="8" rx="2" fill="#63dc80" opacity="0.18"/><rect x="76" y="318" width="105" height="8" rx="2" fill="#63dc80" opacity="0.22"/><rect x="76" y="330" width="145" height="8" rx="2" fill="#63dc80" opacity="0.16"/><rect x="76" y="342" width="130" height="8" rx="2" fill="#63dc80" opacity="0.14"/><rect x="76" y="354" width="90" height="8" rx="2" fill="#63dc80" opacity="0.12"/>
+        <rect x="300" y="164" width="660" height="296" rx="8" fill="#0a0a1a" stroke="#1a1a32" stroke-width="1"/>
+        <polyline points="316,438 380,416 440,426 500,382 560,398 620,350 680,366 740,316 800,334 860,285 920,302 960,275" stroke="#ffc828" stroke-width="2.5" fill="none" opacity="0.95"/>
+        <polygon points="316,438 380,416 440,426 500,382 560,398 620,350 680,366 740,316 800,334 860,285 920,302 960,275 960,456 316,456" fill="#ffc828" opacity="0.06"/>
+        <rect x="980" y="164" width="180" height="296" rx="8" fill="#0d0d1e" stroke="#1a1a32" stroke-width="1"/>
+        <rect x="996" y="182" width="72" height="28" rx="5" fill="#1a3020"/><text x="1009" y="200" font-size="10" fill="#63dc80" font-family="sans-serif" font-weight="500">BUY</text>
+        <rect x="1076" y="182" width="68" height="28" rx="5" fill="#1e1228"/><text x="1087" y="200" font-size="10" fill="#ff6060" font-family="sans-serif" font-weight="500">SELL</text>
+        <rect x="996" y="226" width="148" height="32" rx="5" fill="#131328" stroke="#252545" stroke-width="1"/><rect x="1008" y="238" width="80" height="8" rx="3" fill="#fff" opacity="0.5"/>
+        <rect x="996" y="270" width="148" height="32" rx="5" fill="#131328" stroke="#252545" stroke-width="1"/><rect x="1008" y="282" width="60" height="8" rx="3" fill="#fff" opacity="0.5"/>
+        <rect x="996" y="318" width="148" height="36" rx="6" fill="#63dc80" opacity="0.9"/><text x="1034" y="340" font-size="10" fill="#050c10" font-family="sans-serif" font-weight="600">PLACE ORDER</text>
+      </svg>
+    </div>
+  </section>
+  <section class="case-body">
+    <div class="case-sidebar"><div class="csl">Contents</div><div class="cst active">Overview</div><div class="cst">Challenge</div><div class="cst">Approach</div><div class="cst">Results</div></div>
+    <div class="case-content">
+      <div><h2 class="csh">Overview</h2><p class="csp">Yellow Network is a layer-3 decentralized trading protocol built on state channels — technically sophisticated infrastructure that allows near-instant, cross-chain trading without custodial risk. My role was to design the trading interface and onboarding flow.</p></div>
+      <div><h2 class="csh">The challenge</h2><p class="csp">Decentralized exchanges suffer from a UX paradox: the more secure and transparent they are, the more cognitive load they impose. Wallet connections, gas fees, slippage tolerance — the vocabulary alone loses most users.</p><div class="csq"><p>"The technology was genuinely better — but it felt worse to use than centralized alternatives. That gap was my target."</p></div></div>
+      <div><h2 class="csh">Approach</h2><p class="csp">I benchmarked 12 DEX and CEX interfaces. Key finding: professional traders trust density, but density without hierarchy is noise. I designed a three-tier information architecture — price and portfolio front and center, order book and trades one step deeper, advanced settings tucked away but reachable.</p></div>
+      <div><h2 class="csh">Results</h2><div class="crg"><div class="crc"><span class="crn">3×</span><span class="crl">Faster task completion vs previous interface</span></div><div class="crc"><span class="crn">+41%</span><span class="crl">Onboarding completion rate after new wallet flow</span></div></div></div>
+    </div>
+  </section>
+  <section class="case-next"><div><div class="cnl">Next project</div><div class="cnt">Openware</div></div><button class="cnb" onclick="showCase('openware')">View case study →</button></section>
+  <footer><span>© 2026 EUGENE TREIHER</span><div class="loc"><div class="locdot"></div><span>Dubai</span></div></footer>
+</div>
+
+<!-- ══════════ CASE: OPENWARE ══════════ -->
+<div id="page-openware" class="page case-page">
+  <button class="case-back" onclick="showPage('home')">Back</button>
+  <section class="case-hero">
+    <div class="case-eyebrow">Fintech · B2B · 2019 — 2021</div>
+    <h1 class="case-title">A crypto exchange platform for every market</h1>
+    <div class="case-meta">
+      <div><div class="cml">Role</div><div class="cmv">UX/UI Designer</div></div>
+      <div><div class="cml">Company</div><div class="cmv">Openware</div></div>
+      <div><div class="cml">Year</div><div class="cmv">2019 — 2021</div></div>
+      <div><div class="cml">Scope</div><div class="cmv">White-label UI, Admin panel</div></div>
+    </div>
+    <div class="case-cover">
+      <svg viewBox="0 0 1200 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="1200" height="520" fill="#040c18"/><defs><radialGradient id="cc3" cx="55%" cy="45%" r="55%"><stop offset="0%" stop-color="#071e40" stop-opacity="0.9"/><stop offset="100%" stop-color="#040c18" stop-opacity="0"/></radialGradient></defs>
+        <rect width="1200" height="520" fill="url(#cc3)"/>
+        <rect x="40" y="32" width="1120" height="456" rx="14" fill="#091525" stroke="#102040" stroke-width="1"/>
+        <rect x="40" y="32" width="1120" height="48" rx="14" fill="#050e1e"/><rect x="40" y="68" width="1120" height="12" fill="#050e1e"/>
+        <circle cx="72" cy="56" r="7" fill="#ff5f57" opacity="0.9"/><circle cx="96" cy="56" r="7" fill="#febc2e" opacity="0.9"/><circle cx="120" cy="56" r="7" fill="#28c840" opacity="0.9"/>
+        <rect x="40" y="80" width="210" height="408" fill="#060f20"/><line x1="250" y1="80" x2="250" y2="488" stroke="#102040" stroke-width="1"/>
+        <rect x="60" y="100" width="80" height="10" rx="4" fill="#508cff" opacity="0.8"/>
+        <rect x="60" y="122" width="55" height="8" rx="3" fill="#fff" opacity="0.12"/><rect x="60" y="142" width="65" height="8" rx="3" fill="#fff" opacity="0.12"/><rect x="60" y="162" width="50" height="8" rx="3" fill="#fff" opacity="0.1"/><rect x="60" y="182" width="60" height="8" rx="3" fill="#fff" opacity="0.1"/><rect x="60" y="202" width="70" height="8" rx="3" fill="#fff" opacity="0.1"/>
+        <rect x="270" y="92" width="130" height="12" rx="4" fill="#fff" opacity="0.6"/><rect x="270" y="112" width="90" height="8" rx="3" fill="#508cff" opacity="0.55"/>
+        <rect x="270" y="136" width="218" height="100" rx="10" fill="#0c1c32" stroke="#122840" stroke-width="1"/>
+        <rect x="290" y="152" width="70" height="8" rx="3" fill="#508cff" opacity="0.6"/><rect x="290" y="168" width="120" height="20" rx="4" fill="#fff" opacity="0.88"/><rect x="290" y="196" width="85" height="7" rx="3" fill="#63dc80" opacity="0.5"/>
+        <rect x="504" y="136" width="218" height="100" rx="10" fill="#0c1c32" stroke="#122840" stroke-width="1"/>
+        <rect x="524" y="152" width="55" height="8" rx="3" fill="#508cff" opacity="0.6"/><rect x="524" y="168" width="100" height="20" rx="4" fill="#fff" opacity="0.88"/><rect x="524" y="196" width="70" height="7" rx="3" fill="#fff" opacity="0.2"/>
+        <rect x="738" y="136" width="218" height="100" rx="10" fill="#0d2240" stroke="#508cff" fill-opacity="0.15" stroke-width="1" stroke-opacity="0.4"/>
+        <rect x="758" y="152" width="65" height="8" rx="3" fill="#508cff" opacity="0.9"/><rect x="758" y="168" width="110" height="20" rx="4" fill="#508cff" opacity="0.9"/><rect x="758" y="196" width="80" height="7" rx="3" fill="#508cff" opacity="0.45"/>
+        <rect x="972" y="136" width="178" height="100" rx="10" fill="#0c1c32" stroke="#122840" stroke-width="1"/>
+        <rect x="990" y="152" width="60" height="8" rx="3" fill="#508cff" opacity="0.6"/><rect x="990" y="168" width="95" height="20" rx="4" fill="#fff" opacity="0.88"/><rect x="990" y="196" width="75" height="7" rx="3" fill="#ff6060" opacity="0.4"/>
+        <rect x="270" y="252" width="880" height="220" rx="10" fill="#0a1828" stroke="#122840" stroke-width="1"/>
+        <rect x="292" y="268" width="80" height="8" rx="3" fill="#fff" opacity="0.45"/><rect x="500" y="268" width="65" height="8" rx="3" fill="#fff" opacity="0.25"/><rect x="700" y="268" width="75" height="8" rx="3" fill="#fff" opacity="0.25"/><rect x="900" y="268" width="60" height="8" rx="3" fill="#fff" opacity="0.25"/>
+        <line x1="270" y1="288" x2="1150" y2="288" stroke="#122840" stroke-width="1"/>
+        <rect x="292" y="300" width="90" height="8" rx="3" fill="#fff" opacity="0.6"/><rect x="500" y="300" width="55" height="8" rx="3" fill="#fff" opacity="0.45"/><rect x="700" y="300" width="65" height="8" rx="3" fill="#63dc80" opacity="0.7"/><rect x="900" y="300" width="55" height="6" rx="3" fill="#508cff" opacity="0.5"/>
+        <line x1="270" y1="320" x2="1150" y2="320" stroke="#122840" stroke-width="0.5"/>
+        <rect x="292" y="332" width="75" height="8" rx="3" fill="#fff" opacity="0.45"/><rect x="500" y="332" width="60" height="8" rx="3" fill="#fff" opacity="0.35"/><rect x="700" y="332" width="70" height="8" rx="3" fill="#ff6060" opacity="0.55"/><rect x="900" y="332" width="60" height="6" rx="3" fill="#508cff" opacity="0.4"/>
+        <line x1="270" y1="352" x2="1150" y2="352" stroke="#122840" stroke-width="0.5"/>
+        <rect x="292" y="364" width="85" height="8" rx="3" fill="#fff" opacity="0.45"/><rect x="500" y="364" width="50" height="8" rx="3" fill="#fff" opacity="0.35"/><rect x="700" y="364" width="68" height="8" rx="3" fill="#63dc80" opacity="0.6"/><rect x="900" y="364" width="52" height="6" rx="3" fill="#508cff" opacity="0.4"/>
+        <line x1="270" y1="384" x2="1150" y2="384" stroke="#122840" stroke-width="0.5"/>
+        <rect x="292" y="396" width="70" height="8" rx="3" fill="#fff" opacity="0.35"/><rect x="500" y="396" width="65" height="8" rx="3" fill="#fff" opacity="0.25"/><rect x="700" y="396" width="72" height="8" rx="3" fill="#63dc80" opacity="0.5"/><rect x="900" y="396" width="58" height="6" rx="3" fill="#508cff" opacity="0.35"/>
+      </svg>
+    </div>
+  </section>
+  <section class="case-body">
+    <div class="case-sidebar"><div class="csl">Contents</div><div class="cst active">Overview</div><div class="cst">Challenge</div><div class="cst">Design system</div><div class="cst">Results</div></div>
+    <div class="case-content">
+      <div><h2 class="csh">Overview</h2><p class="csp">Openware builds white-label cryptocurrency exchange infrastructure. I designed both the end-user trading interface and the admin panel used by exchange operators across 12+ client deployments.</p></div>
+      <div><h2 class="csh">The challenge</h2><p class="csp">White-label means the same product serves radically different clients: a retail exchange in Southeast Asia, a regulated fintech in Europe, an OTC desk. Each had different branding, compliance requirements, and users — but one codebase.</p></div>
+      <div><h2 class="csh">Design system</h2><p class="csp">I built a token-based design system in Figma with theme variables covering color, typography, radius, and spacing. A single swap of 12 tokens could transform the product from dark crypto to clean fintech — without touching component logic.</p><div class="csq"><p>"One system, infinite skins. The constraint forced better decisions than freedom would have."</p></div></div>
+      <div><h2 class="csh">Results</h2><div class="crg"><div class="crc"><span class="crn">12+</span><span class="crl">Exchange clients launched using the design system</span></div><div class="crc"><span class="crn">−60%</span><span class="crl">Reduction in per-client design customization time</span></div><div class="crc"><span class="crn">1</span><span class="crl">Unified system across web, mobile, and admin</span></div><div class="crc"><span class="crn">3</span><span class="crl">Continents where Openware-powered exchanges operate</span></div></div></div>
+    </div>
+  </section>
+  <section class="case-next"><div><div class="cnl">Back to</div><div class="cnt">All projects</div></div><button class="cnb" onclick="showPage('home')">View all work →</button></section>
+  <footer><span>© 2026 EUGENE TREIHER</span><div class="loc"><div class="locdot"></div><span>Dubai</span></div></footer>
+</div>
+
+<script>
+// ── CURSOR SMOKE LIGHT ──
+(function(){
+  const canvas = document.getElementById('blob-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize(){
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // ── ambient blobs ──
+  const blobs = [
+    { x:.50, y:.80, r:.65, vx:.00008, vy:.00006, base:.13 },
+    { x:.20, y:.60, r:.45, vx:.00012, vy:-.00009, base:.07 },
+    { x:.80, y:.50, r:.40, vx:-.00010, vy:.00011, base:.06 },
+    { x:.50, y:.30, r:.35, vx:.00007, vy:.00014,  base:.04 },
+    { x:.35, y:.90, r:.30, vx:-.00009, vy:-.00007, base:.05 },
+  ];
+
+  // ── cursor smoke ──
+  let mx = W * 0.5, my = H * 0.5;
+  let smoothX = mx, smoothY = my;
+  window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  const puffs = [];
+  const MAX_PUFFS = 80;
+
+  function spawnPuff(){
+    puffs.push({
+      x: smoothX + (Math.random() - 0.5) * 8,
+      y: smoothY + (Math.random() - 0.5) * 8,
+      r: 60 + Math.random() * 80,
+      alpha: 0.025 + Math.random() * 0.015,
+      life: 0,
+      maxLife: 110 + Math.random() * 70,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: -0.15 - Math.random() * 0.25,
+    });
+    if(puffs.length > MAX_PUFFS) puffs.shift();
+  }
+
+  let t = 0;
+  function draw(){
+    t++;
+    ctx.clearRect(0, 0, W, H);
+
+    // ── draw ambient blobs ──
+    blobs.forEach((b, i) => {
+      const px = (b.x + Math.sin(t*b.vx*60 + i*1.3)*.18) * W;
+      const py = (b.y + Math.cos(t*b.vy*60 + i*2.1)*.15) * H;
+      const radius = b.r * Math.min(W, H);
+      const alpha  = b.base + Math.sin(t*.008 + i*1.7)*.03;
+      const g = ctx.createRadialGradient(px, py, 0, px, py, radius);
+      g.addColorStop(0, `rgba(255,255,255,${alpha})`);
+      g.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(px, py, radius, 0, Math.PI*2);
+      ctx.fill();
+    });
+
+    // ── draw cursor smoke ──
+    smoothX += (mx - smoothX) * 0.08;
+    smoothY += (my - smoothY) * 0.08;
+    spawnPuff();
+
+    puffs.forEach(p => {
+      p.life++;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.r  += 0.8;
+
+      const progress = p.life / p.maxLife;
+      const fade = progress < 0.15
+        ? progress / 0.15
+        : 1 - (progress - 0.15) / 0.85;
+      const a = p.alpha * fade;
+      if(a <= 0.001) return;
+
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      g.addColorStop(0,   `rgba(255,255,255,${a})`);
+      g.addColorStop(0.5, `rgba(255,255,255,${a * 0.3})`);
+      g.addColorStop(1,   'rgba(255,255,255,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fill();
+    });
+
+    for(let i = puffs.length - 1; i >= 0; i--){
+      if(puffs[i].life >= puffs[i].maxLife) puffs.splice(i, 1);
+    }
+
+    // ambient cursor glow
+    const ag = ctx.createRadialGradient(smoothX, smoothY, 0, smoothX, smoothY, 260);
+    ag.addColorStop(0, 'rgba(255,255,255,0.015)');
+    ag.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = ag;
+    ctx.beginPath();
+    ctx.arc(smoothX, smoothY, 260, 0, Math.PI*2);
+    ctx.fill();
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+
+// ── GLITCH HOVER ──
+(function(){
+  // trigger headline reveal
+  window.__triggerHeadline = function(){
+    const h1 = document.querySelector('.hero-headline');
+    if(h1) h1.classList.add('revealed');
+  };
+})();
+
+// ── LOADER CHAR SPLIT ──
+(function(){
+  const name = 'EUGENE TREIHER';
+  const container = document.getElementById('loader-name');
+  let delay = 0.05;
+  name.split('').forEach(ch => {
+    const span = document.createElement('span');
+    if(ch === ' '){
+      span.className = 'loader-char space';
+    } else {
+      span.className = 'loader-char';
+      span.textContent = ch;
+    }
+    span.style.animationDelay = delay + 's';
+    delay += 0.06;
+    container.appendChild(span);
+  });
+})();
+
+// ── LOADER DISMISS ──
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('done');
+    setTimeout(() => {
+      document.querySelectorAll('.hero .reveal, .hero .reveal-children').forEach(el => {
+        el.classList.add('visible');
+        el.querySelectorAll('.stat-num[data-target]').forEach(animateCounter);
+      });
+      if(window.__triggerHeadline) window.__triggerHeadline();
+    }, 100);
+  }, 1800);
+});
+
+// ── COUNTER ANIMATION ──
+function animateCounter(el){
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1400;
+  const start = performance.now();
+  function easeOutExpo(t){ return t===1?1:1-Math.pow(2,-10*t); }
+  function tick(now){
+    const progress = Math.min((now - start) / duration, 1);
+    const val = Math.floor(easeOutExpo(progress) * target);
+    el.textContent = val + suffix;
+    if(progress < 1) requestAnimationFrame(tick);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // trigger counters inside revealed element
+      entry.target.querySelectorAll('.stat-num[data-target]').forEach(animateCounter);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+function initReveal() {
+  document.querySelectorAll('.reveal, .reveal-children').forEach(el => {
+    // skip hero — handled by loader
+    if (!el.closest('.hero')) observer.observe(el);
+  });
+}
+document.addEventListener('DOMContentLoaded', initReveal);
+
+// ── SEAMLESS MARQUEE ──
+(function(){
+  const track = document.getElementById('logos-track');
+  if(!track) return;
+
+  // clone items to fill seamlessly
+  const items = Array.from(track.children);
+  items.forEach(item => track.appendChild(item.cloneNode(true)));
+
+  let x = 0;
+  const speed = 1.35; // px per frame
+  let paused = false;
+
+  track.parentElement.addEventListener('mouseenter', () => paused = true);
+  track.parentElement.addEventListener('mouseleave', () => paused = false);
+
+  function tick(){
+    if(!paused){
+      x -= speed;
+      // reset when first half scrolled out
+      const halfW = track.scrollWidth / 2;
+      if(Math.abs(x) >= halfW) x = 0;
+      track.style.transform = `translateX(${x}px)`;
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+// ── CASE LIST HOVER PREVIEW ──
+(function(){
+  const preview = document.getElementById('case-preview');
+  const previewImg = document.getElementById('case-preview-img');
+  const previewVid = document.getElementById('case-preview-vid');
+  if(!preview) return;
+
+  function showImg(src){
+    previewVid.pause();
+    previewVid.style.display = 'none';
+    previewImg.style.display = 'block';
+    previewImg.src = src;
+    preview.classList.add('visible');
+  }
+
+  function showVid(src){
+    previewImg.style.display = 'none';
+    previewVid.style.display = 'block';
+    if(previewVid.getAttribute('src') !== src){
+      previewVid.src = src;
+      previewVid.load();
+    }
+    previewVid.play();
+    preview.classList.add('visible');
+  }
+
+  function hidePreview(){
+    preview.classList.remove('visible');
+    previewVid.pause();
+  }
+
+  document.querySelectorAll('.case-row[data-preview], .case-row[data-preview-video]').forEach(row => {
+    row.addEventListener('mouseenter', () => {
+      if(row.dataset.previewVideo) showVid(row.dataset.previewVideo);
+      else if(row.dataset.preview) showImg(row.dataset.preview);
+    });
+    row.addEventListener('mouseleave', hidePreview);
+  });
+
+  document.addEventListener('mousemove', e => {
+    let x = e.clientX + 28;
+    let y = e.clientY - 180;
+    if(x + 280 > window.innerWidth) x = e.clientX - 308;
+    if(y < 10) y = 10;
+    preview.style.left = x + 'px';
+    preview.style.top  = y + 'px';
+  });
+})();
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('main-nav').className = id==='home'?'':'case-nav';
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function showCase(id){ showPage(id); }
+function goHome(section){
+  showPage('home');
+  setTimeout(()=>{
+    const el=document.getElementById(section);
+    if(el) el.scrollIntoView({behavior:'smooth'});
+  },60);
+}
+</script>
+</body>
+</html>
