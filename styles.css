@@ -494,7 +494,7 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 @media(max-width:768px){
   .burger{display:flex}
   .mobile-menu{display:flex}
-  .nav-links,.nav-linkedin{display:none}
+  .nav-links,.nav-linkedin,.nav-cta-desktop{display:none}
   nav{padding:14px 16px}
   .hero,.work-section,.about-section,.contact-section,.case-hero,.case-body,.case-next,footer{padding-left:20px;padding-right:20px}
   .hero-bottom{flex-direction:column;gap:28px;align-items:flex-start}
