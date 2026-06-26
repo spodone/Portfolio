@@ -500,8 +500,10 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
   .hero,.work-section,.about-section,.contact-section,.case-hero,.case-body,.case-next,footer{padding-left:20px;padding-right:20px}
   .hero-bottom{flex-direction:column;gap:28px;align-items:flex-start}
   .hero-stats{gap:32px}
-  .case-row{grid-template-columns:32px 1fr 60px}
+  .case-row{grid-template-columns:32px 1fr;gap:16px;padding:24px 0}
   .case-row-tags{display:none}
+  .case-list{padding:0 20px}
+  .case-row-name{font-size:22px}
   .about-section{grid-template-columns:1fr;gap:48px}
   .case-back{margin-left:20px}
   .hero-headline{font-size:clamp(36px,10vw,56px)}
