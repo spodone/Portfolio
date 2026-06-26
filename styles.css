@@ -474,7 +474,27 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .reflection-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:10px}
 .reflection-text{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:22px;color:var(--text);line-height:1.4}
 
+/* ── BURGER ── */
+.burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:4px;width:28px;height:28px}
+.burger span{display:block;height:1.5px;background:var(--text);border-radius:2px;transition:transform .3s,opacity .3s}
+.burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.open span:nth-child(2){transform:translateY(-6.5px) rotate(-45deg)}
+
+.mobile-menu{
+  display:none;position:fixed;inset:0;z-index:99;
+  background:rgba(10,10,15,0.97);backdrop-filter:blur(24px);
+  flex-direction:column;align-items:center;justify-content:center;gap:32px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:36px;color:var(--text);text-decoration:none;letter-spacing:-.01em;transition:color .2s}
+.mobile-menu a:hover{color:var(--accent)}
+.mobile-menu .nav-cta{font-size:14px;padding:12px 32px;margin-top:8px}
+
 @media(max-width:768px){
+  .burger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-links,.nav-linkedin{display:none}
   nav{padding:14px 16px}
   .hero,.work-section,.about-section,.contact-section,.case-hero,.case-body,.case-next,footer{padding-left:20px;padding-right:20px}
   .hero-bottom{flex-direction:column;gap:28px;align-items:flex-start}

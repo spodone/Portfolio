@@ -29,9 +29,19 @@
     <div class="nav-right">
       <a href="https://www.linkedin.com/in/yevhen-t-9b0225137/" target="_blank" class="nav-linkedin">LinkedIn</a>
       <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in touch</button>
+      <button class="burger" id="burger" aria-label="Menu" onclick="toggleMenu()">
+        <span></span><span></span>
+      </button>
     </div>
   </div>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#work" onclick="toggleMenu()">Work</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="https://www.linkedin.com/in/yevhen-t-9b0225137/" target="_blank">LinkedIn</a>
+  <button class="nav-cta" onclick="toggleMenu();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in touch</button>
+</div>
 
 <section class="hero">
   <div class="hero-main">
@@ -158,6 +168,15 @@
 <footer><span>© 2026 EUGENE TREIHER</span><div class="loc"><div class="locdot"></div><span>Dubai</span></div></footer>
 
 <script src="canvas.js"></script>
+<script>
+function toggleMenu(){
+  const menu = document.getElementById('mobile-menu');
+  const burger = document.getElementById('burger');
+  menu.classList.toggle('open');
+  burger.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+</script>
 <script>
 // ── LOADER ──
 (function(){
