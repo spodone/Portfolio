@@ -318,7 +318,7 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 #loader.done{opacity:0;visibility:hidden}
 .loader-name{
   display:flex;overflow:hidden;
-  font-family:'Bricolage Grotesque', sans-serif;font-size:clamp(24px,6vw,48px);font-weight:300;color:var(--text);
+  font-family:'Bricolage Grotesque', sans-serif;font-size:clamp(29px,7.2vw,58px);font-weight:300;color:var(--text);
   letter-spacing:.12em;line-height:1;text-transform:uppercase;}
 .loader-char{
   display:inline-block;
