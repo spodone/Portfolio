@@ -505,6 +505,8 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
   .about-section{grid-template-columns:1fr;gap:48px}
   .case-back{margin-left:20px}
   .hero-headline{font-size:clamp(36px,10vw,56px)}
+  .hero-bottom{text-align:center;align-items:center}
+  .hero-stats{justify-content:center}
   .case-body{grid-template-columns:1fr}
   .case-sidebar{display:none}
   .crg{grid-template-columns:1fr}
