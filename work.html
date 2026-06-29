@@ -110,18 +110,19 @@ html, body { height: 100%; overflow: hidden; }
 }
 .pf-num-line { width: 28px; height: 1px; background: var(--muted); opacity: .4; }
 
-/* Fixed right — progress lines */
+/* Fixed right — progress dots */
 .work-progress {
   position: fixed; right: 40px; top: 50%; transform: translateY(-50%);
-  display: flex; flex-direction: column; gap: 7px; z-index: 100;
+  display: flex; flex-direction: column; gap: 10px; z-index: 100;
 }
 .wp-line {
-  height: 1.5px; width: 16px; background: rgba(255,255,255,.18);
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,.25);
   cursor: pointer;
-  transition: width .35s cubic-bezier(.22,1,.36,1), background .35s;
+  transition: background .35s, transform .35s;
 }
-.wp-line:hover { background: rgba(255,255,255,.45); width: 22px; }
-.wp-line.active { width: 30px; background: var(--text); }
+.wp-line:hover { background: rgba(255,255,255,.55); }
+.wp-line.active { background: var(--text); transform: scale(1.4); }
 
 /* Counter bottom-left */
 .work-counter {
@@ -336,13 +337,50 @@ function toggleMenu(){
     hint.classList.toggle('hidden',i===slides.length-1);
   }
   lines.forEach(l=>l.addEventListener('click',()=>slides[parseInt(l.dataset.idx)].scrollIntoView({behavior:'smooth'})));
+
   const obs=new IntersectionObserver(es=>{
     es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=0.6)activate(parseInt(e.target.dataset.idx));});
   },{root:slider,threshold:0.6});
   slides.forEach(s=>obs.observe(s));
+
+  function goTo(i,smooth){
+    slides[i].scrollIntoView({behavior: smooth ? 'smooth' : 'instant'});
+  }
+
+  // endless loop via wheel
+  let wheelLocked=false;
+  slider.addEventListener('wheel',e=>{
+    if(wheelLocked) return;
+    if(e.deltaY>0 && cur===slides.length-1){
+      wheelLocked=true;
+      goTo(0,false);
+      setTimeout(()=>wheelLocked=false,600);
+    } else if(e.deltaY<0 && cur===0){
+      wheelLocked=true;
+      goTo(slides.length-1,false);
+      setTimeout(()=>wheelLocked=false,600);
+    }
+  },{passive:true});
+
+  // endless loop via touch
+  let touchY=0;
+  slider.addEventListener('touchstart',e=>touchY=e.touches[0].clientY,{passive:true});
+  slider.addEventListener('touchend',e=>{
+    const dy=touchY-e.changedTouches[0].clientY;
+    if(dy>40 && cur===slides.length-1) goTo(0,false);
+    else if(dy<-40 && cur===0) goTo(slides.length-1,false);
+  },{passive:true});
+
+  // endless loop via keyboard
   document.addEventListener('keydown',e=>{
-    if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();slides[Math.min(cur+1,slides.length-1)].scrollIntoView({behavior:'smooth'});}
-    if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();slides[Math.max(cur-1,0)].scrollIntoView({behavior:'smooth'});}
+    if(e.key==='ArrowDown'||e.key==='ArrowRight'){
+      e.preventDefault();
+      goTo(cur===slides.length-1 ? 0 : cur+1, cur!==slides.length-1);
+    }
+    if(e.key==='ArrowUp'||e.key==='ArrowLeft'){
+      e.preventDefault();
+      goTo(cur===0 ? slides.length-1 : cur-1, cur!==0);
+    }
   });
 })();
 </script>
