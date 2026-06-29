@@ -134,7 +134,6 @@ nav{
 /* ── LOGOS ── */
 .logos-section{
   padding:48px 0;
-  border-bottom:1px solid var(--line);
   overflow:hidden;
   position:relative;z-index:1;
 }
