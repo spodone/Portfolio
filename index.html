@@ -154,6 +154,52 @@
   </div>
 </section>
 
+<section class="testimonials-section reveal">
+  <div class="testimonials-header">
+    <span class="sec-num">Testimonials</span>
+  </div>
+  <div class="testimonials-track-wrap">
+    <div class="testimonials-track">
+
+      <div class="t-card">
+        <div class="t-avatar">JD</div>
+        <div class="t-name">James Donovan</div>
+        <div class="t-role">Head of Product · Openware</div>
+        <p class="t-text">"Eugene has a rare ability to bring clarity to complex financial workflows. His design instincts are sharp and his execution is always precise."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-avatar">SM</div>
+        <div class="t-name">Sofia Martinez</div>
+        <div class="t-role">CPO · DappRadar</div>
+        <p class="t-text">"Working with Eugene on our staking UX was a turning point. He understood the Web3 user deeply and delivered something that actually converted."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-avatar">AK</div>
+        <div class="t-name">Anton Kovalev</div>
+        <div class="t-role">CEO · Yellow Network</div>
+        <p class="t-text">"Eugene thinks in systems, not screens. He helped us navigate a full product redesign under tight timelines without losing quality."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-avatar">RL</div>
+        <div class="t-name">Rachel Lim</div>
+        <div class="t-role">VP Design · Ouinex</div>
+        <p class="t-text">"Eugene brought a level of craft and strategic thinking to our trading platform that genuinely moved our key metrics. A true partner."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-avatar">PB</div>
+        <div class="t-name">Pavel Bondarenko</div>
+        <div class="t-role">CTO · FUIB Bank</div>
+        <p class="t-text">"The KYB flow Eugene designed cut our ops costs dramatically. He grasped the banking compliance context faster than most engineers I've worked with."</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
 <footer><span>© 2026 EUGENE TREIHER</span><div class="loc"><div class="locdot"></div><span>Dubai</span></div></footer>
 
@@ -266,6 +312,23 @@ function animateCounter(el){
     if(x + 280 > window.innerWidth) x = e.clientX - 308;
     if(y < 10) y = 10;
     preview.style.left = x + 'px'; preview.style.top = y + 'px';
+  });
+})();
+
+// ── TESTIMONIALS DRAG SCROLL ──
+(function(){
+  const wrap = document.querySelector('.testimonials-track-wrap');
+  if(!wrap) return;
+  let isDown=false, startX, scrollLeft;
+  wrap.addEventListener('mousedown', e=>{
+    isDown=true; wrap.classList.add('dragging');
+    startX=e.pageX-wrap.offsetLeft; scrollLeft=wrap.scrollLeft;
+  });
+  wrap.addEventListener('mouseleave',()=>{ isDown=false; wrap.classList.remove('dragging'); });
+  wrap.addEventListener('mouseup',()=>{ isDown=false; wrap.classList.remove('dragging'); });
+  wrap.addEventListener('mousemove', e=>{
+    if(!isDown) return; e.preventDefault();
+    wrap.scrollLeft = scrollLeft-(e.pageX-wrap.offsetLeft-startX);
   });
 })();
 </script>
