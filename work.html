@@ -101,21 +101,13 @@ html, body { height: 100%; overflow: hidden; }
   gap: 56px;
   padding-left: calc(19% + 5vw);
   margin-top: 48px;
-  overflow: hidden;
-}
-.pf-meta-inner {
-  display: flex; gap: 56px; width: 100%;
-  transform: translateY(110%);
   opacity: 0;
-  transition: transform .9s cubic-bezier(.16,1,.3,1), opacity .01s linear;
-  transition-delay: .28s;
+  transform: translateY(16px);
+  transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+  transition-delay: .32s;
 }
-.pf.active .pf-meta-inner { transform: translateY(0); opacity: 1; }
-.pf:not(.active) .pf-meta-inner {
-  transform: translateY(110%); opacity: 0;
-  transition: transform .5s cubic-bezier(.55,0,.1,1), opacity .01s linear;
-  transition-delay: 0s;
-}
+.pf.active .pf-meta { opacity: 1; transform: translateY(0); }
+.pf:not(.active) .pf-meta { opacity: 0; transform: translateY(16px); transition-delay: 0s; }
 .pf-meta-block { display: flex; flex-direction: column; gap: 2px; }
 .pf-meta-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted2); line-height: 1.6; }
 .pf-meta-label strong { color: var(--text); font-weight: 400; }
@@ -227,7 +219,7 @@ html, body { height: 100%; overflow: hidden; }
       </div>
     </div>
     <h2 class="pf-title"><span class="line"><span class="line-inner">KYB Verification</span></span></h2>
-    <div class="pf-meta"><div class="pf-meta-inner">
+    <div class="pf-meta">
       <div class="pf-meta-block">
         <span class="pf-meta-label"><strong>KYB Verification Service</strong></span>
         <span class="pf-meta-label">FUIB Bank · Fintech · Banking</span>
@@ -238,7 +230,7 @@ html, body { height: 100%; overflow: hidden; }
         <span class="pf-meta-label"><strong style="color:var(--accent);font-size:1.3em">$1.1M</strong></span>
         <span class="pf-meta-label">operational savings</span>
       </div>
-    </div></div>
+    </div>
   </section>
 
   <!-- 02 -->
@@ -251,7 +243,7 @@ html, body { height: 100%; overflow: hidden; }
       </div>
     </div>
     <h2 class="pf-title"><span class="line"><span class="line-inner">Token Staking</span></span></h2>
-    <div class="pf-meta"><div class="pf-meta-inner">
+    <div class="pf-meta">
       <div class="pf-meta-block">
         <span class="pf-meta-label"><strong>Token Staking UX</strong></span>
         <span class="pf-meta-label">DappRadar · Web3 · DeFi</span>
@@ -262,7 +254,7 @@ html, body { height: 100%; overflow: hidden; }
         <span class="pf-meta-label"><strong style="color:var(--accent);font-size:1.3em">5M+</strong></span>
         <span class="pf-meta-label">tokens staked · month one</span>
       </div>
-    </div></div>
+    </div>
   </section>
 
   <!-- 03 -->
@@ -293,7 +285,7 @@ html, body { height: 100%; overflow: hidden; }
       </div>
     </div>
     <h2 class="pf-title"><span class="line"><span class="line-inner">Rankings UX</span></span></h2>
-    <div class="pf-meta"><div class="pf-meta-inner">
+    <div class="pf-meta">
       <div class="pf-meta-block">
         <span class="pf-meta-label"><strong>Rankings Experience</strong></span>
         <span class="pf-meta-label">DappRadar · Web3 · UX</span>
@@ -304,7 +296,7 @@ html, body { height: 100%; overflow: hidden; }
         <span class="pf-meta-label"><strong style="color:var(--accent);font-size:1.3em">+16%</strong></span>
         <span class="pf-meta-label">engaged sessions</span>
       </div>
-    </div></div>
+    </div>
   </section>
 
   <!-- 04 -->
@@ -317,7 +309,7 @@ html, body { height: 100%; overflow: hidden; }
       </div>
     </div>
     <h2 class="pf-title"><span class="line"><span class="line-inner">White-label</span></span></h2>
-    <div class="pf-meta"><div class="pf-meta-inner">
+    <div class="pf-meta">
       <div class="pf-meta-block">
         <span class="pf-meta-label"><strong>White-label Exchange</strong></span>
         <span class="pf-meta-label">Openware · Fintech · B2B</span>
@@ -328,7 +320,7 @@ html, body { height: 100%; overflow: hidden; }
         <span class="pf-meta-label"><strong style="color:var(--accent);font-size:1.3em">7K+</strong></span>
         <span class="pf-meta-label">designers using the UI kit</span>
       </div>
-    </div></div>
+    </div>
   </section>
 
 </div>
