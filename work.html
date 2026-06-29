@@ -7,10 +7,158 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Bricolage+Grotesque:wght@200;300;400;500;600&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+/* ── WORK PAGE LAYOUT ── */
+.work-wrap { position: relative; z-index: 1; }
+
+/* Fixed right progress */
+.work-progress {
+  position: fixed; right: 44px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 8px; z-index: 60;
+}
+.wp-line {
+  height: 1.5px; background: var(--muted);
+  transition: width .4s cubic-bezier(.22,1,.36,1), background .4s;
+  width: 18px;
+}
+.wp-line.active { width: 32px; background: var(--text); }
+
+/* Each project section */
+.pf {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 110px 120px 60px;
+  position: relative;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+/* project number — left side */
+.pf-num {
+  position: absolute; left: 52px; top: 50%; transform: translateY(-50%);
+  font-size: 11px; letter-spacing: .08em; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* visual card */
+.pf-frame { position: relative; width: 100%; max-width: 960px; }
+.pf-visual {
+  width: 100%; aspect-ratio: 16/9;
+  border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--line); position: relative;
+}
+.pf-visual img, .pf-visual svg {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 1s cubic-bezier(.22,1,.36,1);
+}
+.pf:hover .pf-visual img,
+.pf:hover .pf-visual svg { transform: scale(1.035); }
+.pf-visual-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,10,15,0.55) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* Giant overlapping title */
+.pf-title {
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 300;
+  font-size: clamp(52px, 12vw, 160px);
+  line-height: .88; letter-spacing: -.04em;
+  color: var(--text);
+  margin-top: -0.13em;
+  position: relative; z-index: 2;
+  width: 100%; max-width: 960px;
+  pointer-events: none;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1);
+}
+.pf.visible .pf-title { opacity: 1; transform: translateY(0); transition-delay: .1s; }
+
+/* meta row */
+.pf-meta {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  width: 100%; max-width: 960px;
+  margin-top: 24px; padding-top: 18px;
+  border-top: 1px solid var(--line);
+  opacity: 0; transform: translateY(12px);
+  transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+}
+.pf.visible .pf-meta { opacity: 1; transform: translateY(0); transition-delay: .22s; }
+.pf-meta-block { display: flex; flex-direction: column; gap: 3px; }
+.pf-meta-name { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text); }
+.pf-meta-sub { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.pf-meta-metric { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 300; font-size: 28px; color: var(--accent); letter-spacing: -.02em; line-height: 1; }
+.pf-cta {
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--line); padding-bottom: 4px;
+  transition: color .2s, border-color .2s;
+}
+.pf-cta:hover { color: var(--accent); border-color: var(--accent); }
+.pf-cta span { transition: transform .3s; }
+.pf-cta:hover span { transform: translateX(4px); }
+
+/* hero intro */
+.work-intro {
+  min-height: 70vh; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 130px 52px 72px;
+  border-bottom: 1px solid var(--line); position: relative; z-index: 1;
+}
+.work-intro-label {
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 32px; display: flex; align-items: center; gap: 14px;
+}
+.work-intro-label::before { content: ''; width: 24px; height: 1px; background: var(--muted); display: block; }
+.work-intro-headline {
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 300;
+  font-size: clamp(40px, 6vw, 80px); line-height: 1.04;
+  letter-spacing: -.025em; color: var(--text); margin-bottom: 0;
+}
+.work-intro-headline em { font-style: normal; color: var(--accent); }
+.work-intro-bottom {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--line);
+}
+.work-intro-desc { font-size: 14px; color: var(--muted2); line-height: 1.8; max-width: 360px; }
+.work-intro-scroll { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 12px; }
+.work-intro-scroll::before { content: ''; width: 1px; height: 32px; background: var(--muted); display: block; animation: scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse { 0%,100%{opacity:.4;height:24px} 50%{opacity:1;height:36px} }
+
+/* work footer */
+.work-end {
+  padding: 120px 52px; position: relative; z-index: 1; text-align: center;
+  background: rgba(8,8,12,0.6);
+}
+.work-end-headline {
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 300;
+  font-size: clamp(36px,5vw,72px); line-height: 1.04;
+  letter-spacing: -.025em; color: var(--text); margin-bottom: 48px;
+}
+.work-end-headline em { font-style: italic; color: var(--accent); }
+
+@media(max-width:768px){
+  .pf { padding: 110px 20px 60px; }
+  .pf-num { display: none; }
+  .work-progress { display: none; }
+  .work-intro { padding: 130px 20px 60px; }
+  .work-intro-bottom { flex-direction: column; gap: 24px; align-items: flex-start; }
+  .work-end { padding: 80px 20px; }
+  .pf-title { font-size: clamp(40px, 13vw, 80px); }
+}
+</style>
 </head>
 <body>
 
 <canvas id="blob-canvas"></canvas>
+
+<!-- Fixed progress indicator -->
+<div class="work-progress" id="work-progress">
+  <div class="wp-line active" data-idx="0"></div>
+  <div class="wp-line" data-idx="1"></div>
+  <div class="wp-line" data-idx="2"></div>
+  <div class="wp-line" data-idx="3"></div>
+</div>
 
 <nav id="main-nav">
   <div class="nav-inner">
@@ -36,175 +184,148 @@
   <button class="nav-cta" onclick="toggleMenu();window.location.href='/#contact'">Get in touch</button>
 </div>
 
-<!-- ── HERO ── -->
-<section class="work-hero">
-  <div class="work-hero-label">Selected Work</div>
-  <h1 class="work-hero-headline">
-    <span class="text-reveal"><span class="text-reveal-inner">Designing products that</span></span>
-    <span class="text-reveal delay-1"><span class="text-reveal-inner">ship faster, convert better,</span></span>
-    <span class="text-reveal delay-2"><span class="text-reveal-inner">and <em>scale globally.</em></span></span>
-  </h1>
-  <div class="work-hero-bottom">
-    <p class="work-hero-desc">A curated collection of fintech, Web3 and enterprise products designed with measurable business impact — across 9 years and 50+ shipped projects.</p>
-    <div class="work-hero-count">04</div>
-  </div>
-</section>
+<div class="work-wrap">
 
-<!-- ── PROJECT 01 ── -->
-<section class="project-section reveal">
-  <div class="project-inner">
-    <div>
-      <div class="project-eyebrow">
-        <span class="project-num">01</span>
-        <span class="project-tag">Fintech</span>
-        <span class="project-tag">Banking</span>
-      </div>
-      <span class="project-company">FUIB Bank · 2023 — 2024</span>
-      <h2 class="project-title">KYB Verification<br>Service</h2>
-      <p class="project-desc">Redesigned how a major Ukrainian bank verifies business clients — turning a weeks-long manual compliance process into a guided digital experience.</p>
-      <div class="project-metric-block">
-        <span class="project-metric-num">$1.1M</span>
-        <span class="project-metric-label">estimated operational savings in the first 6 months</span>
-      </div>
-      <a href="/kyb-fuib" class="project-cta">View Case <span class="project-cta-arrow">→</span></a>
+  <!-- INTRO -->
+  <section class="work-intro">
+    <div class="work-intro-label">Selected Work — 4 Projects</div>
+    <h1 class="work-intro-headline">
+      Designing products<br>
+      that <em>actually ship.</em>
+    </h1>
+    <div class="work-intro-bottom">
+      <p class="work-intro-desc">9 years. 50+ products. Fintech, Web3, Banking. Each one built to solve a real business problem with measurable impact.</p>
+      <div class="work-intro-scroll"><span>Scroll</span></div>
     </div>
-    <div class="project-visual">
-      <img src="case1.png" alt="KYB Verification Service">
-      <div class="project-visual-overlay"></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── PROJECT 02 ── -->
-<section class="project-section reveal">
-  <div class="project-inner reverse">
-    <div>
-      <div class="project-eyebrow">
-        <span class="project-num">02</span>
-        <span class="project-tag">Web3</span>
-        <span class="project-tag">DeFi</span>
+  <!-- ── 01 KYB ── -->
+  <section class="pf" data-idx="0" id="pf-01">
+    <span class="pf-num">00.01</span>
+    <div class="pf-frame">
+      <div class="pf-visual">
+        <img src="case1.png" alt="KYB Verification Service">
+        <div class="pf-visual-overlay"></div>
       </div>
-      <span class="project-company">DappRadar · 2022 — 2023</span>
-      <h2 class="project-title">Token Staking<br>UX</h2>
-      <p class="project-desc">Designed the RADAR token staking experience — making complex DeFi mechanics feel as simple as a savings account, without losing transparency.</p>
-      <div class="project-metric-block">
-        <span class="project-metric-num">5M+</span>
-        <span class="project-metric-label">tokens staked and 100+ new PRO subscribers in month one</span>
+      <h2 class="pf-title">KYB<br>Verification</h2>
+      <div class="pf-meta">
+        <div class="pf-meta-block">
+          <span class="pf-meta-name">KYB Verification Service</span>
+          <span class="pf-meta-sub">Fintech · Banking · FUIB Bank · 2023 — 2024</span>
+        </div>
+        <div class="pf-meta-block" style="text-align:right;align-items:flex-end">
+          <span class="pf-meta-metric">$1.1M</span>
+          <span class="pf-meta-sub">operational savings</span>
+        </div>
+        <a href="/kyb-fuib" class="pf-cta">View Case <span>→</span></a>
       </div>
-      <a href="/token-staking-dappradar" class="project-cta">View Case <span class="project-cta-arrow">→</span></a>
     </div>
-    <div class="project-visual">
-      <img src="case2.png" alt="Token Staking UX">
-      <div class="project-visual-overlay"></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── PROJECT 03 ── -->
-<section class="project-section reveal">
-  <div class="project-inner">
-    <div>
-      <div class="project-eyebrow">
-        <span class="project-num">03</span>
-        <span class="project-tag">Web3</span>
-        <span class="project-tag">UX</span>
+  <!-- ── 02 TOKEN STAKING ── -->
+  <section class="pf" data-idx="1" id="pf-02">
+    <span class="pf-num">00.02</span>
+    <div class="pf-frame">
+      <div class="pf-visual">
+        <img src="case2.png" alt="Token Staking UX">
+        <div class="pf-visual-overlay"></div>
       </div>
-      <span class="project-company">DappRadar · 2022 — 2023</span>
-      <h2 class="project-title">Rankings<br>Experience</h2>
-      <p class="project-desc">Redesigned DappRadar's core discovery experience — the rankings page used by millions to find and track blockchain applications across 50+ chains.</p>
-      <div class="project-metric-block">
-        <span class="project-metric-num">+16%</span>
-        <span class="project-metric-label">increase in engaged sessions after redesign</span>
+      <h2 class="pf-title">Token<br>Staking UX</h2>
+      <div class="pf-meta">
+        <div class="pf-meta-block">
+          <span class="pf-meta-name">Token Staking UX</span>
+          <span class="pf-meta-sub">Web3 · DeFi · DappRadar · 2022 — 2023</span>
+        </div>
+        <div class="pf-meta-block" style="text-align:right;align-items:flex-end">
+          <span class="pf-meta-metric">5M+</span>
+          <span class="pf-meta-sub">tokens staked month one</span>
+        </div>
+        <a href="/token-staking-dappradar" class="pf-cta">View Case <span>→</span></a>
       </div>
-      <a href="/rankings-dappradar" class="project-cta">View Case <span class="project-cta-arrow">→</span></a>
     </div>
-    <div class="project-visual">
-      <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;background:#0b1116">
-        <defs><radialGradient id="wg1" cx="50%" cy="60%" r="55%"><stop offset="0%" stop-color="#0f3d20" stop-opacity="0.8"/><stop offset="100%" stop-color="#0b1116" stop-opacity="0"/></radialGradient></defs>
-        <rect width="800" height="600" fill="url(#wg1)"/>
-        <rect x="30" y="30" width="740" height="540" rx="10" fill="#111820" stroke="#1e2d3a" stroke-width="1"/>
-        <rect x="30" y="30" width="740" height="40" rx="10" fill="#0d151e"/><rect x="30" y="58" width="740" height="12" fill="#0d151e"/>
-        <circle cx="55" cy="50" r="5" fill="#ff5f57" opacity="0.8"/><circle cx="74" cy="50" r="5" fill="#febc2e" opacity="0.8"/><circle cx="93" cy="50" r="5" fill="#28c840" opacity="0.8"/>
-        <rect x="50" y="90" width="200" height="8" rx="3" fill="#63dc80" opacity="0.7"/>
-        <rect x="50" y="110" width="140" height="6" rx="2" fill="#fff" opacity="0.2"/>
-        <rect x="50" y="140" width="700" height="1" fill="#1a2534"/>
-        <rect x="50" y="155" width="60" height="6" rx="2" fill="#fff" opacity="0.3"/><rect x="200" y="155" width="80" height="6" rx="2" fill="#fff" opacity="0.2"/><rect x="400" y="155" width="70" height="6" rx="2" fill="#fff" opacity="0.2"/><rect x="580" y="155" width="60" height="6" rx="2" fill="#fff" opacity="0.2"/>
-        <rect x="50" y="172" width="700" height="1" fill="#1a2534"/>
-        <rect x="50" y="185" width="40" height="6" rx="2" fill="#63dc80" opacity="0.8"/><rect x="100" y="182" width="30" height="30" rx="4" fill="#1a2d40"/><rect x="140" y="187" width="100" height="6" rx="2" fill="#fff" opacity="0.7"/><rect x="400" y="187" width="70" height="6" rx="2" fill="#63dc80" opacity="0.8"/><rect x="580" y="184" width="60" height="12" rx="5" fill="#63dc80" opacity="0.15"/><rect x="592" y="188" width="36" height="4" rx="1" fill="#63dc80" opacity="0.7"/>
-        <rect x="50" y="226" width="700" height="1" fill="#1a2534"/>
-        <rect x="50" y="239" width="40" height="6" rx="2" fill="#fff" opacity="0.4"/><rect x="100" y="236" width="30" height="30" rx="4" fill="#1a2d40"/><rect x="140" y="241" width="90" height="6" rx="2" fill="#fff" opacity="0.6"/><rect x="400" y="241" width="60" height="6" rx="2" fill="#ff6060" opacity="0.6"/><rect x="580" y="238" width="60" height="12" rx="5" fill="#1a2d40"/>
-        <rect x="50" y="280" width="700" height="1" fill="#1a2534"/>
-        <rect x="50" y="293" width="40" height="6" rx="2" fill="#fff" opacity="0.4"/><rect x="100" y="290" width="30" height="30" rx="4" fill="#1a2d40"/><rect x="140" y="295" width="120" height="6" rx="2" fill="#fff" opacity="0.6"/><rect x="400" y="295" width="80" height="6" rx="2" fill="#63dc80" opacity="0.6"/>
-        <rect x="50" y="334" width="700" height="1" fill="#1a2534"/>
-        <rect x="50" y="347" width="40" height="6" rx="2" fill="#fff" opacity="0.3"/><rect x="100" y="344" width="30" height="30" rx="4" fill="#1a2d40"/><rect x="140" y="349" width="80" height="6" rx="2" fill="#fff" opacity="0.5"/><rect x="400" y="349" width="65" height="6" rx="2" fill="#63dc80" opacity="0.5"/>
-        <polyline points="50,460 130,440 210,445 290,420 370,430 450,402 530,412 610,388 690,395 750,375" stroke="#63dc80" stroke-width="2" fill="none" opacity="0.7"/>
-        <polygon points="50,460 130,440 210,445 290,420 370,430 450,402 530,412 610,388 690,395 750,375 750,480 50,480" fill="#63dc80" opacity="0.06"/>
-      </svg>
-      <div class="project-visual-overlay"></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── PROJECT 04 ── -->
-<section class="project-section reveal">
-  <div class="project-inner reverse">
-    <div>
-      <div class="project-eyebrow">
-        <span class="project-num">04</span>
-        <span class="project-tag">Fintech</span>
-        <span class="project-tag">B2B</span>
+  <!-- ── 03 RANKINGS ── -->
+  <section class="pf" data-idx="2" id="pf-03">
+    <span class="pf-num">00.03</span>
+    <div class="pf-frame">
+      <div class="pf-visual">
+        <svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg" style="background:#0b1116">
+          <defs><radialGradient id="rg1" cx="50%" cy="60%" r="55%"><stop offset="0%" stop-color="#0f3d20" stop-opacity="0.8"/><stop offset="100%" stop-color="#0b1116" stop-opacity="0"/></radialGradient></defs>
+          <rect width="960" height="540" fill="url(#rg1)"/>
+          <rect x="40" y="40" width="880" height="460" rx="12" fill="#111820" stroke="#1e2d3a" stroke-width="1"/>
+          <rect x="40" y="40" width="880" height="44" rx="12" fill="#0d151e"/><rect x="40" y="72" width="880" height="12" fill="#0d151e"/>
+          <circle cx="66" cy="62" r="6" fill="#ff5f57" opacity="0.8"/><circle cx="84" cy="62" r="6" fill="#febc2e" opacity="0.8"/><circle cx="102" cy="62" r="6" fill="#28c840" opacity="0.8"/>
+          <rect x="60" y="102" width="280" height="9" rx="3" fill="#63dc80" opacity="0.7"/>
+          <rect x="60" y="120" width="180" height="6" rx="2" fill="#fff" opacity="0.2"/>
+          <rect x="60" y="148" width="840" height="1" fill="#1a2534"/>
+          <rect x="60" y="162" width="70" height="6" rx="2" fill="#fff" opacity="0.3"/><rect x="220" y="162" width="90" height="6" rx="2" fill="#fff" opacity="0.2"/><rect x="440" y="162" width="80" height="6" rx="2" fill="#fff" opacity="0.2"/><rect x="660" y="162" width="70" height="6" rx="2" fill="#fff" opacity="0.2"/>
+          <rect x="60" y="178" width="840" height="1" fill="#1a2534"/>
+          <rect x="60" y="192" width="40" height="6" rx="2" fill="#63dc80" opacity="0.8"/><rect x="110" y="188" width="36" height="36" rx="5" fill="#1a2d40"/><rect x="156" y="194" width="120" height="6" rx="2" fill="#fff" opacity="0.7"/><rect x="440" y="194" width="80" height="6" rx="2" fill="#63dc80" opacity="0.8"/><rect x="660" y="190" width="70" height="14" rx="5" fill="#63dc80" opacity="0.12"/>
+          <rect x="60" y="238" width="840" height="1" fill="#1a2534"/>
+          <rect x="60" y="252" width="40" height="6" rx="2" fill="#fff" opacity="0.4"/><rect x="110" y="248" width="36" height="36" rx="5" fill="#1a2d40"/><rect x="156" y="254" width="100" height="6" rx="2" fill="#fff" opacity="0.6"/><rect x="440" y="254" width="70" height="6" rx="2" fill="#ff6060" opacity="0.6"/>
+          <rect x="60" y="298" width="840" height="1" fill="#1a2534"/>
+          <rect x="60" y="312" width="40" height="6" rx="2" fill="#fff" opacity="0.4"/><rect x="110" y="308" width="36" height="36" rx="5" fill="#1a2d40"/><rect x="156" y="314" width="130" height="6" rx="2" fill="#fff" opacity="0.6"/><rect x="440" y="314" width="60" height="6" rx="2" fill="#63dc80" opacity="0.6"/>
+          <rect x="60" y="358" width="840" height="1" fill="#1a2534"/>
+          <polyline points="60,440 160,420 260,428 360,400 460,412 560,378 660,392 760,360 860,370 900,355" stroke="#63dc80" stroke-width="2" fill="none" opacity="0.7"/>
+          <polygon points="60,440 160,420 260,428 360,400 460,412 560,378 660,392 760,360 860,370 900,355 900,460 60,460" fill="#63dc80" opacity="0.06"/>
+        </svg>
+        <div class="pf-visual-overlay"></div>
       </div>
-      <span class="project-company">Openware · 2019 — 2021</span>
-      <h2 class="project-title">White-label<br>Exchange</h2>
-      <p class="project-desc">Designed a white-label crypto exchange UI kit that became the foundation for 12+ live exchanges across 3 continents — one system, infinite skins.</p>
-      <div class="project-metric-block">
-        <span class="project-metric-num">7K+</span>
-        <span class="project-metric-label">designers and developers using the open-source UI kit</span>
+      <h2 class="pf-title">Rankings<br>Experience</h2>
+      <div class="pf-meta">
+        <div class="pf-meta-block">
+          <span class="pf-meta-name">Rankings Experience</span>
+          <span class="pf-meta-sub">Web3 · UX · DappRadar · 2022 — 2023</span>
+        </div>
+        <div class="pf-meta-block" style="text-align:right;align-items:flex-end">
+          <span class="pf-meta-metric">+16%</span>
+          <span class="pf-meta-sub">engaged sessions</span>
+        </div>
+        <a href="/rankings-dappradar" class="pf-cta">View Case <span>→</span></a>
       </div>
-      <a href="/white-label-openware" class="project-cta">View Case <span class="project-cta-arrow">→</span></a>
     </div>
-    <div class="project-visual">
-      <img src="case3.png" alt="White-label Exchange">
-      <div class="project-visual-overlay"></div>
+  </section>
+
+  <!-- ── 04 OPENWARE ── -->
+  <section class="pf" data-idx="3" id="pf-04">
+    <span class="pf-num">00.04</span>
+    <div class="pf-frame">
+      <div class="pf-visual">
+        <img src="case3.png" alt="White-label Exchange">
+        <div class="pf-visual-overlay"></div>
+      </div>
+      <h2 class="pf-title">White-label<br>Exchange</h2>
+      <div class="pf-meta">
+        <div class="pf-meta-block">
+          <span class="pf-meta-name">White-label Exchange</span>
+          <span class="pf-meta-sub">Fintech · B2B · Openware · 2019 — 2021</span>
+        </div>
+        <div class="pf-meta-block" style="text-align:right;align-items:flex-end">
+          <span class="pf-meta-metric">7K+</span>
+          <span class="pf-meta-sub">designers using the UI kit</span>
+        </div>
+        <a href="/white-label-openware" class="pf-cta">View Case <span>→</span></a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── FOOTER CTA ── -->
-<section class="work-footer-cta reveal">
-  <h2 class="work-footer-headline">
-    Interested in building<br>
-    the <em>next great product?</em><br>
-    Let's work together.
-  </h2>
-  <a href="mailto:yevhen@treiher.com" class="contact-email" style="font-size:clamp(18px,2vw,28px)">yevhen@treiher.com</a>
-</section>
+  <!-- FOOTER CTA -->
+  <section class="work-end reveal">
+    <h2 class="work-end-headline">
+      Interested in building<br>
+      the <em>next great product?</em><br>
+      Let's work together.
+    </h2>
+    <a href="mailto:yevhen@treiher.com" class="contact-email">yevhen@treiher.com</a>
+  </section>
 
-<footer><span>© 2026 EUGENE TREIHER</span><div class="loc"><div class="locdot"></div><span>Dubai</span></div></footer>
+  <footer><span>© 2026 EUGENE TREIHER</span><div class="loc"><div class="locdot"></div><span>Dubai</span></div></footer>
+
+</div>
 
 <script src="canvas.js"></script>
 <script>
-// ── HERO TEXT REVEAL ──
-document.addEventListener('DOMContentLoaded', () => {
-  // trigger hero text immediately
-  setTimeout(() => {
-    document.querySelectorAll('.work-hero .text-reveal').forEach(el => el.classList.add('visible'));
-  }, 100);
-});
-
-// ── VISUAL CLIP REVEAL ──
-const visualObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      // slight delay so content reveals first
-      setTimeout(() => entry.target.classList.add('visible'), 200);
-      visualObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15 });
-
-document.querySelectorAll('.project-visual').forEach(el => visualObserver.observe(el));
-
 // ── BURGER ──
 function toggleMenu(){
   const menu = document.getElementById('mobile-menu');
@@ -214,16 +335,21 @@ function toggleMenu(){
   document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
 }
 
-// ── PARALLAX ON VISUALS ──
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  document.querySelectorAll('.project-visual img, .project-visual svg').forEach(el => {
-    const rect = el.closest('.project-section').getBoundingClientRect();
-    const center = rect.top + rect.height / 2 - window.innerHeight / 2;
-    const offset = center * 0.06;
-    el.style.transform = `translateY(${offset}px)`;
+// ── SECTION REVEAL + PROGRESS ──
+const sections = document.querySelectorAll('.pf');
+const progressLines = document.querySelectorAll('.wp-line');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      const idx = parseInt(entry.target.dataset.idx);
+      progressLines.forEach((l, i) => l.classList.toggle('active', i === idx));
+    }
   });
-}, { passive: true });
+}, { threshold: 0.4 });
+
+sections.forEach(s => sectionObserver.observe(s));
 </script>
 </body>
 </html>
