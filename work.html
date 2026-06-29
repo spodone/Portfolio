@@ -30,8 +30,8 @@ html, body { height: 100%; overflow: hidden; }
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  /* image starts just below nav */
-  padding-top: 76px;
+  /* image starts below nav with breathing room */
+  padding-top: 100px;
 }
 
 /* Image card — upper area, centered horizontally */
@@ -95,18 +95,6 @@ html, body { height: 100%; overflow: hidden; }
 .pf-meta-block { display: flex; flex-direction: column; gap: 2px; }
 .pf-meta-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted2); line-height: 1.6; }
 .pf-meta-label strong { color: var(--text); font-weight: 400; }
-.pf-cta {
-  margin-left: auto;
-  margin-right: calc(19% - 40px);
-  font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
-  color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 6px;
-  align-self: flex-start; margin-top: 4px;
-  border-bottom: 1px solid var(--line); padding-bottom: 3px;
-  transition: color .2s, border-color .2s;
-}
-.pf-cta:hover { color: var(--accent); border-color: var(--accent); }
-.pf-cta span { display: inline-block; transition: transform .3s; }
-.pf-cta:hover span { transform: translateX(4px); }
 
 /* Project number — far left, at image vertical center */
 .pf-num {
@@ -154,7 +142,7 @@ html, body { height: 100%; overflow: hidden; }
 
 /* Mobile */
 @media(max-width: 768px){
-  .pf { padding-top: 72px; }
+  .pf { padding-top: 96px; }
   .pf-visual-wrap { width: 88%; }
   .pf-visual { height: 42vh; }
   .pf-title { font-size: clamp(44px, 12vw, 80px); padding-left: 6vw; margin-top: -0.22em; white-space: normal; }
@@ -231,7 +219,6 @@ html, body { height: 100%; overflow: hidden; }
         <span class="pf-meta-label"><strong style="color:var(--accent);font-size:1.3em">$1.1M</strong></span>
         <span class="pf-meta-label">operational savings</span>
       </div>
-      <a href="/kyb-fuib" class="pf-cta">View Case <span>→</span></a>
     </div>
   </section>
 
@@ -256,7 +243,6 @@ html, body { height: 100%; overflow: hidden; }
         <span class="pf-meta-label"><strong style="color:var(--accent);font-size:1.3em">5M+</strong></span>
         <span class="pf-meta-label">tokens staked · month one</span>
       </div>
-      <a href="/token-staking-dappradar" class="pf-cta">View Case <span>→</span></a>
     </div>
   </section>
 
@@ -299,7 +285,6 @@ html, body { height: 100%; overflow: hidden; }
         <span class="pf-meta-label"><strong style="color:var(--accent);font-size:1.3em">+16%</strong></span>
         <span class="pf-meta-label">engaged sessions</span>
       </div>
-      <a href="/rankings-dappradar" class="pf-cta">View Case <span>→</span></a>
     </div>
   </section>
 
@@ -324,7 +309,6 @@ html, body { height: 100%; overflow: hidden; }
         <span class="pf-meta-label"><strong style="color:var(--accent);font-size:1.3em">7K+</strong></span>
         <span class="pf-meta-label">designers using the UI kit</span>
       </div>
-      <a href="/white-label-openware" class="pf-cta">View Case <span>→</span></a>
     </div>
   </section>
 
@@ -351,20 +335,14 @@ function toggleMenu(){
     hint.classList.toggle('hidden',i===slides.length-1);
   }
   lines.forEach(l=>l.addEventListener('click',()=>slides[parseInt(l.dataset.idx)].scrollIntoView({behavior:'smooth'})));
-  new IntersectionObserver(es=>{
-    es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=0.6)activate(parseInt(e.target.dataset.idx));});
-  },{root:slider,threshold:0.6}).observe(...[slides].flat())||slides.forEach(s=>
-    new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=0.6)activate(parseInt(e.target.dataset.idx));});},{root:slider,threshold:0.6}).observe(s)
-  );
-  document.addEventListener('keydown',e=>{
-    if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();slides[Math.min(cur+1,slides.length-1)].scrollIntoView({behavior:'smooth'});}
-    if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();slides[Math.max(cur-1,0)].scrollIntoView({behavior:'smooth'});}
-  });
-  // fix the observer — rewrite cleanly
   const obs=new IntersectionObserver(es=>{
     es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=0.6)activate(parseInt(e.target.dataset.idx));});
   },{root:slider,threshold:0.6});
   slides.forEach(s=>obs.observe(s));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();slides[Math.min(cur+1,slides.length-1)].scrollIntoView({behavior:'smooth'});}
+    if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();slides[Math.max(cur-1,0)].scrollIntoView({behavior:'smooth'});}
+  });
 })();
 </script>
 </body>
