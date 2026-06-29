@@ -324,62 +324,64 @@ function toggleMenu(){
   document.body.style.overflow=m.classList.contains('open')?'hidden':'';
 }
 (function(){
-  const slider=document.getElementById('work-slider');
-  const slides=document.querySelectorAll('.pf');
-  const lines=document.querySelectorAll('.wp-line');
-  const counter=document.getElementById('work-counter').querySelector('.work-counter-num');
-  const hint=document.getElementById('work-hint');
-  let cur=0;
-  function activate(i){
-    slides[cur].classList.remove('active'); cur=i; slides[cur].classList.add('active');
-    lines.forEach((l,j)=>l.classList.toggle('active',j===i));
-    counter.textContent=String(i+1).padStart(2,'0');
-    hint.classList.toggle('hidden',i===slides.length-1);
+  const slider = document.getElementById('work-slider');
+  const real = Array.from(document.querySelectorAll('.pf'));
+  const dots = document.querySelectorAll('.wp-line');
+  const counterNum = document.querySelector('.work-counter-num');
+  const total = real.length;
+  let cur = 0;
+
+  // Clone first + last for seamless loop
+  const cloneLast  = real[total-1].cloneNode(true);
+  const cloneFirst = real[0].cloneNode(true);
+  slider.insertBefore(cloneLast, real[0]);   // position 0
+  slider.appendChild(cloneFirst);            // position total+1
+
+  const vh = () => window.innerHeight;
+
+  // Start on real slide 0 (position 1 * vh)
+  slider.scrollTop = vh();
+
+  function activate(i) {
+    real[cur].classList.remove('active');
+    cur = i;
+    real[cur].classList.add('active');
+    dots.forEach((d,j) => d.classList.toggle('active', j===i));
+    counterNum.textContent = String(i+1).padStart(2,'0');
   }
-  lines.forEach(l=>l.addEventListener('click',()=>slides[parseInt(l.dataset.idx)].scrollIntoView({behavior:'smooth'})));
 
-  const obs=new IntersectionObserver(es=>{
-    es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=0.6)activate(parseInt(e.target.dataset.idx));});
-  },{root:slider,threshold:0.6});
-  slides.forEach(s=>obs.observe(s));
+  // Dot nav
+  dots.forEach(d => d.addEventListener('click', () => {
+    slider.scrollTo({top: (parseInt(d.dataset.idx)+1)*vh(), behavior:'smooth'});
+  }));
 
-  function goTo(i,smooth){
-    slides[i].scrollIntoView({behavior: smooth ? 'smooth' : 'instant'});
-  }
+  // Track active slide while scrolling
+  slider.addEventListener('scroll', () => {
+    const idx = Math.round(slider.scrollTop / vh());
+    const real_idx = ((idx-1) % total + total) % total;
+    if(real_idx !== cur) activate(real_idx);
+  }, {passive:true});
 
-  // endless loop via wheel
-  let wheelLocked=false;
-  slider.addEventListener('wheel',e=>{
-    if(wheelLocked) return;
-    if(e.deltaY>0 && cur===slides.length-1){
-      wheelLocked=true;
-      goTo(0,false);
-      setTimeout(()=>wheelLocked=false,600);
-    } else if(e.deltaY<0 && cur===0){
-      wheelLocked=true;
-      goTo(slides.length-1,false);
-      setTimeout(()=>wheelLocked=false,600);
+  // After scroll settles — silently teleport if on a clone
+  slider.addEventListener('scrollend', () => {
+    const pos = slider.scrollTop;
+    const h = vh();
+    if(pos < h * 0.5) {
+      // on clone-last → jump to real last (no animation)
+      slider.scrollTop = h * total;
+    } else if(pos > h * (total + 0.5)) {
+      // on clone-first → jump to real first (no animation)
+      slider.scrollTop = h;
     }
-  },{passive:true});
+  });
 
-  // endless loop via touch
-  let touchY=0;
-  slider.addEventListener('touchstart',e=>touchY=e.touches[0].clientY,{passive:true});
-  slider.addEventListener('touchend',e=>{
-    const dy=touchY-e.changedTouches[0].clientY;
-    if(dy>40 && cur===slides.length-1) goTo(0,false);
-    else if(dy<-40 && cur===0) goTo(slides.length-1,false);
-  },{passive:true});
-
-  // endless loop via keyboard
-  document.addEventListener('keydown',e=>{
+  // Keyboard
+  document.addEventListener('keydown', e => {
     if(e.key==='ArrowDown'||e.key==='ArrowRight'){
-      e.preventDefault();
-      goTo(cur===slides.length-1 ? 0 : cur+1, cur!==slides.length-1);
+      e.preventDefault(); slider.scrollBy({top: vh(), behavior:'smooth'});
     }
     if(e.key==='ArrowUp'||e.key==='ArrowLeft'){
-      e.preventDefault();
-      goTo(cur===0 ? slides.length-1 : cur-1, cur!==0);
+      e.preventDefault(); slider.scrollBy({top: -vh(), behavior:'smooth'});
     }
   });
 })();
