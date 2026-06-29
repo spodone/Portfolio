@@ -1,5 +1,48 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
+/* ── VIEW TRANSITIONS ── */
+@view-transition { navigation: auto; }
+
+/* Root page fade — old page out */
+::view-transition-old(root){
+  animation: 500ms cubic-bezier(.76,0,.24,1) both vt-out;
+}
+/* Root page fade — new page in, delayed so hero settles first */
+::view-transition-new(root){
+  animation: 500ms cubic-bezier(.76,0,.24,1) 120ms both vt-in;
+}
+@keyframes vt-out { to { opacity:0; transform:scale(0.97); } }
+@keyframes vt-in  { from { opacity:0; transform:scale(1.03); } }
+
+/* Shared hero element — browser handles position/size morphing automatically */
+::view-transition-group(case-cover){
+  animation-duration: 800ms;
+  animation-timing-function: cubic-bezier(.76,0,.24,1);
+}
+/* Cross-fade the image content during morph */
+::view-transition-old(case-cover){ animation: 300ms cubic-bezier(.76,0,.24,1) both vt-img-out; }
+::view-transition-new(case-cover){ animation: 500ms cubic-bezier(.76,0,.24,1) 200ms both vt-img-in; }
+@keyframes vt-img-out { to   { opacity:0; } }
+@keyframes vt-img-in  { from { opacity:0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
+/* ── CASE HERO COVER (destination of shared element transition) ── */
+.case-hero-cover {
+  width: 100%;
+  height: 56vh;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 52px;
+  view-transition-name: case-cover;
+}
+.case-hero-cover img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
 :root{
   --bg:#0a0a0f;
   --text:#f0ede8;

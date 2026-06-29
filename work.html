@@ -392,6 +392,13 @@ function toggleMenu(){
     }
   });
 
+  // Shared-element transition: tag clicked image as the hero morph source
+  document.querySelectorAll('.pf-visual').forEach(el => {
+    el.addEventListener('click', () => {
+      el.style.viewTransitionName = 'case-cover';
+    });
+  });
+
   // Keyboard
   document.addEventListener('keydown', e => {
     if(e.key==='ArrowDown'||e.key==='ArrowRight'){
