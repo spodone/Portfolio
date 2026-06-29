@@ -1,9 +1,5 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-/* ── PAGE TRANSITIONS ── */
-body{transition:opacity .42s cubic-bezier(.4,0,.2,1),transform .42s cubic-bezier(.4,0,.2,1)}
-body.page-entering{opacity:0;transform:scale(1.025)}
-body.page-exiting{opacity:0;transform:scale(0.975);pointer-events:none}
 :root{
   --bg:#0a0a0f;
   --text:#f0ede8;
