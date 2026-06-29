@@ -27,7 +27,7 @@ nav{
   padding:12px 24px 12px 28px;
 }
 .nav-right{display:flex;align-items:center;gap:16px;justify-content:flex-end;margin-left:auto}
-.nav-logo{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:400;color:var(--text);text-decoration:none;letter-spacing:.02em;cursor:pointer}
+.nav-logo{font-family:'Bricolage Grotesque',sans-serif;font-size:24px;font-weight:400;color:var(--text);text-decoration:none;letter-spacing:.02em;cursor:pointer}
 .nav-links{display:flex;gap:28px;list-style:none;justify-content:center}
 .nav-links a{color:var(--muted2);text-decoration:none;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;transition:color .2s;cursor:pointer}
 .nav-links a:hover{color:var(--text)}
