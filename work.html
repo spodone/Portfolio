@@ -124,14 +124,8 @@ html, body { height: 100%; overflow: hidden; }
 .wp-line:hover { background: rgba(255,255,255,.55); }
 .wp-line.active { background: var(--text); transform: scale(1.4); }
 
-/* Counter bottom-left */
-.work-counter {
-  position: fixed; bottom: 36px; left: 3.5vw; z-index: 100;
-  font-size: 11px; letter-spacing: .08em; color: var(--muted);
-  font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 10px;
-}
-.work-counter-num { color: var(--text); }
-.work-counter-sep { width: 24px; height: 1px; background: var(--muted); opacity: .4; }
+/* Counter hidden */
+.work-counter { display: none; }
 
 /* Scroll hint bottom-right */
 .work-hint {
@@ -202,7 +196,7 @@ html, body { height: 100%; overflow: hidden; }
 
   <!-- 01 -->
   <section class="pf active" data-idx="0">
-    <div class="pf-num"><span class="pf-num-val">00.01</span><span class="pf-num-line"></span></div>
+    <div class="pf-num"><span class="pf-num-val">01</span></div>
     <div class="pf-visual-wrap">
       <div class="pf-visual">
         <img src="case1.png" alt="KYB Verification">
@@ -226,7 +220,7 @@ html, body { height: 100%; overflow: hidden; }
 
   <!-- 02 -->
   <section class="pf" data-idx="1">
-    <div class="pf-num"><span class="pf-num-val">00.02</span><span class="pf-num-line"></span></div>
+    <div class="pf-num"><span class="pf-num-val">02</span></div>
     <div class="pf-visual-wrap">
       <div class="pf-visual">
         <img src="case2.png" alt="Token Staking UX">
@@ -250,7 +244,7 @@ html, body { height: 100%; overflow: hidden; }
 
   <!-- 03 -->
   <section class="pf" data-idx="2">
-    <div class="pf-num"><span class="pf-num-val">00.03</span><span class="pf-num-line"></span></div>
+    <div class="pf-num"><span class="pf-num-val">03</span></div>
     <div class="pf-visual-wrap">
       <div class="pf-visual">
         <svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg" style="background:#0b1116">
@@ -292,7 +286,7 @@ html, body { height: 100%; overflow: hidden; }
 
   <!-- 04 -->
   <section class="pf" data-idx="3">
-    <div class="pf-num"><span class="pf-num-val">00.04</span><span class="pf-num-line"></span></div>
+    <div class="pf-num"><span class="pf-num-val">04</span></div>
     <div class="pf-visual-wrap">
       <div class="pf-visual">
         <img src="case3.png" alt="White-label Exchange">
