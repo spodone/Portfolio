@@ -8,9 +8,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Bricolage+Grotesque:wght@200;300;400;500;600&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-/* ── FULL-SCREEN SLIDER ── */
 html, body { height: 100%; overflow: hidden; }
 
+/* NAV stays fixed on top */
+#main-nav { position: fixed; z-index: 200; }
+
+/* Full-page scroll-snap slider */
 .work-slider {
   position: fixed; inset: 0;
   overflow-y: scroll;
@@ -18,129 +21,153 @@ html, body { height: 100%; overflow: hidden; }
   -webkit-overflow-scrolling: touch;
 }
 
-/* Each slide */
+/* ── SLIDE ── */
 .pf {
   height: 100vh; width: 100%;
   scroll-snap-align: start;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 100px 120px 60px;
-  position: relative; overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  /* image starts just below nav */
+  padding-top: 76px;
+}
+
+/* Image card — upper area, centered horizontally */
+.pf-visual-wrap {
+  width: 62%;
+  margin: 0 auto;
+  position: relative;
   flex-shrink: 0;
 }
-
-/* project number */
-.pf-num {
-  position: absolute; left: 52px; top: 50%; transform: translateY(-50%);
-  font-size: 11px; letter-spacing: .08em; color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-
-/* visual card */
-.pf-frame { position: relative; width: 100%; max-width: 1000px; }
 .pf-visual {
-  width: 100%; aspect-ratio: 16/9;
-  border-radius: 16px; overflow: hidden;
-  border: 1px solid var(--line); position: relative;
+  width: 100%;
+  height: 54vh;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255,255,255,.06);
 }
 .pf-visual img, .pf-visual svg {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-  transition: transform 1s cubic-bezier(.22,1,.36,1);
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 1.2s cubic-bezier(.22,1,.36,1);
 }
+.pf.active .pf-visual img { transform: scale(1.04); }
 .pf-visual-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(10,10,15,.5) 0%, transparent 55%);
+  background: linear-gradient(to top, rgba(10,10,15,.45) 0%, transparent 55%);
   pointer-events: none;
 }
 
-/* Giant title */
+/* Giant title — starts from LEFT EDGE, overlaps image bottom */
 .pf-title {
-  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 300;
-  font-size: clamp(52px, 11.5vw, 152px);
-  line-height: .88; letter-spacing: -.04em;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 300;
+  font-size: clamp(64px, 14vw, 200px);
+  line-height: .86;
+  letter-spacing: -.045em;
   color: var(--text);
-  margin-top: -0.12em;
+  /* overlap: pull up into image bottom */
+  margin-top: -0.28em;
+  /* bleed from left edge */
+  padding-left: 5vw;
   position: relative; z-index: 2;
-  width: 100%; max-width: 1000px;
-  pointer-events: none;
-  opacity: 0; transform: translateY(24px);
-  transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1);
+  white-space: nowrap;
+  /* animate in */
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .85s cubic-bezier(.22,1,.36,1), transform .85s cubic-bezier(.22,1,.36,1);
 }
-.pf.active .pf-title { opacity: 1; transform: translateY(0); transition-delay: .08s; }
+.pf.active .pf-title { opacity: 1; transform: translateY(0); transition-delay: .06s; }
 
-/* meta row */
+/* Small metadata row below image */
 .pf-meta {
-  display: flex; justify-content: space-between; align-items: flex-end;
-  width: 100%; max-width: 1000px;
-  margin-top: 22px; padding-top: 16px;
-  border-top: 1px solid var(--line);
-  opacity: 0; transform: translateY(10px);
-  transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+  display: flex;
+  gap: 56px;
+  /* align under image, starting at its left edge */
+  padding-left: calc(19% + 5vw); /* center of 62% image = 19% left margin + 5vw title padding */
+  margin-top: 18px;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
 }
-.pf.active .pf-meta { opacity: 1; transform: translateY(0); transition-delay: .2s; }
-.pf-meta-name { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text); }
-.pf-meta-sub { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
-.pf-meta-metric { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 300; font-size: 26px; color: var(--accent); letter-spacing: -.02em; line-height: 1; }
-.pf-meta-metric-label { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+.pf.active .pf-meta { opacity: 1; transform: translateY(0); transition-delay: .18s; }
+.pf-meta-block { display: flex; flex-direction: column; gap: 2px; }
+.pf-meta-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted2); line-height: 1.6; }
+.pf-meta-label strong { color: var(--text); font-weight: 400; }
 .pf-cta {
-  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px;
-  border-bottom: 1px solid var(--line); padding-bottom: 4px;
+  margin-left: auto;
+  margin-right: calc(19% - 40px);
+  font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 6px;
+  align-self: flex-start; margin-top: 4px;
+  border-bottom: 1px solid var(--line); padding-bottom: 3px;
   transition: color .2s, border-color .2s;
 }
 .pf-cta:hover { color: var(--accent); border-color: var(--accent); }
 .pf-cta span { display: inline-block; transition: transform .3s; }
 .pf-cta:hover span { transform: translateX(4px); }
 
-/* Fixed right progress */
-.work-progress {
-  position: fixed; right: 44px; top: 50%; transform: translateY(-50%);
-  display: flex; flex-direction: column; gap: 8px; z-index: 100;
+/* Project number — far left, at image vertical center */
+.pf-num {
+  position: absolute;
+  left: 3.5vw;
+  top: calc(76px + 27vh); /* nav + ~half of image */
+  display: flex; flex-direction: column; gap: 10px; align-items: flex-start;
 }
-.wp-line {
-  height: 1.5px; width: 18px; background: rgba(255,255,255,.2);
-  cursor: pointer; transition: width .35s cubic-bezier(.22,1,.36,1), background .35s;
-}
-.wp-line:hover { background: rgba(255,255,255,.5); width: 24px; }
-.wp-line.active { width: 34px; background: var(--text); }
-
-/* slide counter */
-.work-counter {
-  position: fixed; bottom: 40px; left: 52px; z-index: 100;
-  font-size: 11px; letter-spacing: .1em; color: var(--muted);
+.pf-num-val {
+  font-size: 11px; letter-spacing: .08em; color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
-.work-counter strong { color: var(--text); }
+.pf-num-line { width: 28px; height: 1px; background: var(--muted); opacity: .4; }
 
-/* scroll hint */
+/* Fixed right — progress lines */
+.work-progress {
+  position: fixed; right: 40px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 7px; z-index: 100;
+}
+.wp-line {
+  height: 1.5px; width: 16px; background: rgba(255,255,255,.18);
+  cursor: pointer;
+  transition: width .35s cubic-bezier(.22,1,.36,1), background .35s;
+}
+.wp-line:hover { background: rgba(255,255,255,.45); width: 22px; }
+.wp-line.active { width: 30px; background: var(--text); }
+
+/* Counter bottom-left */
+.work-counter {
+  position: fixed; bottom: 36px; left: 3.5vw; z-index: 100;
+  font-size: 11px; letter-spacing: .08em; color: var(--muted);
+  font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 10px;
+}
+.work-counter-num { color: var(--text); }
+.work-counter-sep { width: 24px; height: 1px; background: var(--muted); opacity: .4; }
+
+/* Scroll hint bottom-right */
 .work-hint {
-  position: fixed; bottom: 40px; right: 44px; z-index: 100;
-  display: flex; align-items: center; gap: 10px;
-  font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+  position: fixed; bottom: 36px; right: 40px; z-index: 100;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
   opacity: 1; transition: opacity .4s;
 }
 .work-hint.hidden { opacity: 0; pointer-events: none; }
-.work-hint-arrow { display: flex; flex-direction: column; gap: 3px; }
-.work-hint-arrow span { display: block; width: 1.5px; height: 8px; background: var(--muted); animation: arrowBounce 1.4s ease-in-out infinite; }
-.work-hint-arrow span:nth-child(2) { animation-delay: .15s; }
-.work-hint-arrow span:nth-child(3) { animation-delay: .3s; }
-@keyframes arrowBounce { 0%,100%{opacity:.3} 50%{opacity:1} }
 
-/* nav stays on top */
-#main-nav { position: fixed; z-index: 200; }
-
-@media(max-width:768px){
-  .pf { padding: 100px 20px 80px; }
+/* Mobile */
+@media(max-width: 768px){
+  .pf { padding-top: 72px; }
+  .pf-visual-wrap { width: 88%; }
+  .pf-visual { height: 42vh; }
+  .pf-title { font-size: clamp(44px, 12vw, 80px); padding-left: 6vw; margin-top: -0.22em; white-space: normal; }
   .pf-num { display: none; }
-  .work-progress { right: 16px; }
-  .work-counter { left: 20px; }
-  .pf-title { font-size: clamp(40px, 13vw, 72px); }
+  .work-progress { right: 14px; }
+  .work-counter { left: 6vw; }
+  .pf-meta { padding-left: 6vw; flex-wrap: wrap; gap: 20px; }
+  .pf-cta { margin-left: 0; margin-right: 0; }
   .work-hint { display: none; }
 }
 </style>
 </head>
 <body>
-
 <canvas id="blob-canvas"></canvas>
 
 <nav id="main-nav">
@@ -159,7 +186,6 @@ html, body { height: 100%; overflow: hidden; }
     </div>
   </div>
 </nav>
-
 <div class="mobile-menu" id="mobile-menu">
   <a href="/work" onclick="toggleMenu()">Work</a>
   <a href="/#about" onclick="toggleMenu()">About</a>
@@ -167,74 +193,77 @@ html, body { height: 100%; overflow: hidden; }
   <button class="nav-cta" onclick="toggleMenu();window.location.href='/#contact'">Get in touch</button>
 </div>
 
-<!-- Fixed UI -->
+<!-- Fixed chrome -->
 <div class="work-progress" id="work-progress">
   <div class="wp-line active" data-idx="0"></div>
   <div class="wp-line" data-idx="1"></div>
   <div class="wp-line" data-idx="2"></div>
   <div class="wp-line" data-idx="3"></div>
 </div>
-
-<div class="work-counter" id="work-counter"><strong>01</strong> / 04</div>
-
-<div class="work-hint" id="work-hint">
-  Scroll
-  <div class="work-hint-arrow"><span></span><span></span><span></span></div>
+<div class="work-counter" id="work-counter">
+  <span class="work-counter-num">01</span>
+  <span class="work-counter-sep"></span>
+  <span>04</span>
 </div>
+<div class="work-hint" id="work-hint">Scroll ↓</div>
 
 <!-- SLIDER -->
 <div class="work-slider" id="work-slider">
 
-  <!-- 01 KYB -->
-  <section class="pf active" data-idx="0" id="pf-0">
-    <span class="pf-num">00.01</span>
-    <div class="pf-frame">
+  <!-- 01 -->
+  <section class="pf active" data-idx="0">
+    <div class="pf-num"><span class="pf-num-val">00.01</span><span class="pf-num-line"></span></div>
+    <div class="pf-visual-wrap">
       <div class="pf-visual">
-        <img src="case1.png" alt="KYB Verification Service">
+        <img src="case1.png" alt="KYB Verification">
         <div class="pf-visual-overlay"></div>
       </div>
-      <h2 class="pf-title">KYB<br>Verification</h2>
-      <div class="pf-meta">
-        <div>
-          <div class="pf-meta-name">KYB Verification Service</div>
-          <div class="pf-meta-sub">Fintech · Banking · FUIB Bank · 2023 — 2024</div>
-        </div>
-        <div style="text-align:right">
-          <div class="pf-meta-metric">$1.1M</div>
-          <div class="pf-meta-metric-label">operational savings</div>
-        </div>
-        <a href="/kyb-fuib" class="pf-cta">View Case <span>→</span></a>
+    </div>
+    <h2 class="pf-title">KYB Verification</h2>
+    <div class="pf-meta">
+      <div class="pf-meta-block">
+        <span class="pf-meta-label"><strong>KYB Verification Service</strong></span>
+        <span class="pf-meta-label">FUIB Bank · Fintech · Banking</span>
+        <span class="pf-meta-label">2023 — 2024</span>
       </div>
+      <div class="pf-meta-block">
+        <span class="pf-meta-label">Impact</span>
+        <span class="pf-meta-label"><strong style="color:var(--accent);font-size:1.3em">$1.1M</strong></span>
+        <span class="pf-meta-label">operational savings</span>
+      </div>
+      <a href="/kyb-fuib" class="pf-cta">View Case <span>→</span></a>
     </div>
   </section>
 
-  <!-- 02 TOKEN STAKING -->
-  <section class="pf" data-idx="1" id="pf-1">
-    <span class="pf-num">00.02</span>
-    <div class="pf-frame">
+  <!-- 02 -->
+  <section class="pf" data-idx="1">
+    <div class="pf-num"><span class="pf-num-val">00.02</span><span class="pf-num-line"></span></div>
+    <div class="pf-visual-wrap">
       <div class="pf-visual">
         <img src="case2.png" alt="Token Staking UX">
         <div class="pf-visual-overlay"></div>
       </div>
-      <h2 class="pf-title">Token<br>Staking UX</h2>
-      <div class="pf-meta">
-        <div>
-          <div class="pf-meta-name">Token Staking UX</div>
-          <div class="pf-meta-sub">Web3 · DeFi · DappRadar · 2022 — 2023</div>
-        </div>
-        <div style="text-align:right">
-          <div class="pf-meta-metric">5M+</div>
-          <div class="pf-meta-metric-label">tokens staked month one</div>
-        </div>
-        <a href="/token-staking-dappradar" class="pf-cta">View Case <span>→</span></a>
+    </div>
+    <h2 class="pf-title">Token Staking</h2>
+    <div class="pf-meta">
+      <div class="pf-meta-block">
+        <span class="pf-meta-label"><strong>Token Staking UX</strong></span>
+        <span class="pf-meta-label">DappRadar · Web3 · DeFi</span>
+        <span class="pf-meta-label">2022 — 2023</span>
       </div>
+      <div class="pf-meta-block">
+        <span class="pf-meta-label">Impact</span>
+        <span class="pf-meta-label"><strong style="color:var(--accent);font-size:1.3em">5M+</strong></span>
+        <span class="pf-meta-label">tokens staked · month one</span>
+      </div>
+      <a href="/token-staking-dappradar" class="pf-cta">View Case <span>→</span></a>
     </div>
   </section>
 
-  <!-- 03 RANKINGS -->
-  <section class="pf" data-idx="2" id="pf-2">
-    <span class="pf-num">00.03</span>
-    <div class="pf-frame">
+  <!-- 03 -->
+  <section class="pf" data-idx="2">
+    <div class="pf-num"><span class="pf-num-val">00.03</span><span class="pf-num-line"></span></div>
+    <div class="pf-visual-wrap">
       <div class="pf-visual">
         <svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg" style="background:#0b1116">
           <defs><radialGradient id="rg1" cx="50%" cy="60%" r="55%"><stop offset="0%" stop-color="#0f3d20" stop-opacity="0.8"/><stop offset="100%" stop-color="#0b1116" stop-opacity="0"/></radialGradient></defs>
@@ -245,53 +274,57 @@ html, body { height: 100%; overflow: hidden; }
           <rect x="60" y="102" width="280" height="9" rx="3" fill="#63dc80" opacity="0.7"/>
           <rect x="60" y="120" width="180" height="6" rx="2" fill="#fff" opacity="0.2"/>
           <rect x="60" y="148" width="840" height="1" fill="#1a2534"/>
-          <rect x="60" y="162" width="70" height="6" rx="2" fill="#fff" opacity="0.3"/><rect x="220" y="162" width="90" height="6" rx="2" fill="#fff" opacity="0.2"/><rect x="440" y="162" width="80" height="6" rx="2" fill="#fff" opacity="0.2"/>
+          <rect x="60" y="162" width="70" height="6" rx="2" fill="#fff" opacity="0.3"/><rect x="220" y="162" width="90" height="6" rx="2" fill="#fff" opacity="0.2"/>
           <rect x="60" y="178" width="840" height="1" fill="#1a2534"/>
-          <rect x="60" y="192" width="40" height="6" rx="2" fill="#63dc80" opacity="0.8"/><rect x="110" y="188" width="36" height="36" rx="5" fill="#1a2d40"/><rect x="156" y="194" width="120" height="6" rx="2" fill="#fff" opacity="0.7"/><rect x="440" y="194" width="80" height="6" rx="2" fill="#63dc80" opacity="0.8"/>
+          <rect x="60" y="192" width="40" height="6" rx="2" fill="#63dc80" opacity="0.8"/><rect x="110" y="188" width="36" height="36" rx="5" fill="#1a2d40"/><rect x="156" y="194" width="120" height="6" rx="2" fill="#fff" opacity="0.7"/>
           <rect x="60" y="238" width="840" height="1" fill="#1a2534"/>
-          <rect x="60" y="252" width="40" height="6" rx="2" fill="#fff" opacity="0.4"/><rect x="110" y="248" width="36" height="36" rx="5" fill="#1a2d40"/><rect x="156" y="254" width="100" height="6" rx="2" fill="#fff" opacity="0.6"/><rect x="440" y="254" width="70" height="6" rx="2" fill="#ff6060" opacity="0.6"/>
+          <rect x="60" y="252" width="40" height="6" rx="2" fill="#fff" opacity="0.4"/><rect x="110" y="248" width="36" height="36" rx="5" fill="#1a2d40"/><rect x="156" y="254" width="100" height="6" rx="2" fill="#fff" opacity="0.6"/>
           <rect x="60" y="298" width="840" height="1" fill="#1a2534"/>
-          <rect x="60" y="312" width="40" height="6" rx="2" fill="#fff" opacity="0.4"/><rect x="110" y="308" width="36" height="36" rx="5" fill="#1a2d40"/><rect x="156" y="314" width="130" height="6" rx="2" fill="#fff" opacity="0.6"/><rect x="440" y="314" width="60" height="6" rx="2" fill="#63dc80" opacity="0.6"/>
+          <rect x="60" y="312" width="40" height="6" rx="2" fill="#fff" opacity="0.4"/><rect x="110" y="308" width="36" height="36" rx="5" fill="#1a2d40"/><rect x="156" y="314" width="130" height="6" rx="2" fill="#fff" opacity="0.6"/>
           <polyline points="60,440 160,420 260,428 360,400 460,412 560,378 660,392 760,360 860,370 900,355" stroke="#63dc80" stroke-width="2" fill="none" opacity="0.7"/>
           <polygon points="60,440 160,420 260,428 360,400 460,412 560,378 660,392 760,360 860,370 900,355 900,460 60,460" fill="#63dc80" opacity="0.06"/>
         </svg>
         <div class="pf-visual-overlay"></div>
       </div>
-      <h2 class="pf-title">Rankings<br>Experience</h2>
-      <div class="pf-meta">
-        <div>
-          <div class="pf-meta-name">Rankings Experience</div>
-          <div class="pf-meta-sub">Web3 · UX · DappRadar · 2022 — 2023</div>
-        </div>
-        <div style="text-align:right">
-          <div class="pf-meta-metric">+16%</div>
-          <div class="pf-meta-metric-label">engaged sessions</div>
-        </div>
-        <a href="/rankings-dappradar" class="pf-cta">View Case <span>→</span></a>
+    </div>
+    <h2 class="pf-title">Rankings UX</h2>
+    <div class="pf-meta">
+      <div class="pf-meta-block">
+        <span class="pf-meta-label"><strong>Rankings Experience</strong></span>
+        <span class="pf-meta-label">DappRadar · Web3 · UX</span>
+        <span class="pf-meta-label">2022 — 2023</span>
       </div>
+      <div class="pf-meta-block">
+        <span class="pf-meta-label">Impact</span>
+        <span class="pf-meta-label"><strong style="color:var(--accent);font-size:1.3em">+16%</strong></span>
+        <span class="pf-meta-label">engaged sessions</span>
+      </div>
+      <a href="/rankings-dappradar" class="pf-cta">View Case <span>→</span></a>
     </div>
   </section>
 
-  <!-- 04 OPENWARE -->
-  <section class="pf" data-idx="3" id="pf-3">
-    <span class="pf-num">00.04</span>
-    <div class="pf-frame">
+  <!-- 04 -->
+  <section class="pf" data-idx="3">
+    <div class="pf-num"><span class="pf-num-val">00.04</span><span class="pf-num-line"></span></div>
+    <div class="pf-visual-wrap">
       <div class="pf-visual">
         <img src="case3.png" alt="White-label Exchange">
         <div class="pf-visual-overlay"></div>
       </div>
-      <h2 class="pf-title">White-label<br>Exchange</h2>
-      <div class="pf-meta">
-        <div>
-          <div class="pf-meta-name">White-label Exchange</div>
-          <div class="pf-meta-sub">Fintech · B2B · Openware · 2019 — 2021</div>
-        </div>
-        <div style="text-align:right">
-          <div class="pf-meta-metric">7K+</div>
-          <div class="pf-meta-metric-label">designers using the UI kit</div>
-        </div>
-        <a href="/white-label-openware" class="pf-cta">View Case <span>→</span></a>
+    </div>
+    <h2 class="pf-title">White-label</h2>
+    <div class="pf-meta">
+      <div class="pf-meta-block">
+        <span class="pf-meta-label"><strong>White-label Exchange</strong></span>
+        <span class="pf-meta-label">Openware · Fintech · B2B</span>
+        <span class="pf-meta-label">2019 — 2021</span>
       </div>
+      <div class="pf-meta-block">
+        <span class="pf-meta-label">Impact</span>
+        <span class="pf-meta-label"><strong style="color:var(--accent);font-size:1.3em">7K+</strong></span>
+        <span class="pf-meta-label">designers using the UI kit</span>
+      </div>
+      <a href="/white-label-openware" class="pf-cta">View Case <span>→</span></a>
     </div>
   </section>
 
@@ -300,56 +333,38 @@ html, body { height: 100%; overflow: hidden; }
 <script src="canvas.js"></script>
 <script>
 function toggleMenu(){
-  const menu = document.getElementById('mobile-menu');
-  const burger = document.getElementById('burger');
-  menu.classList.toggle('open');
-  burger.classList.toggle('open');
-  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  const m=document.getElementById('mobile-menu'),b=document.getElementById('burger');
+  m.classList.toggle('open'); b.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
 }
-
 (function(){
-  const slider = document.getElementById('work-slider');
-  const slides = document.querySelectorAll('.pf');
-  const progressLines = document.querySelectorAll('.wp-line');
-  const counter = document.getElementById('work-counter');
-  const hint = document.getElementById('work-hint');
-  let current = 0;
-
-  function setActive(idx){
-    if(idx < 0 || idx >= slides.length) return;
-    slides[current].classList.remove('active');
-    current = idx;
-    slides[current].classList.add('active');
-    progressLines.forEach((l, i) => l.classList.toggle('active', i === idx));
-    counter.innerHTML = '<strong>' + String(idx + 1).padStart(2,'0') + '</strong> / 0' + slides.length;
-    hint.classList.toggle('hidden', idx === slides.length - 1);
+  const slider=document.getElementById('work-slider');
+  const slides=document.querySelectorAll('.pf');
+  const lines=document.querySelectorAll('.wp-line');
+  const counter=document.getElementById('work-counter').querySelector('.work-counter-num');
+  const hint=document.getElementById('work-hint');
+  let cur=0;
+  function activate(i){
+    slides[cur].classList.remove('active'); cur=i; slides[cur].classList.add('active');
+    lines.forEach((l,j)=>l.classList.toggle('active',j===i));
+    counter.textContent=String(i+1).padStart(2,'0');
+    hint.classList.toggle('hidden',i===slides.length-1);
   }
-
-  progressLines.forEach(l => {
-    l.addEventListener('click', () => {
-      slides[parseInt(l.dataset.idx)].scrollIntoView({ behavior: 'smooth' });
-    });
+  lines.forEach(l=>l.addEventListener('click',()=>slides[parseInt(l.dataset.idx)].scrollIntoView({behavior:'smooth'})));
+  new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=0.6)activate(parseInt(e.target.dataset.idx));});
+  },{root:slider,threshold:0.6}).observe(...[slides].flat())||slides.forEach(s=>
+    new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=0.6)activate(parseInt(e.target.dataset.idx));});},{root:slider,threshold:0.6}).observe(s)
+  );
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();slides[Math.min(cur+1,slides.length-1)].scrollIntoView({behavior:'smooth'});}
+    if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();slides[Math.max(cur-1,0)].scrollIntoView({behavior:'smooth'});}
   });
-
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if(e.isIntersecting && e.intersectionRatio >= 0.6)
-        setActive(parseInt(e.target.dataset.idx));
-    });
-  }, { root: slider, threshold: 0.6 });
-
-  slides.forEach(s => obs.observe(s));
-
-  document.addEventListener('keydown', e => {
-    if(e.key === 'ArrowDown' || e.key === 'ArrowRight'){
-      e.preventDefault();
-      slides[Math.min(current + 1, slides.length - 1)].scrollIntoView({ behavior: 'smooth' });
-    }
-    if(e.key === 'ArrowUp' || e.key === 'ArrowLeft'){
-      e.preventDefault();
-      slides[Math.max(current - 1, 0)].scrollIntoView({ behavior: 'smooth' });
-    }
-  });
+  // fix the observer — rewrite cleanly
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=0.6)activate(parseInt(e.target.dataset.idx));});
+  },{root:slider,threshold:0.6});
+  slides.forEach(s=>obs.observe(s));
 })();
 </script>
 </body>
