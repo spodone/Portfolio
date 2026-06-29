@@ -70,17 +70,30 @@ html, body { height: 100%; overflow: hidden; }
   line-height: .86;
   letter-spacing: -.045em;
   color: var(--text);
-  /* overlap: pull up into image bottom */
   margin-top: -1em;
-  /* bleed from left edge */
   padding-left: 5vw;
   position: relative; z-index: 2;
   white-space: nowrap;
-  /* animate in */
-  opacity: 0; transform: translateY(20px);
-  transition: opacity .85s cubic-bezier(.22,1,.36,1), transform .85s cubic-bezier(.22,1,.36,1);
 }
-.pf.active .pf-title { opacity: 1; transform: translateY(0); transition-delay: .06s; }
+.pf-title .line {
+  display: block; overflow: hidden; padding-bottom: .06em;
+}
+.pf-title .line-inner {
+  display: block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform .9s cubic-bezier(.16,1,.3,1), opacity .01s linear;
+}
+.pf.active .pf-title .line-inner {
+  transform: translateY(0); opacity: 1;
+}
+.pf.active .pf-title .line:nth-child(1) .line-inner { transition-delay: .05s; }
+.pf.active .pf-title .line:nth-child(2) .line-inner { transition-delay: .2s; }
+/* reset when slide goes inactive */
+.pf:not(.active) .pf-title .line-inner {
+  transform: translateY(110%); opacity: 0;
+  transition: transform .5s cubic-bezier(.55,0,.1,1), opacity .01s linear;
+}
 
 /* Small metadata row below image */
 .pf-meta {
@@ -203,7 +216,7 @@ html, body { height: 100%; overflow: hidden; }
         <div class="pf-visual-overlay"></div>
       </div>
     </div>
-    <h2 class="pf-title">KYB Verification</h2>
+    <h2 class="pf-title"><span class="line"><span class="line-inner">KYB Verification</span></span></h2>
     <div class="pf-meta">
       <div class="pf-meta-block">
         <span class="pf-meta-label"><strong>KYB Verification Service</strong></span>
@@ -227,7 +240,7 @@ html, body { height: 100%; overflow: hidden; }
         <div class="pf-visual-overlay"></div>
       </div>
     </div>
-    <h2 class="pf-title">Token Staking</h2>
+    <h2 class="pf-title"><span class="line"><span class="line-inner">Token Staking</span></span></h2>
     <div class="pf-meta">
       <div class="pf-meta-block">
         <span class="pf-meta-label"><strong>Token Staking UX</strong></span>
@@ -269,7 +282,7 @@ html, body { height: 100%; overflow: hidden; }
         <div class="pf-visual-overlay"></div>
       </div>
     </div>
-    <h2 class="pf-title">Rankings UX</h2>
+    <h2 class="pf-title"><span class="line"><span class="line-inner">Rankings UX</span></span></h2>
     <div class="pf-meta">
       <div class="pf-meta-block">
         <span class="pf-meta-label"><strong>Rankings Experience</strong></span>
@@ -293,7 +306,7 @@ html, body { height: 100%; overflow: hidden; }
         <div class="pf-visual-overlay"></div>
       </div>
     </div>
-    <h2 class="pf-title">White-label</h2>
+    <h2 class="pf-title"><span class="line"><span class="line-inner">White-label</span></span></h2>
     <div class="pf-meta">
       <div class="pf-meta-block">
         <span class="pf-meta-label"><strong>White-label Exchange</strong></span>
