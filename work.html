@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Eugene Treiher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Bricolage+Grotesque:wght@200;300;400;500;600&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas id="blob-canvas"></canvas>
+
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Eugene T.</a>
+    <ul class="nav-links">
+      <li><a href="/work" style="color:var(--text)">Work</a></li>
+      <li><a href="/#about">About</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://www.linkedin.com/in/yevhen-t-9b0225137/" target="_blank" class="nav-linkedin">LinkedIn</a>
+      <a href="/#contact" class="nav-cta nav-cta-desktop" style="text-decoration:none">Get in touch</a>
+      <button class="burger" id="burger" aria-label="Menu" onclick="toggleMenu()">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/work" onclick="toggleMenu()">Work</a>
+  <a href="/#about" onclick="toggleMenu()">About</a>
+  <a href="https://www.linkedin.com/in/yevhen-t-9b0225137/" target="_blank">LinkedIn</a>
+  <button class="nav-cta" onclick="toggleMenu();window.location.href='/#contact'">Get in touch</button>
+</div>
+
+<!-- ── HERO ── -->
+<section class="work-hero">
+  <div class="work-hero-label">Selected Work</div>
+  <h1 class="work-hero-headline">
+    <span class="text-reveal"><span class="text-reveal-inner">Designing products that</span></span>
+    <span class="text-reveal delay-1"><span class="text-reveal-inner">ship faster, convert better,</span></span>
+    <span class="text-reveal delay-2"><span class="text-reveal-inner">and <em>scale globally.</em></span></span>
+  </h1>
+  <div class="work-hero-bottom">
+    <p class="work-hero-desc">A curated collection of fintech, Web3 and enterprise products designed with measurable business impact — across 9 years and 50+ shipped projects.</p>
+    <div class="work-hero-count">04</div>
+  </div>
+</section>
+
+<!-- ── PROJECT 01 ── -->
+<section class="project-section reveal">
+  <div class="project-inner">
+    <div>
+      <div class="project-eyebrow">
+        <span class="project-num">01</span>
+        <span class="project-tag">Fintech</span>
+        <span class="project-tag">Banking</span>
+      </div>
+      <span class="project-company">FUIB Bank · 2023 — 2024</span>
+      <h2 class="project-title">KYB Verification<br>Service</h2>
+      <p class="project-desc">Redesigned how a major Ukrainian bank verifies business clients — turning a weeks-long manual compliance process into a guided digital experience.</p>
+      <div class="project-metric-block">
+        <span class="project-metric-num">$1.1M</span>
+        <span class="project-metric-label">estimated operational savings in the first 6 months</span>
+      </div>
+      <a href="/kyb-fuib" class="project-cta">View Case <span class="project-cta-arrow">→</span></a>
+    </div>
+    <div class="project-visual">
+      <img src="case1.png" alt="KYB Verification Service">
+      <div class="project-visual-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECT 02 ── -->
+<section class="project-section reveal">
+  <div class="project-inner reverse">
+    <div>
+      <div class="project-eyebrow">
+        <span class="project-num">02</span>
+        <span class="project-tag">Web3</span>
+        <span class="project-tag">DeFi</span>
+      </div>
+      <span class="project-company">DappRadar · 2022 — 2023</span>
+      <h2 class="project-title">Token Staking<br>UX</h2>
+      <p class="project-desc">Designed the RADAR token staking experience — making complex DeFi mechanics feel as simple as a savings account, without losing transparency.</p>
+      <div class="project-metric-block">
+        <span class="project-metric-num">5M+</span>
+        <span class="project-metric-label">tokens staked and 100+ new PRO subscribers in month one</span>
+      </div>
+      <a href="/token-staking-dappradar" class="project-cta">View Case <span class="project-cta-arrow">→</span></a>
+    </div>
+    <div class="project-visual">
+      <img src="case2.png" alt="Token Staking UX">
+      <div class="project-visual-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECT 03 ── -->
+<section class="project-section reveal">
+  <div class="project-inner">
+    <div>
+      <div class="project-eyebrow">
+        <span class="project-num">03</span>
+        <span class="project-tag">Web3</span>
+        <span class="project-tag">UX</span>
+      </div>
+      <span class="project-company">DappRadar · 2022 — 2023</span>
+      <h2 class="project-title">Rankings<br>Experience</h2>
+      <p class="project-desc">Redesigned DappRadar's core discovery experience — the rankings page used by millions to find and track blockchain applications across 50+ chains.</p>
+      <div class="project-metric-block">
+        <span class="project-metric-num">+16%</span>
+        <span class="project-metric-label">increase in engaged sessions after redesign</span>
+      </div>
+      <a href="/rankings-dappradar" class="project-cta">View Case <span class="project-cta-arrow">→</span></a>
+    </div>
+    <div class="project-visual">
+      <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;background:#0b1116">
+        <defs><radialGradient id="wg1" cx="50%" cy="60%" r="55%"><stop offset="0%" stop-color="#0f3d20" stop-opacity="0.8"/><stop offset="100%" stop-color="#0b1116" stop-opacity="0"/></radialGradient></defs>
+        <rect width="800" height="600" fill="url(#wg1)"/>
+        <rect x="30" y="30" width="740" height="540" rx="10" fill="#111820" stroke="#1e2d3a" stroke-width="1"/>
+        <rect x="30" y="30" width="740" height="40" rx="10" fill="#0d151e"/><rect x="30" y="58" width="740" height="12" fill="#0d151e"/>
+        <circle cx="55" cy="50" r="5" fill="#ff5f57" opacity="0.8"/><circle cx="74" cy="50" r="5" fill="#febc2e" opacity="0.8"/><circle cx="93" cy="50" r="5" fill="#28c840" opacity="0.8"/>
+        <rect x="50" y="90" width="200" height="8" rx="3" fill="#63dc80" opacity="0.7"/>
+        <rect x="50" y="110" width="140" height="6" rx="2" fill="#fff" opacity="0.2"/>
+        <rect x="50" y="140" width="700" height="1" fill="#1a2534"/>
+        <rect x="50" y="155" width="60" height="6" rx="2" fill="#fff" opacity="0.3"/><rect x="200" y="155" width="80" height="6" rx="2" fill="#fff" opacity="0.2"/><rect x="400" y="155" width="70" height="6" rx="2" fill="#fff" opacity="0.2"/><rect x="580" y="155" width="60" height="6" rx="2" fill="#fff" opacity="0.2"/>
+        <rect x="50" y="172" width="700" height="1" fill="#1a2534"/>
+        <rect x="50" y="185" width="40" height="6" rx="2" fill="#63dc80" opacity="0.8"/><rect x="100" y="182" width="30" height="30" rx="4" fill="#1a2d40"/><rect x="140" y="187" width="100" height="6" rx="2" fill="#fff" opacity="0.7"/><rect x="400" y="187" width="70" height="6" rx="2" fill="#63dc80" opacity="0.8"/><rect x="580" y="184" width="60" height="12" rx="5" fill="#63dc80" opacity="0.15"/><rect x="592" y="188" width="36" height="4" rx="1" fill="#63dc80" opacity="0.7"/>
+        <rect x="50" y="226" width="700" height="1" fill="#1a2534"/>
+        <rect x="50" y="239" width="40" height="6" rx="2" fill="#fff" opacity="0.4"/><rect x="100" y="236" width="30" height="30" rx="4" fill="#1a2d40"/><rect x="140" y="241" width="90" height="6" rx="2" fill="#fff" opacity="0.6"/><rect x="400" y="241" width="60" height="6" rx="2" fill="#ff6060" opacity="0.6"/><rect x="580" y="238" width="60" height="12" rx="5" fill="#1a2d40"/>
+        <rect x="50" y="280" width="700" height="1" fill="#1a2534"/>
+        <rect x="50" y="293" width="40" height="6" rx="2" fill="#fff" opacity="0.4"/><rect x="100" y="290" width="30" height="30" rx="4" fill="#1a2d40"/><rect x="140" y="295" width="120" height="6" rx="2" fill="#fff" opacity="0.6"/><rect x="400" y="295" width="80" height="6" rx="2" fill="#63dc80" opacity="0.6"/>
+        <rect x="50" y="334" width="700" height="1" fill="#1a2534"/>
+        <rect x="50" y="347" width="40" height="6" rx="2" fill="#fff" opacity="0.3"/><rect x="100" y="344" width="30" height="30" rx="4" fill="#1a2d40"/><rect x="140" y="349" width="80" height="6" rx="2" fill="#fff" opacity="0.5"/><rect x="400" y="349" width="65" height="6" rx="2" fill="#63dc80" opacity="0.5"/>
+        <polyline points="50,460 130,440 210,445 290,420 370,430 450,402 530,412 610,388 690,395 750,375" stroke="#63dc80" stroke-width="2" fill="none" opacity="0.7"/>
+        <polygon points="50,460 130,440 210,445 290,420 370,430 450,402 530,412 610,388 690,395 750,375 750,480 50,480" fill="#63dc80" opacity="0.06"/>
+      </svg>
+      <div class="project-visual-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECT 04 ── -->
+<section class="project-section reveal">
+  <div class="project-inner reverse">
+    <div>
+      <div class="project-eyebrow">
+        <span class="project-num">04</span>
+        <span class="project-tag">Fintech</span>
+        <span class="project-tag">B2B</span>
+      </div>
+      <span class="project-company">Openware · 2019 — 2021</span>
+      <h2 class="project-title">White-label<br>Exchange</h2>
+      <p class="project-desc">Designed a white-label crypto exchange UI kit that became the foundation for 12+ live exchanges across 3 continents — one system, infinite skins.</p>
+      <div class="project-metric-block">
+        <span class="project-metric-num">7K+</span>
+        <span class="project-metric-label">designers and developers using the open-source UI kit</span>
+      </div>
+      <a href="/white-label-openware" class="project-cta">View Case <span class="project-cta-arrow">→</span></a>
+    </div>
+    <div class="project-visual">
+      <img src="case3.png" alt="White-label Exchange">
+      <div class="project-visual-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER CTA ── -->
+<section class="work-footer-cta reveal">
+  <h2 class="work-footer-headline">
+    Interested in building<br>
+    the <em>next great product?</em><br>
+    Let's work together.
+  </h2>
+  <a href="mailto:yevhen@treiher.com" class="contact-email" style="font-size:clamp(18px,2vw,28px)">yevhen@treiher.com</a>
+</section>
+
+<footer><span>© 2026 EUGENE TREIHER</span><div class="loc"><div class="locdot"></div><span>Dubai</span></div></footer>
+
+<script src="canvas.js"></script>
+<script>
+// ── HERO TEXT REVEAL ──
+document.addEventListener('DOMContentLoaded', () => {
+  // trigger hero text immediately
+  setTimeout(() => {
+    document.querySelectorAll('.work-hero .text-reveal').forEach(el => el.classList.add('visible'));
+  }, 100);
+});
+
+// ── VISUAL CLIP REVEAL ──
+const visualObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      // slight delay so content reveals first
+      setTimeout(() => entry.target.classList.add('visible'), 200);
+      visualObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.project-visual').forEach(el => visualObserver.observe(el));
+
+// ── BURGER ──
+function toggleMenu(){
+  const menu = document.getElementById('mobile-menu');
+  const burger = document.getElementById('burger');
+  menu.classList.toggle('open');
+  burger.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+
+// ── PARALLAX ON VISUALS ──
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  document.querySelectorAll('.project-visual img, .project-visual svg').forEach(el => {
+    const rect = el.closest('.project-section').getBoundingClientRect();
+    const center = rect.top + rect.height / 2 - window.innerHeight / 2;
+    const offset = center * 0.06;
+    el.style.transform = `translateY(${offset}px)`;
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
