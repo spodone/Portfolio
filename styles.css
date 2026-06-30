@@ -266,6 +266,8 @@ nav{
   max-width:720px;
   margin:72px auto;
   width:calc(100% - 104px);
+  background:rgba(8,8,12,0.82);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
 }
 .ai-chat-label{
   font-size:11px;letter-spacing:.14em;text-transform:uppercase;
