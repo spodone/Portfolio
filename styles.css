@@ -33,8 +33,10 @@ nav{
 .nav-links{display:flex;gap:28px;list-style:none;justify-content:center}
 .nav-links a{color:var(--muted2);text-decoration:none;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;transition:color .2s;cursor:pointer}
 .nav-links a:hover{color:var(--text)}
-.nav-cta{background:var(--accent);color:#0a0a0f;border:none;padding:8px 20px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--sans);letter-spacing:0.02em;transition:opacity .2s}
-.nav-cta:hover{opacity:.82}
+.nav-cta{background:var(--accent);color:#0a0a0f;border:none;padding:8px 20px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--sans);letter-spacing:0.02em;transition:opacity .2s;position:relative;overflow:hidden;}
+.nav-cta::after{content:'';position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.35) 50%,transparent 100%);transform:skewX(-15deg);transition:left .55s cubic-bezier(.4,0,.2,1);pointer-events:none;}
+.nav-cta:hover{opacity:.92}
+.nav-cta:hover::after{left:140%}
 .nav-linkedin{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);text-decoration:none;transition:color .2s}
 .nav-linkedin:hover{color:var(--text)}
 .case-nav .nav-links{display:none}
@@ -132,10 +134,20 @@ nav{
   border:1px solid var(--line);border-radius:100px;
   padding:8px 16px;
   text-decoration:none;
-  transition:border-color .2s,color .2s;
+  transition:border-color .3s,color .3s;
   white-space:nowrap;
+  overflow:hidden;
 }
-.felix-btn:hover{border-color:rgba(240,237,232,.2);color:var(--text)}
+.felix-btn::after{
+  content:'';position:absolute;top:0;left:-80%;
+  width:50%;height:100%;
+  background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.18) 50%,transparent 100%);
+  transform:skewX(-15deg);
+  transition:left .55s cubic-bezier(.4,0,.2,1);
+  pointer-events:none;
+}
+.felix-btn:hover{border-color:rgba(240,237,232,.25);color:var(--text)}
+.felix-btn:hover::after{left:140%}
 
 .hero-ctas{display:flex;align-items:center;gap:32px;padding-top:48px;margin-top:16px;border-top:1px solid var(--line)}
 .hero-cta-arrow{
