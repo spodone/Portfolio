@@ -316,8 +316,8 @@ nav{
   transition:color .2s;
 }
 .ai-chips-toggle:hover{color:var(--text)}
-.ai-chips{display:none;flex-wrap:wrap;gap:8px;}
-.ai-chips--open{display:flex;}
+.ai-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.ai-chips--closed{display:none;}
 .ai-chip{
   font-size:13px;color:var(--muted2);
   background:rgba(255,255,255,.04);

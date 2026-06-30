@@ -407,8 +407,8 @@ function removeTyping() {
 function toggleChips() {
   const chips = document.getElementById('ai-chips');
   const arrow = document.getElementById('ai-chips-arrow');
-  const open = chips.classList.toggle('ai-chips--open');
-  arrow.textContent = open ? '↑' : '↓';
+  const closed = chips.classList.toggle('ai-chips--closed');
+  arrow.textContent = closed ? '↓' : '↑';
 }
 
 function sendMessage(text) {
@@ -416,10 +416,10 @@ function sendMessage(text) {
   const q = text || input.value.trim();
   if (!q) return;
   input.value = '';
-  // collapse chips after first use
+  // collapse chips after use
   const chips = document.getElementById('ai-chips');
   const arrow = document.getElementById('ai-chips-arrow');
-  chips.classList.remove('ai-chips--open');
+  chips.classList.add('ai-chips--closed');
   arrow.textContent = '↓';
   appendMsg(q, 'user');
   showTyping();
