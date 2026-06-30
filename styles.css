@@ -125,6 +125,32 @@ nav{
 .hero-headline.revealed .line:nth-child(2) .line-inner{transition-delay:.18s}
 .hero-headline.revealed .line:nth-child(3) .line-inner{transition-delay:.31s}
 
+.hero-ctas{display:flex;align-items:center;gap:32px;padding-top:48px;margin-top:16px;border-top:1px solid var(--line)}
+.hero-cta-arrow{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  text-decoration:none;color:var(--text);cursor:pointer;
+}
+.hero-cta-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+.hero-cta-icon{
+  font-size:20px;color:var(--text);
+  animation:bounceDown 1.8s ease-in-out infinite;
+  display:block;
+}
+@keyframes bounceDown{
+  0%,100%{transform:translateY(0);opacity:.5}
+  50%{transform:translateY(6px);opacity:1}
+}
+.hero-cta-arrow:hover .hero-cta-label{color:var(--text)}
+.hero-cta-chat{
+  font-size:13px;color:var(--muted2);
+  text-decoration:none;
+  border:1px solid var(--line);border-radius:100px;
+  padding:10px 20px;
+  transition:border-color .2s,color .2s;
+  white-space:nowrap;
+}
+.hero-cta-chat:hover{border-color:rgba(240,237,232,.2);color:var(--text)}
+
 .hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;padding-top:48px;margin-top:16px;border-top:1px solid var(--line)}
 .hero-desc{font-size:14px;color:var(--muted2);max-width:320px;line-height:1.8}
 .hero-stats{display:flex;gap:48px}
