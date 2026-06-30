@@ -307,7 +307,17 @@ nav{
 .ai-typing-dot:nth-child(3){animation-delay:.3s}
 @keyframes typingBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
 
-.ai-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.ai-chips-wrap{display:flex;flex-direction:column;gap:10px;}
+.ai-chips-toggle{
+  align-self:flex-start;
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);background:none;border:none;
+  cursor:pointer;font-family:var(--sans);padding:0;
+  transition:color .2s;
+}
+.ai-chips-toggle:hover{color:var(--text)}
+.ai-chips{display:none;flex-wrap:wrap;gap:8px;}
+.ai-chips--open{display:flex;}
 .ai-chip{
   font-size:13px;color:var(--muted2);
   background:rgba(255,255,255,.04);

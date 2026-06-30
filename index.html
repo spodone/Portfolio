@@ -138,15 +138,18 @@
       <span>Hey 👋 I'm Eugene's AI assistant. Ask me anything — his experience, skills, or how he can help your team.</span>
     </div>
   </div>
-  <div class="ai-chips" id="ai-chips">
-    <button class="ai-chip" onclick="askChip(this)">How can Eugene help our team?</button>
-    <button class="ai-chip" onclick="askChip(this)">Tell me about the KYB case</button>
-    <button class="ai-chip" onclick="askChip(this)">What's Eugene's strongest skill?</button>
-    <button class="ai-chip" onclick="askChip(this)">How does he use AI in product design?</button>
-    <button class="ai-chip" onclick="askChip(this)">Show me measurable results</button>
-    <button class="ai-chip" onclick="askChip(this)">Tell me about his Web3 experience</button>
-    <button class="ai-chip" onclick="askChip(this)">Has he led design initiatives?</button>
-    <button class="ai-chip" onclick="askChip(this)">What kind of role is Eugene looking for?</button>
+  <div class="ai-chips-wrap" id="ai-chips-wrap">
+    <button class="ai-chips-toggle" id="ai-chips-toggle" onclick="toggleChips()">Suggested questions <span id="ai-chips-arrow">↓</span></button>
+    <div class="ai-chips" id="ai-chips">
+      <button class="ai-chip" onclick="askChip(this)">How can Eugene help our team?</button>
+      <button class="ai-chip" onclick="askChip(this)">Tell me about the KYB case</button>
+      <button class="ai-chip" onclick="askChip(this)">What's Eugene's strongest skill?</button>
+      <button class="ai-chip" onclick="askChip(this)">How does he use AI in product design?</button>
+      <button class="ai-chip" onclick="askChip(this)">Show me measurable results</button>
+      <button class="ai-chip" onclick="askChip(this)">Tell me about his Web3 experience</button>
+      <button class="ai-chip" onclick="askChip(this)">Has he led design initiatives?</button>
+      <button class="ai-chip" onclick="askChip(this)">What kind of role is Eugene looking for?</button>
+    </div>
   </div>
   <div class="ai-input-row">
     <input class="ai-input" id="ai-input" type="text" placeholder="Ask something…" autocomplete="off" />
@@ -401,13 +404,23 @@ function removeTyping() {
   if (t) t.remove();
 }
 
+function toggleChips() {
+  const chips = document.getElementById('ai-chips');
+  const arrow = document.getElementById('ai-chips-arrow');
+  const open = chips.classList.toggle('ai-chips--open');
+  arrow.textContent = open ? '↑' : '↓';
+}
+
 function sendMessage(text) {
   const input = document.getElementById('ai-input');
   const q = text || input.value.trim();
   if (!q) return;
   input.value = '';
-  // hide chips after first interaction
-  document.getElementById('ai-chips').style.display = 'none';
+  // collapse chips after first use
+  const chips = document.getElementById('ai-chips');
+  const arrow = document.getElementById('ai-chips-arrow');
+  chips.classList.remove('ai-chips--open');
+  arrow.textContent = '↓';
   appendMsg(q, 'user');
   showTyping();
   setTimeout(() => {
