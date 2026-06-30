@@ -131,17 +131,22 @@
   </div>
 </section>
 
-<section class="about-section" id="about">
-  <div class="reveal">
-    <h2 class="about-headline">Senior designer.<br><em>Problem solver.</em></h2>
-    <p class="about-text">I'm Yevhen — a product designer based in Barcelona. 6 years at the intersection of complex technology and everyday people, mostly in Web3 and Fintech.</p>
-    <p class="about-text">I believe the best product design is invisible. My job is to make the complex feel obvious.</p>
+<section class="ai-chat-section reveal" id="about">
+  <div class="ai-chat-label">AI · Ask about Eugene</div>
+  <div class="ai-chat-window" id="ai-chat-window">
+    <div class="ai-msg ai-msg--bot">
+      <span>Hey 👋 I'm Eugene's AI assistant. Ask me anything — his experience, skills, or how he can help your team.</span>
+    </div>
   </div>
-  <div class="exp-list reveal reveal-delay-2">
-    <div class="exp-item"><div><div class="exp-co">DappRadar</div><div class="exp-role">Lead Product Designer</div></div><span class="exp-yr">2022 — now</span></div>
-    <div class="exp-item"><div><div class="exp-co">Yellow Network</div><div class="exp-role">Senior UX Designer</div></div><span class="exp-yr">2021 — 2022</span></div>
-    <div class="exp-item"><div><div class="exp-co">Openware</div><div class="exp-role">UX/UI Designer</div></div><span class="exp-yr">2019 — 2021</span></div>
-    <div class="exp-item"><div><div class="exp-co">Freelance</div><div class="exp-role">Product Designer</div></div><span class="exp-yr">2018 — 2019</span></div>
+  <div class="ai-chips" id="ai-chips">
+    <button class="ai-chip" onclick="askChip(this)">How can Eugene help my team?</button>
+    <button class="ai-chip" onclick="askChip(this)">What's his strongest skill?</button>
+    <button class="ai-chip" onclick="askChip(this)">Tell me about his Web3 work</button>
+    <button class="ai-chip" onclick="askChip(this)">Has he led design teams?</button>
+  </div>
+  <div class="ai-input-row">
+    <input class="ai-input" id="ai-input" type="text" placeholder="Ask something…" autocomplete="off" />
+    <button class="ai-send" id="ai-send" onclick="sendMessage()">↑</button>
   </div>
 </section>
 
@@ -321,6 +326,99 @@ function toggleCard(btn) {
   const expanded = card.classList.toggle('expanded');
   btn.textContent = expanded ? 'Show less' : 'Read more';
 }
+
+// ── AI CHAT (mocked) ──
+const MOCK = [
+  {
+    keys: ['help','team','hire','work with','collaborate','bring'],
+    answer: "Eugene excels at taking complex, data-heavy products and making them feel intuitive. He's worked across fintech, Web3, and banking — so he ramps up fast on regulated, technical domains. He's most valuable when a team needs someone who can own the full design process: from research and strategy through to pixel-perfect delivery and developer handoff."
+  },
+  {
+    keys: ['skill','strong','best at','good at','speciali'],
+    answer: "His strongest area is turning complex systems into simple, usable interfaces — particularly in trading, DeFi, and banking. He's also deeply experienced with design systems: at DappRadar he rebuilt the entire component library in Figma and cut per-feature design time significantly."
+  },
+  {
+    keys: ['web3','defi','crypto','blockchain','staking','dapp','radar'],
+    answer: "At DappRadar he led the design of RADAR token staking — 5M+ tokens staked and 100+ new PRO subscribers in the first month. He also redesigned the Rankings experience, their core product, which increased engaged sessions by 16%. Before that, at Openware he built a white-label crypto exchange UI used by 12+ exchanges across 3 continents."
+  },
+  {
+    keys: ['bank','kyb','fintech','fuib','financial'],
+    answer: "At FUIB Bank he designed a KYB (Know Your Business) verification service that saved up to $1.1M in operational costs within 6 months. He navigated complex compliance requirements and legacy system constraints while shipping a product that genuinely moved the needle."
+  },
+  {
+    keys: ['lead','team','manage','senior','junior','mentored'],
+    answer: "Yes — at DappRadar he was the Lead Product Designer, owning the design process end-to-end and working directly with PMs, engineers, and stakeholders. He also ran the transition to Figma company-wide and established the design system. He mentors junior designers and is used to being the sole designer on a product team."
+  },
+  {
+    keys: ['ai','artificial','machine','gpt','llm','automation'],
+    answer: "Eugene is genuinely AI-native — he was one of the first in his organisation to integrate AI into his design workflow and coached others on practical applications. He focuses on AI-powered features and automation UX, and understands how to design for products where AI is the core experience."
+  },
+  {
+    keys: ['experience','year','long','background','career'],
+    answer: "9+ years in product design, mostly in fintech and Web3. He's worked at DappRadar (Lead Designer), Yellow Network (Senior UX), Openware (UX/UI Designer), and as a freelancer before that. He's shipped products used by millions of users across Europe, Southeast Asia, and the Middle East."
+  },
+  {
+    keys: ['contact','reach','email','talk','meet','available'],
+    answer: "You can reach Eugene on LinkedIn — there's a link in the nav — or just hit \"Get in touch\" above. He's currently based in Dubai and is open to senior roles, advisory work, or consulting engagements."
+  }
+];
+
+function getBotAnswer(q) {
+  const lower = q.toLowerCase();
+  for (const item of MOCK) {
+    if (item.keys.some(k => lower.includes(k))) return item.answer;
+  }
+  return "Great question. Eugene has 9+ years designing complex products in fintech and Web3. He's shipped work at DappRadar, FUIB Bank, and Openware — feel free to ask about any specific area.";
+}
+
+function appendMsg(text, role) {
+  const win = document.getElementById('ai-chat-window');
+  const div = document.createElement('div');
+  div.className = 'ai-msg ai-msg--' + role;
+  const span = document.createElement('span');
+  span.textContent = text;
+  div.appendChild(span);
+  win.appendChild(div);
+  win.scrollTop = win.scrollHeight;
+}
+
+function showTyping() {
+  const win = document.getElementById('ai-chat-window');
+  const div = document.createElement('div');
+  div.className = 'ai-msg ai-typing';
+  div.id = 'ai-typing';
+  div.innerHTML = '<span><span class="ai-typing-dot"></span><span class="ai-typing-dot"></span><span class="ai-typing-dot"></span></span>';
+  win.appendChild(div);
+  win.scrollTop = win.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('ai-typing');
+  if (t) t.remove();
+}
+
+function sendMessage(text) {
+  const input = document.getElementById('ai-input');
+  const q = text || input.value.trim();
+  if (!q) return;
+  input.value = '';
+  // hide chips after first interaction
+  document.getElementById('ai-chips').style.display = 'none';
+  appendMsg(q, 'user');
+  showTyping();
+  setTimeout(() => {
+    removeTyping();
+    appendMsg(getBotAnswer(q), 'bot');
+  }, 900 + Math.random() * 400);
+}
+
+function askChip(btn) {
+  sendMessage(btn.textContent);
+}
+
+document.getElementById('ai-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') sendMessage();
+});
 
 // ── TESTIMONIALS DRAG SCROLL ──
 (function(){
