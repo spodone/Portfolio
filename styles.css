@@ -693,7 +693,8 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .coming-soon-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:clamp(36px,4vw,56px);color:var(--text);line-height:1.1;letter-spacing:-.02em}
 
 /* ── CASE STUDY SECTIONS ── */
-.cs-section{padding:80px 52px;border-bottom:1px solid var(--line);position:relative;z-index:1}
+.cs-section{padding:80px 52px 80px 284px;border-bottom:1px solid var(--line);position:relative;z-index:1}
+.kyb-sidebar{position:fixed;left:52px;top:110px;width:180px;z-index:10}
 .cs-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block}
 .cs-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:clamp(32px,3.5vw,48px);line-height:1.08;letter-spacing:-.02em;color:var(--text);margin-bottom:48px}
 .cs-text{font-size:15px;color:var(--muted2);line-height:1.88;font-family:'Inter',sans-serif;font-weight:300;max-width:720px}
@@ -821,6 +822,7 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
   .crg{grid-template-columns:1fr}
   .case-next{flex-direction:column;gap:24px;align-items:flex-start}
   .cs-section{padding:60px 20px}
+  .kyb-sidebar{display:none}
   .exec-grid{grid-template-columns:1fr 1fr}
   .goals-grid{grid-template-columns:1fr;gap:32px}
   .insights-grid{grid-template-columns:1fr}

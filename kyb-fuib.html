@@ -54,8 +54,18 @@
     </div>
   </section>
 
+  <div class="kyb-sidebar">
+    <div class="csl">Contents</div>
+    <div class="cst active" data-target="overview">Overview</div>
+    <div class="cst" data-target="discovery">Discovery</div>
+    <div class="cst" data-target="solution">Solution</div>
+    <div class="cst" data-target="design-system">Design system</div>
+    <div class="cst" data-target="results">Results</div>
+    <div class="cst" data-target="reflection">Reflection</div>
+  </div>
+
   <!-- ── 2. EXECUTIVE SUMMARY ── -->
-  <section class="cs-section reveal">
+  <section class="cs-section reveal" id="overview">
     <span class="cs-tag">02 — Executive Summary</span>
     <h2 class="cs-title">Quick snapshot</h2>
     <div class="exec-grid">
@@ -135,7 +145,7 @@
   </section>
 
   <!-- ── 5. DISCOVERY ── -->
-  <section class="cs-section reveal">
+  <section class="cs-section reveal" id="discovery">
     <span class="cs-tag">05 — Discovery</span>
     <h2 class="cs-title">How we understood the problem</h2>
     <div class="discovery-grid">
@@ -272,7 +282,7 @@
   </section>
 
   <!-- ── 8. SOLUTION ── -->
-  <section class="cs-section reveal">
+  <section class="cs-section reveal" id="solution">
     <span class="cs-tag">08 — Solution</span>
     <h2 class="cs-title">What we built</h2>
 
@@ -416,7 +426,7 @@
   </section>
 
   <!-- ── 9. DESIGN SYSTEM ── -->
-  <section class="cs-section reveal">
+  <section class="cs-section reveal" id="design-system">
     <span class="cs-tag">09 — Design System</span>
     <h2 class="cs-title">Building for consistency and scale</h2>
     <div class="ds-grid">
@@ -445,7 +455,7 @@
   </section>
 
   <!-- ── 10. RESULTS ── -->
-  <section class="cs-section reveal">
+  <section class="cs-section reveal" id="results">
     <span class="cs-tag">10 — Results</span>
     <h2 class="cs-title">Business impact</h2>
     <div class="results-grid-cs">
@@ -469,7 +479,7 @@
   </section>
 
   <!-- ── 11. REFLECTION ── -->
-  <section class="cs-section reveal">
+  <section class="cs-section reveal" id="reflection">
     <span class="cs-tag">11 — Reflection</span>
     <h2 class="cs-title">What I learned</h2>
     <div class="reflection-list">
@@ -505,11 +515,10 @@
 
 <script src="canvas.js"></script>
 <script>
-const sections = document.querySelectorAll('.cs-section[id], .case-hero');
-const navItems = document.querySelectorAll('.cst');
+const navItems = document.querySelectorAll('.kyb-sidebar .cst');
 window.addEventListener('scroll', () => {
   let current = '';
-  document.querySelectorAll('[id]').forEach(s => {
+  document.querySelectorAll('.cs-section[id]').forEach(s => {
     if(window.scrollY >= s.offsetTop - 160) current = s.id;
   });
   navItems.forEach(n => { n.classList.toggle('active', n.dataset.target === current); });
