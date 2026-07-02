@@ -290,7 +290,7 @@ nav{
 
 .case-preview{
   position:fixed;
-  width:280px;height:360px;
+  width:420px;height:260px;
   border-radius:16px;overflow:hidden;
   pointer-events:none;
   opacity:0;
