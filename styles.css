@@ -825,6 +825,7 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
   .hero-cta-arrow{display:none}
   .felix-btn{right:16px;top:calc(64px + 24px);}
   .case-list{padding:0 20px}
+  .sec-header{padding-left:20px;padding-right:20px;}
   .case-row-name{font-size:22px}
   .about-section{grid-template-columns:1fr;gap:48px}
   .case-back{margin-left:20px}
