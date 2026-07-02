@@ -285,6 +285,9 @@ nav{
 .case-row:hover .case-row-tag{border-color:var(--accent);color:var(--accent)}
 .case-row-year{font-size:11px;color:var(--muted);letter-spacing:.04em;text-align:right;white-space:nowrap}
 
+.view-all-btn{display:inline-flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:100px;padding:12px 24px;transition:color .2s,border-color .2s}
+.view-all-btn:hover{color:var(--text);border-color:rgba(240,237,232,0.2)}
+
 .case-preview{
   position:fixed;
   width:280px;height:360px;

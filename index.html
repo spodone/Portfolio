@@ -41,7 +41,7 @@
 </a>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#work" onclick="toggleMenu()">Work</a>
+  <a href="/work" onclick="toggleMenu()">Work</a>
   <a href="#about" onclick="toggleMenu()">About</a>
   <a href="https://www.linkedin.com/in/yevhen-t-9b0225137/" target="_blank">LinkedIn</a>
   <button class="nav-cta" onclick="toggleMenu();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in touch</button>
@@ -94,7 +94,7 @@
 <section class="work-section" id="work">
   <div class="sec-header reveal">
     <span class="sec-num">02 — Selected work</span>
-    <span class="sec-num">5 projects</span>
+    <a href="/work" class="sec-num" style="text-decoration:none;color:inherit;">5 projects →</a>
   </div>
 
   <div class="case-preview" id="case-preview">
@@ -127,22 +127,9 @@
         <span class="case-row-tag">UX</span>
       </div>
     </a>
-    <a class="case-row" href="/white-label-openware" data-preview="case3.png">
-      <span class="case-idx">04</span>
-      <div class="case-row-name">White-label Exchange @Openware<span class="case-row-desc">Designed an open-source crypto trading UI kit used by <em class="case-accent">7K+</em> designers and developers.</span></div>
-      <div class="case-row-tags">
-        <span class="case-row-tag">Fintech</span>
-        <span class="case-row-tag">B2B</span>
-      </div>
-    </a>
-    <a class="case-row" href="/design-system-dappradar">
-      <span class="case-idx">05</span>
-      <div class="case-row-name">Design System @DappRadar<span class="case-row-desc">Built a token-based design system that cut per-feature design time by <em class="case-accent">60%</em>.</span></div>
-      <div class="case-row-tags">
-        <span class="case-row-tag">Web3</span>
-        <span class="case-row-tag">Systems</span>
-      </div>
-    </a>
+  </div>
+  <div style="margin-top:32px;padding:0 0;">
+    <a href="/work" class="view-all-btn">View all projects →</a>
   </div>
 </section>
 
