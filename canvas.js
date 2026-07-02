@@ -129,3 +129,17 @@
     autoReveal('.crg, .exec-grid, .insights-grid, .discovery-grid, .ds-grid', 'reveal-children');
   });
 })();
+
+// ── SMART NAV (hide on scroll down, show on scroll up) ──
+(function(){
+  const nav = document.getElementById('main-nav');
+  const felix = document.querySelector('.felix-btn');
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const goingDown = y > lastY && y > 80;
+    nav.classList.toggle('nav-hidden', goingDown);
+    if(felix) felix.classList.toggle('felix-hidden', goingDown);
+    lastY = y;
+  }, { passive: true });
+})();

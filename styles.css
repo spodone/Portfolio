@@ -21,7 +21,10 @@ nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;justify-content:space-between;align-items:center;
   padding:22px 52px;
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
 }
+nav.nav-hidden{transform:translateY(-120%);}
+.felix-btn.felix-hidden{opacity:0;transform:translateY(-12px);pointer-events:none;}
 .nav-inner{
   width:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
   background:rgba(10,10,15,0.6);backdrop-filter:blur(20px);
@@ -134,7 +137,7 @@ nav{
   border:1px solid var(--line);border-radius:100px;
   padding:8px 16px;
   text-decoration:none;
-  transition:border-color .3s,color .3s;
+  transition:border-color .3s,color .3s,opacity .3s cubic-bezier(.4,0,.2,1),transform .35s cubic-bezier(.4,0,.2,1);
   white-space:nowrap;
   overflow:hidden;
 }
