@@ -154,6 +154,14 @@ html, body { height: 100%; overflow: hidden; }
 }
 .work-hint.hidden { opacity: 0; pointer-events: none; }
 
+/* ── PAGE ENTRANCE ── */
+.pf-visual-wrap.wp-enter{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.22,1,.36,1) .08s,transform .9s cubic-bezier(.22,1,.36,1) .08s;}
+.pf-visual-wrap.wp-enter.wp-in{opacity:1;transform:translateY(0);}
+.work-progress.wp-enter{opacity:0;transition:opacity .7s cubic-bezier(.22,1,.36,1) .6s;}
+.work-progress.wp-enter.wp-in{opacity:1;}
+.work-hint.wp-enter{opacity:0;transition:opacity .6s ease .85s;}
+.work-hint.wp-enter.wp-in{opacity:1;}
+
 /* Mobile */
 @media(max-width: 768px){
   .pf { padding-top: 96px; }
@@ -397,6 +405,17 @@ function toggleMenu(){
       activate(0, true);
     }
   });
+
+  // Page entrance animation
+  const _enterEls = [
+    document.querySelector('.pf.active .pf-visual-wrap'),
+    document.getElementById('work-progress'),
+    document.getElementById('work-hint'),
+  ];
+  _enterEls.forEach(el => el && el.classList.add('wp-enter'));
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    _enterEls.forEach(el => el && el.classList.add('wp-in'));
+  }));
 
   // Keyboard
   document.addEventListener('keydown', e => {
