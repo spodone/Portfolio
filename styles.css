@@ -802,6 +802,12 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .mobile-menu a:hover{color:var(--accent)}
 .mobile-menu .nav-cta{font-size:14px;padding:12px 32px;margin-top:8px}
 
+/* ── PAGE TRANSITION ── */
+#pg-trans{position:fixed;inset:0;background:var(--bg);z-index:9999;pointer-events:none;transform:translateY(0);transition:transform .75s cubic-bezier(.87,0,.13,1);}
+#pg-trans::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--accent);}
+#pg-trans.pt-revealed{transform:translateY(-100%);}
+.pt-exiting{opacity:0;transform:translateY(-12px);transition:opacity .38s ease,transform .38s ease;}
+
 @media(max-width:768px){
   .burger{display:flex}
   .mobile-menu{display:flex}

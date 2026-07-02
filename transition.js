@@ -1,16 +1,34 @@
 (function(){
-  // Enter: fade + scale in from slightly larger
-  document.body.classList.add('page-entering');
-  requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.remove('page-entering')));
+  // Inject curtain overlay
+  var el = document.createElement('div');
+  el.id = 'pg-trans';
+  document.body.appendChild(el);
 
-  // Exit: fade + scale down, then navigate
-  document.addEventListener('click', e => {
-    const link = e.target.closest('a[href]');
-    if(!link) return;
-    const href = link.getAttribute('href');
-    if(!href || href.startsWith('#') || href.startsWith('mailto') || href.startsWith('http') || link.target === '_blank') return;
+  // Entry: panel starts covering, sweeps upward to reveal page
+  // Skip on home page — the loader already handles the entry reveal
+  if(document.getElementById('loader')){
+    el.style.transition = 'none';
+    el.classList.add('pt-revealed'); // instantly hide panel
+  } else {
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        el.classList.add('pt-revealed');
+      });
+    });
+  }
+
+  // Exit: fade content, then navigate (next page entry shows curtain reveal)
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href]');
+    if(!a) return;
+    var href = a.getAttribute('href');
+    if(!href) return;
+    if(href.startsWith('http') || href.startsWith('//') || href.startsWith('#') || href.startsWith('mailto') || href.startsWith('tel')) return;
+    if(a.target === '_blank') return;
+    if(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
-    document.body.classList.add('page-exiting');
-    setTimeout(()=>{ window.location.href = href; }, 420);
+    var target = a.href;
+    document.body.classList.add('pt-exiting');
+    setTimeout(function(){ window.location.href = target; }, 420);
   });
 })();
