@@ -222,7 +222,7 @@ html, body { height: 100%; overflow: hidden; }
 <div class="work-slider" id="work-slider">
 
   <!-- 01 -->
-  <section class="pf active" data-idx="0">
+  <section class="pf" data-idx="0">
     <div class="pf-num"><span class="pf-num-val">01</span></div>
     <div class="pf-visual-wrap wp-enter">
       <a href="/kyb-fuib" class="pf-visual">
@@ -406,10 +406,11 @@ function toggleMenu(){
     }
   });
 
-  // Page entrance animation — initial state set in HTML, JS triggers reveal
+  // Page entrance — image first, then title + meta cascade
   requestAnimationFrame(() => requestAnimationFrame(() => {
     document.querySelectorAll('.wp-enter').forEach(el => el.classList.add('wp-in'));
   }));
+  setTimeout(() => real[0].classList.add('active'), 180);
 
   // Keyboard
   document.addEventListener('keydown', e => {
