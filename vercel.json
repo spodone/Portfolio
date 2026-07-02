@@ -4,6 +4,7 @@
     { "source": "/token-staking-dappradar", "destination": "/token-staking-dappradar.html" },
     { "source": "/rankings-dappradar", "destination": "/rankings-dappradar.html" },
     { "source": "/white-label-openware", "destination": "/white-label-openware.html" },
+    { "source": "/design-system-dappradar", "destination": "/design-system-dappradar.html" },
     { "source": "/work", "destination": "/work.html" }
   ]
 }
