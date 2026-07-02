@@ -204,7 +204,7 @@ html, body { height: 100%; overflow: hidden; }
 </div>
 
 <!-- Fixed chrome -->
-<div class="work-progress" id="work-progress">
+<div class="work-progress wp-enter" id="work-progress">
   <div class="wp-line active" data-idx="0"></div>
   <div class="wp-line" data-idx="1"></div>
   <div class="wp-line" data-idx="2"></div>
@@ -216,7 +216,7 @@ html, body { height: 100%; overflow: hidden; }
   <span class="work-counter-sep"></span>
   <span>04</span>
 </div>
-<div class="work-hint" id="work-hint">Scroll ↓</div>
+<div class="work-hint wp-enter" id="work-hint">Scroll ↓</div>
 
 <!-- SLIDER -->
 <div class="work-slider" id="work-slider">
@@ -224,7 +224,7 @@ html, body { height: 100%; overflow: hidden; }
   <!-- 01 -->
   <section class="pf active" data-idx="0">
     <div class="pf-num"><span class="pf-num-val">01</span></div>
-    <div class="pf-visual-wrap">
+    <div class="pf-visual-wrap wp-enter">
       <a href="/kyb-fuib" class="pf-visual">
         <img src="KYB case.jpg" alt="KYB Verification">
         <div class="pf-visual-overlay"></div>
@@ -406,15 +406,9 @@ function toggleMenu(){
     }
   });
 
-  // Page entrance animation
-  const _enterEls = [
-    document.querySelector('.pf.active .pf-visual-wrap'),
-    document.getElementById('work-progress'),
-    document.getElementById('work-hint'),
-  ];
-  _enterEls.forEach(el => el && el.classList.add('wp-enter'));
+  // Page entrance animation — initial state set in HTML, JS triggers reveal
   requestAnimationFrame(() => requestAnimationFrame(() => {
-    _enterEls.forEach(el => el && el.classList.add('wp-in'));
+    document.querySelectorAll('.wp-enter').forEach(el => el.classList.add('wp-in'));
   }));
 
   // Keyboard
