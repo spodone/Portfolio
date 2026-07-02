@@ -814,6 +814,7 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
   .nav-inner{grid-template-columns:1fr auto}
   nav{padding:14px 16px}
   .hero,.work-section,.about-section,.contact-section,.case-hero,.case-body,.case-next,footer{padding-left:20px;padding-right:20px}
+  .ai-chat-section{width:calc(100% - 40px);padding:24px 20px;margin:48px auto;}
   .hero-bottom{flex-direction:column;gap:28px;align-items:flex-start}
   .hero-stats{gap:32px}
   .case-row{grid-template-columns:32px 1fr;gap:16px 16px;padding:24px 0}
