@@ -107,8 +107,25 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  function autoReveal(sel, cls) {
+    document.querySelectorAll(sel).forEach(el => {
+      if(!el.classList.contains('reveal') && !el.classList.contains('reveal-children')){
+        el.classList.add(cls);
+        observer.observe(el);
+      }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
+    // Existing explicit markup
     document.querySelectorAll('.reveal, .reveal-children').forEach(el => observer.observe(el));
+
+    // Case page content — individual elements
+    autoReveal('.csh, .csp, .csq, .case-cover, .strategy-item, .reflection-item', 'reveal');
+
+    // Card grids — staggered children
+    autoReveal('.crg, .exec-grid, .insights-grid, .discovery-grid, .ds-grid', 'reveal-children');
   });
 })();
