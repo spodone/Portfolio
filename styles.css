@@ -239,6 +239,7 @@ nav.nav-hidden{transform:translateY(-120%);}
 .sec-num{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
 .case-list{display:flex;flex-direction:column;position:relative;padding:0 52px}
+.work-section .case-row{grid-template-columns:1fr auto;}
 .case-row{
   display:grid;
   grid-template-columns:48px 1fr auto;
