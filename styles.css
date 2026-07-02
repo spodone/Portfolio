@@ -321,7 +321,7 @@ nav.nav-hidden{transform:translateY(-120%);}
   display:flex;flex-direction:column;gap:20px;
   position:relative;z-index:1;
   max-width:720px;
-  margin:72px auto;
+  margin:72px auto 0;
   width:calc(100% - 104px);
   background:rgba(8,8,12,0.82);
   backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
