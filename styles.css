@@ -814,6 +814,7 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
   .case-row{grid-template-columns:32px 1fr;gap:16px 16px;padding:24px 0}
   .case-row-tags{display:none}
   .case-row-cover{display:block;grid-column:1/-1;width:100%;height:200px;object-fit:cover;border-radius:10px;margin-top:4px}
+  .case-preview{display:none!important}
   .case-list{padding:0 20px}
   .case-row-name{font-size:22px}
   .about-section{grid-template-columns:1fr;gap:48px}
