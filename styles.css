@@ -836,6 +836,8 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
   .case-sidebar{display:none}
   .crg{grid-template-columns:1fr}
   .case-next{flex-direction:column;gap:24px;align-items:flex-start}
+  .testimonials-header{padding:0 20px;}
+  .testimonials-track{padding:0 20px;}
   .cs-section{padding:60px 20px}
   .exec-grid{grid-template-columns:1fr 1fr}
   .goals-grid{grid-template-columns:1fr;gap:32px}
