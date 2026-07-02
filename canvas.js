@@ -18,6 +18,9 @@
     { x:.35, y:.90, r:.30, vx:-.00009, vy:-.00007, base:.05 },
   ];
 
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const glowMul  = isMobile ? 0.5 : 1;
+
   let mx = W * 0.5, my = H * 0.5;
   let smoothX = mx, smoothY = my;
   window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
@@ -30,7 +33,7 @@
       x: smoothX + (Math.random() - 0.5) * 8,
       y: smoothY + (Math.random() - 0.5) * 8,
       r: 60 + Math.random() * 80,
-      alpha: 0.025 + Math.random() * 0.015,
+      alpha: (0.025 + Math.random() * 0.015) * glowMul,
       life: 0,
       maxLife: 110 + Math.random() * 70,
       vx: (Math.random() - 0.5) * 0.3,
@@ -86,7 +89,7 @@
     }
 
     const ag = ctx.createRadialGradient(smoothX, smoothY, 0, smoothX, smoothY, 260);
-    ag.addColorStop(0, 'rgba(255,255,255,0.015)');
+    ag.addColorStop(0, `rgba(255,255,255,${0.015 * glowMul})`);
     ag.addColorStop(1, 'rgba(255,255,255,0)');
     ctx.fillStyle = ag;
     ctx.beginPath();
