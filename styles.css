@@ -148,6 +148,9 @@ nav{
 }
 .felix-btn:hover{border-color:rgba(240,237,232,.25);color:var(--text)}
 .felix-btn:hover::after{left:140%}
+.felix-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e;margin-right:7px;position:relative;top:-1px;flex-shrink:0;}
+.felix-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;background:#22c55e;opacity:.4;animation:felix-pulse 1.8s ease-out infinite;}
+@keyframes felix-pulse{0%{transform:scale(1);opacity:.4}70%{transform:scale(2.2);opacity:0}100%{transform:scale(2.2);opacity:0}}
 
 .hero-ctas{display:flex;align-items:center;gap:32px;padding-top:48px;margin-top:16px;border-top:1px solid var(--line)}
 .hero-cta-arrow{
