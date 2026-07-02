@@ -232,7 +232,6 @@ nav.nav-hidden{transform:translateY(-120%);}
 .sec-header{
   display:flex;justify-content:space-between;align-items:baseline;
   padding:24px 52px;
-  position:sticky;top:0;z-index:90;
   border-bottom:1px solid var(--line);
   margin-bottom:0;
 }
