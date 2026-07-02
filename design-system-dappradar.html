@@ -33,9 +33,21 @@
       <div><div class="cml">Role</div><div class="cmv">Lead Product Designer</div></div>
       <div><div class="cml">Company</div><div class="cmv">DappRadar</div></div>
       <div><div class="cml">Year</div><div class="cmv">2022 — 2023</div></div>
+      <div><div class="cml">Team</div><div class="cmv">2 Designers · 8 Engineers</div></div>
       <div><div class="cml">Scope</div><div class="cmv">Design system, Component library</div></div>
     </div>
-    <div class="case-cover">
+    <div style="margin-top:32px">
+      <span class="case-hero-resp-label">My responsibilities</span>
+      <div class="case-hero-resp">
+        <span class="resp-tag">Design System Architecture</span>
+        <span class="resp-tag">Token Design</span>
+        <span class="resp-tag">Component Library</span>
+        <span class="resp-tag">Documentation</span>
+        <span class="resp-tag">Developer Handoff</span>
+        <span class="resp-tag">Design Ops</span>
+      </div>
+    </div>
+    <div class="case-cover" style="margin-top:52px">
       <img src="DappRadarDS.jpg" alt="Design System @DappRadar" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:12px;">
     </div>
   </section>
@@ -45,43 +57,259 @@
       <div class="csl">Contents</div>
       <div class="cst active" data-target="overview">Overview</div>
       <div class="cst" data-target="challenge">Challenge</div>
+      <div class="cst" data-target="approach">Approach</div>
       <div class="cst" data-target="system">The system</div>
       <div class="cst" data-target="results">Results</div>
     </div>
     <div class="case-content">
+
+      <!-- OVERVIEW -->
       <div id="overview">
-        <h2 class="csh">Overview</h2>
-        <p class="csp">When I joined DappRadar, the product had no shared component library — every feature was built from scratch, with inconsistent colors, spacing, and interaction patterns across screens. I led the design and rollout of a token-based design system that became the foundation for every product surface the team shipped.</p>
+        <span class="cs-tag">01 — Executive Summary</span>
+        <h2 class="csh">Quick snapshot</h2>
+        <div class="exec-grid">
+          <div class="exec-card">
+            <span class="exec-label">Context</span>
+            <div class="exec-value">Fast-growing Web3 product, no shared component library</div>
+          </div>
+          <div class="exec-card">
+            <span class="exec-label">Problem</span>
+            <div class="exec-value">Inconsistent UI across verticals, slow feature velocity, design debt accumulating</div>
+          </div>
+          <div class="exec-card">
+            <span class="exec-label">Users</span>
+            <div class="exec-value">2 designers, 8+ engineers shipping across 4 product verticals</div>
+          </div>
+          <div class="exec-card">
+            <span class="exec-label">Solution</span>
+            <div class="exec-value">Token-based design system in Figma, synced to code via CSS variables</div>
+          </div>
+          <div class="exec-card">
+            <span class="exec-label">Timeline</span>
+            <div class="exec-value">12 weeks from audit to full team adoption</div>
+          </div>
+          <div class="exec-card">
+            <span class="exec-label">Outcome</span>
+            <div class="exec-value accent">−60% design time · 60+ components · 3 verticals unified</div>
+          </div>
+        </div>
+
+        <div style="margin-top:56px">
+          <span class="cs-tag">02 — Context</span>
+          <h2 class="csh">Why this mattered</h2>
+          <p class="csp">DappRadar is the world's leading Web3 data platform — tracking dApps, NFTs, DeFi, and blockchain activity across 50+ chains. When I joined as Lead Product Designer, the product had grown rapidly without a shared design foundation. Each vertical (Rankings, Portfolio, Staking, NFT Explorer) had its own visual language — built independently by whoever worked on it at the time.</p>
+          <p class="csp" style="margin-top:16px">The result was a product that felt fragmented. Buttons looked different page to page. Data tables had three different row heights. Color usage was inconsistent enough that users couldn't tell which elements were interactive. And every new feature meant re-making decisions that had already been made elsewhere — just forgotten.</p>
+          <div class="csq" style="margin-top:36px"><p>"A design system isn't a deliverable. It's the infrastructure that makes every other deliverable faster and better."</p></div>
+        </div>
       </div>
+
+      <!-- CHALLENGE -->
       <div id="challenge">
-        <h2 class="csh">The challenge</h2>
-        <p class="csp">DappRadar's product moved fast — new features shipped weekly across Rankings, Portfolio, Staking, and NFT verticals. Without a shared language, designers and developers spent significant time re-solving the same problems. Visual inconsistency was visible to users. Design debt was slowing velocity.</p>
-        <div class="csq"><p>"Inconsistency isn't just a design problem — it erodes user trust one misaligned button at a time."</p></div>
+        <span class="cs-tag">03 — The challenge</span>
+        <h2 class="csh">What was broken</h2>
+        <div class="insights-grid">
+          <div class="insight-card">
+            <div class="insight-block">
+              <span class="insight-block-label">Problem</span>
+              <div class="insight-block-text strong">Every feature was designed from scratch — no shared components, no reuse.</div>
+            </div>
+            <div class="insight-arrow">↓</div>
+            <div class="insight-block">
+              <span class="insight-block-label">Impact</span>
+              <div class="insight-block-text">Designers spent 40–50% of feature time rebuilding UI that already existed elsewhere in the product.</div>
+            </div>
+            <div class="insight-arrow">↓</div>
+            <div class="insight-block">
+              <span class="insight-block-label">Design implication</span>
+              <div class="insight-block-text">Build a shared component library that covers 90% of recurring UI patterns — so designers solve new problems, not old ones.</div>
+            </div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-block">
+              <span class="insight-block-label">Problem</span>
+              <div class="insight-block-text strong">No token system meant global visual changes required editing every file manually.</div>
+            </div>
+            <div class="insight-arrow">↓</div>
+            <div class="insight-block">
+              <span class="insight-block-label">Impact</span>
+              <div class="insight-block-text">When the brand color shifted slightly, it took 2 days to update Figma files. The codebase took longer — and diverged.</div>
+            </div>
+            <div class="insight-arrow">↓</div>
+            <div class="insight-block">
+              <span class="insight-block-label">Design implication</span>
+              <div class="insight-block-text">Design tokens as the single source of truth — one change in Figma variables propagates everywhere.</div>
+            </div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-block">
+              <span class="insight-block-label">Problem</span>
+              <div class="insight-block-text strong">Developers implemented UI from Figma by eye — no spec, no handoff standards.</div>
+            </div>
+            <div class="insight-arrow">↓</div>
+            <div class="insight-block">
+              <span class="insight-block-label">Impact</span>
+              <div class="insight-block-text">Inconsistencies between design and production were constant. QA cycles were long. Designer-developer trust was low.</div>
+            </div>
+            <div class="insight-arrow">↓</div>
+            <div class="insight-block">
+              <span class="insight-block-label">Design implication</span>
+              <div class="insight-block-text">Tokens mapped directly to CSS variables. Every component ships with documented specs, states, and usage rules.</div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- APPROACH -->
+      <div id="approach">
+        <span class="cs-tag">04 — Approach</span>
+        <h2 class="csh">How I built it</h2>
+        <div class="discovery-grid">
+          <div class="discovery-card">
+            <span class="discovery-num">01</span>
+            <div class="discovery-title">UI Audit</div>
+            <div class="discovery-desc">Catalogued every screen across all 4 verticals. Documented every button variant, color value, spacing pattern, and typography style in use. Found 14 different button styles, 6 different input heights, and 23 distinct shades of the same grey.</div>
+          </div>
+          <div class="discovery-card">
+            <span class="discovery-num">02</span>
+            <div class="discovery-title">Token Architecture</div>
+            <div class="discovery-desc">Designed a two-tier token system: primitive tokens (raw values — exact colors, px sizes) and semantic tokens (purpose-driven — "color-action-primary", "spacing-component-padding"). Semantic tokens reference primitives, making rebranding a 5-minute operation.</div>
+          </div>
+          <div class="discovery-card">
+            <span class="discovery-num">03</span>
+            <div class="discovery-title">Component Prioritization</div>
+            <div class="discovery-desc">Ranked components by frequency of use across the product and by developer implementation cost. Built the highest-impact components first — buttons, inputs, data tables, cards, badges — before moving to complex patterns.</div>
+          </div>
+          <div class="discovery-card">
+            <span class="discovery-num">04</span>
+            <div class="discovery-title">State Documentation</div>
+            <div class="discovery-desc">Every component was built with all interactive states: default, hover, focus, active, disabled, loading, error. Figma components used auto-layout and boolean properties so engineers could inspect any state directly without asking.</div>
+          </div>
+          <div class="discovery-card">
+            <span class="discovery-num">05</span>
+            <div class="discovery-title">Dev Handoff</div>
+            <div class="discovery-desc">Worked with the frontend lead to map Figma tokens to CSS custom properties 1:1. Created a shared naming convention so Figma variable names matched CSS variable names exactly — zero translation needed between design and code.</div>
+          </div>
+          <div class="discovery-card">
+            <span class="discovery-num">06</span>
+            <div class="discovery-title">Team Adoption</div>
+            <div class="discovery-desc">Ran two workshops with the design and engineering team. Created a contribution guide so the system could grow without becoming a bottleneck. Set up a #design-system Slack channel for real-time support during the migration period.</div>
+          </div>
+        </div>
+
+        <div style="margin-top:56px">
+          <span class="cs-tag">05 — Principles</span>
+          <h2 class="csh">What guided the decisions</h2>
+          <div class="strategy-list">
+            <div class="strategy-item">
+              <span class="strategy-num">01</span>
+              <div>
+                <div class="strategy-title">Tokens before components</div>
+                <div class="strategy-desc">Get the token layer right first. A component built on bad tokens is hard to fix at scale. Tokens built right make every component easier to maintain and every future change cheaper.</div>
+              </div>
+            </div>
+            <div class="strategy-item">
+              <span class="strategy-num">02</span>
+              <div>
+                <div class="strategy-title">Design for the engineer, not just the designer</div>
+                <div class="strategy-desc">The system's real user is the frontend developer implementing it. Every component was designed with implementation in mind — CSS-mappable tokens, predictable state structure, sensible defaults.</div>
+              </div>
+            </div>
+            <div class="strategy-item">
+              <span class="strategy-num">03</span>
+              <div>
+                <div class="strategy-title">Cover 90%, not 100%</div>
+                <div class="strategy-desc">A system that tries to cover every edge case becomes too rigid to use. I focused on the 90% of UI that recurs — and documented how to handle exceptions — rather than over-engineering for hypothetical futures.</div>
+              </div>
+            </div>
+            <div class="strategy-item">
+              <span class="strategy-num">04</span>
+              <div>
+                <div class="strategy-title">The system is a product, not a project</div>
+                <div class="strategy-desc">Design systems don't have a launch date — they evolve with the product. I set up contribution workflows, versioning conventions, and a deprecation process from day one so the system could grow without chaos.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- THE SYSTEM -->
       <div id="system">
-        <h2 class="csh">The system</h2>
-        <p class="csp">I built a token-based design system in Figma with variables covering color, typography, spacing, radius, and elevation. A core set of ~30 tokens controlled the entire product's visual language — making global changes a single operation rather than a hunt-and-replace across dozens of files.</p>
-        <div class="crg" style="margin-top:32px">
-          <div class="crc"><span class="crn" style="font-size:32px">Tokens</span><span class="crl">Color, typography, spacing, radius, and elevation — all as named variables mapped 1:1 to CSS custom properties in the codebase</span></div>
-          <div class="crc"><span class="crn" style="font-size:32px">Components</span><span class="crl">60+ components across buttons, inputs, tables, cards, navigation, and data visualizations — each with all states documented</span></div>
-          <div class="crc"><span class="crn" style="font-size:32px">Patterns</span><span class="crl">Reusable page-level patterns for empty states, loading skeletons, error boundaries, and onboarding flows</span></div>
-          <div class="crc"><span class="crn" style="font-size:32px">Docs</span><span class="crl">Usage guidelines, do/don't examples, and handoff specs embedded directly in Figma — no separate documentation site needed</span></div>
+        <span class="cs-tag">06 — The system</span>
+        <h2 class="csh">What was built</h2>
+        <div class="ds-grid">
+          <div class="ds-card">
+            <span class="ds-card-label">Foundation</span>
+            <div class="ds-card-title">Design Tokens</div>
+            <div class="ds-card-desc">~30 semantic tokens covering color, typography, spacing, radius, shadow, and z-index. Mapped 1:1 to CSS custom properties. A single Figma variable change propagates across the entire product.</div>
+          </div>
+          <div class="ds-card">
+            <span class="ds-card-label">UI Library</span>
+            <div class="ds-card-title">60+ Components</div>
+            <div class="ds-card-desc">Buttons, inputs, selects, tables, badges, cards, tooltips, modals, navigation, pagination, charts, and data visualization primitives — all with full state coverage and auto-layout.</div>
+          </div>
+          <div class="ds-card">
+            <span class="ds-card-label">Patterns</span>
+            <div class="ds-card-title">Page Templates</div>
+            <div class="ds-card-desc">Reusable page-level patterns for empty states, loading skeletons, error screens, onboarding flows, and settings pages — so new features start from a proven layout, not a blank canvas.</div>
+          </div>
+          <div class="ds-card">
+            <span class="ds-card-label">Documentation</span>
+            <div class="ds-card-title">Inline Specs</div>
+            <div class="ds-card-desc">Usage guidelines, do/don't examples, accessibility notes, and handoff specs embedded directly in Figma components. No separate documentation site — context lives where the design lives.</div>
+          </div>
+          <div class="ds-card">
+            <span class="ds-card-label">Accessibility</span>
+            <div class="ds-card-title">WCAG 2.1 AA</div>
+            <div class="ds-card-desc">All color combinations verified for contrast. Interactive elements have documented focus states. Error messages meet screen reader standards. Accessibility baked in, not bolted on.</div>
+          </div>
+          <div class="ds-card">
+            <span class="ds-card-label">Theming</span>
+            <div class="ds-card-title">Dark / Light modes</div>
+            <div class="ds-card-desc">Semantic token layer makes theme switching a single variable swap. Both dark and light themes fully supported across all components — with DappRadar's dark-first brand as the default.</div>
+          </div>
         </div>
       </div>
+
+      <!-- RESULTS -->
       <div id="results">
-        <h2 class="csh">Results</h2>
+        <span class="cs-tag">07 — Results</span>
+        <h2 class="csh">Impact</h2>
         <div class="crg">
-          <div class="crc"><span class="crn">−60%</span><span class="crl">Reduction in per-feature design time after system adoption</span></div>
-          <div class="crc"><span class="crn">60+</span><span class="crl">Reusable components shipped in the first version</span></div>
-          <div class="crc"><span class="crn">3</span><span class="crl">Product verticals unified under one visual language</span></div>
-          <div class="crc"><span class="crn">∞</span><span class="crl">Faster designer onboarding — new hires productive from day one</span></div>
+          <div class="crc"><span class="crn">−60%</span><span class="crl">Reduction in per-feature design time after full system adoption</span></div>
+          <div class="crc"><span class="crn">60+</span><span class="crl">Reusable components shipped in version 1.0</span></div>
+          <div class="crc"><span class="crn">4</span><span class="crl">Product verticals unified under one visual language</span></div>
+          <div class="crc"><span class="crn">12w</span><span class="crl">From audit to full team adoption</span></div>
+        </div>
+
+        <div style="margin-top:56px">
+          <span class="cs-tag">08 — Reflection</span>
+          <h2 class="csh">What I learned</h2>
+          <div class="reflection-list">
+            <div class="reflection-item">
+              <div class="reflection-dot"></div>
+              <div class="reflection-text">The hardest part of building a design system isn't the design — it's the organizational change. Getting engineers to trust the system and designers to contribute to it rather than around it required as much communication as it did craft.</div>
+            </div>
+            <div class="reflection-item">
+              <div class="reflection-dot"></div>
+              <div class="reflection-text">Token naming is surprisingly consequential. A poorly named token gets used incorrectly — a well-named one enforces intent without documentation. "color-text-muted" is self-explanatory. "grey-500" is not.</div>
+            </div>
+            <div class="reflection-item">
+              <div class="reflection-dot"></div>
+              <div class="reflection-text">Start with the components that will be challenged first. Building buttons and inputs early meant the most-debated elements were already decided — freeing teams to focus on product logic instead of UI arguments.</div>
+            </div>
+            <div class="reflection-item">
+              <div class="reflection-dot"></div>
+              <div class="reflection-text">A design system earns trust through consistency of quality, not comprehensiveness. Ship fewer, better components — then expand. A system with 20 perfect components gets adopted faster than one with 100 fragile ones.</div>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
   <section class="case-next">
-    <div><div class="cnl">Back to</div><div class="cnt">All projects</div></div>
+    <div><div class="cnl">Next project</div><div class="cnt">All projects</div></div>
     <a class="cnb" href="/">View all work →</a>
   </section>
   <footer><span>© 2026 EUGENE TREIHER</span><div class="loc"><div class="locdot"></div><span>Dubai</span></div></footer>
