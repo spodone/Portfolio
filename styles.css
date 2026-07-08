@@ -485,7 +485,12 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .crc{background:var(--bg);padding:30px}
 .crn{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:50px;color:var(--accent);line-height:1;display:block;margin-bottom:10px;letter-spacing:-.02em}
 .crl{font-size:13px;color:var(--muted2);line-height:1.55;font-family:'Inter',sans-serif}
-.case-next{padding:68px 52px 88px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+.case-next{padding:68px 52px 88px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;overflow:hidden}
+.case-next > *{position:relative;z-index:2}
+.case-next-media{position:absolute;top:0;right:0;bottom:0;width:60%;z-index:0;pointer-events:none;overflow:hidden}
+.case-next-media img{width:100%;height:100%;object-fit:cover;opacity:.28;transform:scale(1.02);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.case-next-media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,rgba(10,10,15,.72) 42%,rgba(10,10,15,.55) 100%)}
+.case-next:hover .case-next-media img{opacity:.42;transform:scale(1.06)}
 .cnl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
 .cnt{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:clamp(28px,3vw,40px);color:var(--text);letter-spacing:-.02em}
 .cnb{border:1px solid var(--line);padding:13px 30px;border-radius:100px;color:var(--text);font-size:11px;font-family:var(--sans);cursor:pointer;background:transparent;transition:all .2s;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;display:inline-block}
