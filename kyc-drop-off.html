@@ -8,97 +8,93 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;900&family=Bricolage+Grotesque:wght@200;300;400;500;600&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-/* ── INTERACTIVE KYC DEMO ── */
+/* ── INTERACTIVE KYC DEMO — before / after columns ── */
 .kycd{margin-top:32px}
-.kycd-tabs{display:flex;gap:8px;margin-bottom:14px}
-.kycd-tab{
-  font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:100px;
-  padding:9px 22px;cursor:pointer;transition:color .25s,border-color .25s,background .25s;
-}
-.kycd-tab.active{color:#0a0a0f;background:var(--accent);border-color:var(--accent)}
-.kycd-hint{
-  font-size:12px;color:var(--muted2);font-family:'Inter',sans-serif;margin-bottom:18px;
-  display:flex;align-items:center;gap:8px;min-height:18px;transition:opacity .3s;
-}
-.kycd-hint .pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:kycd-pulse 1.6s ease-in-out infinite;flex-shrink:0}
+.kycd-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.kycd-col-head{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;min-height:52px}
+.kycd-col-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+.kycd-col-label.before{color:var(--muted)}
+.kycd-col-label.after{color:var(--accent)}
+.kycd-col-cap{font-size:12px;color:var(--muted2);font-family:'Inter',sans-serif;line-height:1.5;display:flex;align-items:flex-start;gap:8px}
+.kycd-col-cap .pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:kycd-pulse 1.6s ease-in-out infinite;flex-shrink:0;margin-top:4px}
 @keyframes kycd-pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
 
 /* Light modal replica */
 .kycd-modal{
-  background:#fff;border-radius:16px;overflow:hidden;
+  background:#fff;border-radius:14px;overflow:hidden;
   font-family:'Inter',sans-serif;color:#22252a;
-  box-shadow:0 24px 80px rgba(0,0,0,.5);
-  max-width:640px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  width:100%;
 }
 .kycd-head{
   display:flex;justify-content:space-between;align-items:center;
-  padding:20px 28px;border-bottom:1px solid #ececef;
+  padding:14px 18px;border-bottom:1px solid #ececef;
 }
-.kycd-head-title{font-size:19px;font-weight:600;letter-spacing:-.01em}
-.kycd-head-x{color:#9a9ba1;font-size:18px;line-height:1}
-.kycd-body{padding:24px 28px 30px}
-.kycd-sec{font-size:15px;font-weight:600;margin-bottom:18px;letter-spacing:-.01em}
-.kycd-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
-.kycd-field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.kycd-head-title{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.kycd-head-x{color:#9a9ba1;font-size:14px;line-height:1}
+.kycd-body{padding:16px 18px 20px}
+.kycd-sec{font-size:13px;font-weight:600;margin-bottom:14px;letter-spacing:-.01em}
+.kycd-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px 12px}
+.kycd-field{display:flex;flex-direction:column;gap:5px;min-width:0}
 .kycd-field.full{grid-column:1/-1}
-.kycd-label{font-size:11.5px;color:#6b6e76}
+.kycd-label{font-size:10.5px;color:#6b6e76}
 .kycd-input{
-  border:1px solid #d8dade;border-radius:8px;padding:10px 12px;
-  font-size:13.5px;color:#22252a;background:#fff;font-family:'Inter',sans-serif;
+  border:1px solid #d8dade;border-radius:7px;padding:8px 10px;width:100%;
+  font-size:12px;color:#22252a;background:#fff;font-family:'Inter',sans-serif;
 }
 .kycd-select-wrap{position:relative}
 .kycd-select{
   width:100%;appearance:none;-webkit-appearance:none;
-  border:1px solid #d8dade;border-radius:8px;padding:10px 34px 10px 12px;
-  font-size:13.5px;color:#22252a;background:#fff;font-family:'Inter',sans-serif;cursor:pointer;
+  border:1px solid #d8dade;border-radius:7px;padding:8px 30px 8px 10px;
+  font-size:12px;color:#22252a;background:#fff;font-family:'Inter',sans-serif;cursor:pointer;
   transition:border-color .25s,box-shadow .25s;
 }
 .kycd-select:focus{outline:none;border-color:#e5173f;box-shadow:0 0 0 3px rgba(229,23,63,.08)}
 .kycd-select-wrap::after{
-  content:'';position:absolute;right:14px;top:50%;
-  width:7px;height:7px;border-right:1.5px solid #6b6e76;border-bottom:1.5px solid #6b6e76;
+  content:'';position:absolute;right:12px;top:50%;
+  width:6px;height:6px;border-right:1.5px solid #6b6e76;border-bottom:1.5px solid #6b6e76;
   transform:translateY(-70%) rotate(45deg);pointer-events:none;
 }
-.kycd-static{font-size:13.5px;color:#22252a;padding:10px 0 0}
-.kycd-note{font-size:11.5px;color:#6b6e76}
+.kycd-static{font-size:12px;color:#22252a;padding:8px 0 0}
 
 /* Upload section — the progressive disclosure target */
 .kycd-upload{
   overflow:hidden;
   max-height:400px;opacity:1;transform:translateY(0);
   transition:max-height .7s cubic-bezier(.22,1,.36,1),opacity .55s ease,transform .6s cubic-bezier(.22,1,.36,1),margin-top .7s cubic-bezier(.22,1,.36,1);
-  margin-top:28px;
+  margin-top:22px;
 }
 .kycd-upload.collapsed{max-height:0;opacity:0;transform:translateY(14px);margin-top:0}
-.kycd-upload-title{font-size:15px;font-weight:600;margin-bottom:16px;letter-spacing:-.01em}
-.kycd-drop-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.kycd-upload-title{font-size:13px;font-weight:600;margin-bottom:12px;letter-spacing:-.01em}
+.kycd-drop-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .kycd-drop{
-  border:1.5px dashed #cfd1d6;border-radius:10px;
-  padding:22px 14px;text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:9px;
+  border:1.5px dashed #cfd1d6;border-radius:9px;
+  padding:16px 8px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:7px;
 }
-.kycd-drop-side{font-size:13px;font-weight:600}
-.kycd-drop-hint{font-size:11.5px;color:#6b6e76}
+.kycd-drop-side{font-size:11.5px;font-weight:600}
+.kycd-drop-hint{font-size:10px;color:#6b6e76}
 .kycd-select-file{
-  display:inline-flex;align-items:center;gap:7px;
+  display:inline-flex;align-items:center;gap:5px;
   border:1.5px solid #e5173f;border-radius:100px;color:#e5173f;
-  font-size:12.5px;font-weight:600;padding:7px 16px;cursor:pointer;background:#fff;
-  font-family:'Inter',sans-serif;
+  font-size:10.5px;font-weight:600;padding:5px 12px;cursor:pointer;background:#fff;
+  font-family:'Inter',sans-serif;white-space:nowrap;
 }
-.kycd-formats{font-size:10.5px;color:#9a9ba1;line-height:1.5}
+.kycd-formats{font-size:9px;color:#9a9ba1;line-height:1.5}
 
-/* demo wrapper card */
+/* stage wrapper per column */
 .kycd-stage{
   background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:16px;
-  padding:36px 28px;display:flex;justify-content:center;
+  padding:20px 16px;
+}
+.kycd-stage.highlight{border-color:rgba(201,168,76,.35)}
+@media(max-width:900px){
+  .kycd-cols{grid-template-columns:1fr}
+  .kycd-col-head{min-height:0}
 }
 @media(max-width:768px){
-  .kycd-stage{padding:20px 12px}
-  .kycd-body{padding:18px 16px 22px}
-  .kycd-head{padding:16px 16px}
+  .kycd-stage{padding:14px 10px}
   .kycd-grid{grid-template-columns:1fr}
-  .kycd-drop-row{grid-template-columns:1fr}
 }
 
 /* Before/after compare cards */
@@ -201,76 +197,140 @@
         <h2 class="csh">Solution</h2>
         <p class="csp">Instead of always displaying the upload area, I applied the <strong style="color:var(--text);font-weight:500">Progressive Disclosure</strong> principle. The document upload section remained hidden by default and appeared only after the user changed the Document field. This aligned the UI with the user's actual task and removed an unnecessary decision for the majority of users.</p>
 
-        <!-- ── INTERACTIVE DEMO ── -->
+        <!-- ── INTERACTIVE DEMO: BEFORE / AFTER ── -->
         <div class="kycd">
-          <div class="kycd-tabs">
-            <button class="kycd-tab" data-mode="before">Before</button>
-            <button class="kycd-tab active" data-mode="after">After</button>
-          </div>
-          <div class="kycd-hint" id="kycd-hint"><span class="pulse-dot"></span><span id="kycd-hint-text">Try it — change the document type and watch the upload step appear.</span></div>
+          <div class="kycd-cols">
 
-          <div class="kycd-stage">
-            <div class="kycd-modal">
-              <div class="kycd-head">
-                <span class="kycd-head-title">Data Update</span>
-                <span class="kycd-head-x">✕</span>
+            <!-- BEFORE -->
+            <div>
+              <div class="kycd-col-head">
+                <span class="kycd-col-label before">Before</span>
+                <span class="kycd-col-cap">Upload step always visible — even when nothing changed.</span>
               </div>
-              <div class="kycd-body">
-                <div class="kycd-sec">Personal Information</div>
-                <div class="kycd-grid">
-                  <div class="kycd-field">
-                    <span class="kycd-label">Last Name</span>
-                    <input class="kycd-input" value="Kuchma" readonly>
+              <div class="kycd-stage">
+                <div class="kycd-modal">
+                  <div class="kycd-head">
+                    <span class="kycd-head-title">Data Update</span>
+                    <span class="kycd-head-x">✕</span>
                   </div>
-                  <div class="kycd-field">
-                    <span class="kycd-label">First Name</span>
-                    <input class="kycd-input" value="Alex" readonly>
-                  </div>
-                  <div class="kycd-field full">
-                    <span class="kycd-label">Document</span>
-                    <div class="kycd-select-wrap">
-                      <select class="kycd-select" id="kycd-doc">
-                        <option selected>Passport (ID card)</option>
-                        <option>Biometric passport</option>
-                        <option>Foreign passport</option>
-                        <option>Residence permit</option>
-                      </select>
+                  <div class="kycd-body">
+                    <div class="kycd-sec">Personal Information</div>
+                    <div class="kycd-grid">
+                      <div class="kycd-field">
+                        <span class="kycd-label">Last Name</span>
+                        <input class="kycd-input" value="Kuchma" readonly>
+                      </div>
+                      <div class="kycd-field">
+                        <span class="kycd-label">First Name</span>
+                        <input class="kycd-input" value="Alex" readonly>
+                      </div>
+                      <div class="kycd-field full">
+                        <span class="kycd-label">Document</span>
+                        <div class="kycd-select-wrap">
+                          <select class="kycd-select">
+                            <option selected>Passport (ID card)</option>
+                            <option>Biometric passport</option>
+                            <option>Foreign passport</option>
+                            <option>Residence permit</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="kycd-field">
+                        <span class="kycd-label">Tax ID Number</span>
+                        <span class="kycd-static">3322441155</span>
+                      </div>
+                      <div class="kycd-field">
+                        <span class="kycd-label">Date of Birth</span>
+                        <span class="kycd-static">10/30/1987</span>
+                      </div>
                     </div>
-                  </div>
-                  <div class="kycd-field">
-                    <span class="kycd-label">Tax ID Number</span>
-                    <span class="kycd-static">3322441155</span>
-                  </div>
-                  <div class="kycd-field">
-                    <span class="kycd-label">Date of Birth</span>
-                    <span class="kycd-static">10/30/1987</span>
-                  </div>
-                  <div class="kycd-field full">
-                    <span class="kycd-label">Citizenship</span>
-                    <span class="kycd-static" style="padding-top:2px">Ukraine</span>
+                    <div class="kycd-upload">
+                      <div class="kycd-upload-title">Upload photos of your ID document</div>
+                      <div class="kycd-drop-row">
+                        <div class="kycd-drop">
+                          <span class="kycd-drop-side">Front side</span>
+                          <span class="kycd-drop-hint">Drag file here or</span>
+                          <button class="kycd-select-file" onclick="return false">Select file <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M12 15V4"/><path d="M7 9l5-5 5 5"/><path d="M4 19h16"/></svg></button>
+                          <span class="kycd-formats">max. file size 8MB<br>Formats: PDF, PNG, JPEG, BMP, TIFF.</span>
+                        </div>
+                        <div class="kycd-drop">
+                          <span class="kycd-drop-side">Back side</span>
+                          <span class="kycd-drop-hint">Drag file here or</span>
+                          <button class="kycd-select-file" onclick="return false">Select file <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M12 15V4"/><path d="M7 9l5-5 5 5"/><path d="M4 19h16"/></svg></button>
+                          <span class="kycd-formats">max. file size 8MB<br>Formats: PDF, PNG, JPEG, BMP, TIFF.</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-                <div class="kycd-upload" id="kycd-upload">
-                  <div class="kycd-upload-title">Upload photos of your ID document</div>
-                  <div class="kycd-drop-row">
-                    <div class="kycd-drop">
-                      <span class="kycd-drop-side">Front side</span>
-                      <span class="kycd-drop-hint">Drag file here or</span>
-                      <button class="kycd-select-file" onclick="return false">Select file ⭱</button>
-                      <span class="kycd-formats">max. file size 8MB<br>Formats: PDF, PNG, JPEG, BMP, TIFF.</span>
-                    </div>
-                    <div class="kycd-drop">
-                      <span class="kycd-drop-side">Back side</span>
-                      <span class="kycd-drop-hint">Drag file here or</span>
-                      <button class="kycd-select-file" onclick="return false">Select file ⭱</button>
-                      <span class="kycd-formats">max. file size 8MB<br>Formats: PDF, PNG, JPEG, BMP, TIFF.</span>
-                    </div>
-                  </div>
-                </div>
-
               </div>
             </div>
+
+            <!-- AFTER -->
+            <div>
+              <div class="kycd-col-head">
+                <span class="kycd-col-label after">After</span>
+                <span class="kycd-col-cap"><span class="pulse-dot"></span><span id="kycd-hint-text">Try it — change the document type and watch the upload step appear.</span></span>
+              </div>
+              <div class="kycd-stage highlight">
+                <div class="kycd-modal">
+                  <div class="kycd-head">
+                    <span class="kycd-head-title">Data Update</span>
+                    <span class="kycd-head-x">✕</span>
+                  </div>
+                  <div class="kycd-body">
+                    <div class="kycd-sec">Personal Information</div>
+                    <div class="kycd-grid">
+                      <div class="kycd-field">
+                        <span class="kycd-label">Last Name</span>
+                        <input class="kycd-input" value="Kuchma" readonly>
+                      </div>
+                      <div class="kycd-field">
+                        <span class="kycd-label">First Name</span>
+                        <input class="kycd-input" value="Alex" readonly>
+                      </div>
+                      <div class="kycd-field full">
+                        <span class="kycd-label">Document</span>
+                        <div class="kycd-select-wrap">
+                          <select class="kycd-select" id="kycd-doc">
+                            <option selected>Passport (ID card)</option>
+                            <option>Biometric passport</option>
+                            <option>Foreign passport</option>
+                            <option>Residence permit</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="kycd-field">
+                        <span class="kycd-label">Tax ID Number</span>
+                        <span class="kycd-static">3322441155</span>
+                      </div>
+                      <div class="kycd-field">
+                        <span class="kycd-label">Date of Birth</span>
+                        <span class="kycd-static">10/30/1987</span>
+                      </div>
+                    </div>
+                    <div class="kycd-upload collapsed" id="kycd-upload">
+                      <div class="kycd-upload-title">Upload photos of your ID document</div>
+                      <div class="kycd-drop-row">
+                        <div class="kycd-drop">
+                          <span class="kycd-drop-side">Front side</span>
+                          <span class="kycd-drop-hint">Drag file here or</span>
+                          <button class="kycd-select-file" onclick="return false">Select file <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M12 15V4"/><path d="M7 9l5-5 5 5"/><path d="M4 19h16"/></svg></button>
+                          <span class="kycd-formats">max. file size 8MB<br>Formats: PDF, PNG, JPEG, BMP, TIFF.</span>
+                        </div>
+                        <div class="kycd-drop">
+                          <span class="kycd-drop-side">Back side</span>
+                          <span class="kycd-drop-hint">Drag file here or</span>
+                          <button class="kycd-select-file" onclick="return false">Select file <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M12 15V4"/><path d="M7 9l5-5 5 5"/><path d="M4 19h16"/></svg></button>
+                          <span class="kycd-formats">max. file size 8MB<br>Formats: PDF, PNG, JPEG, BMP, TIFF.</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -344,39 +404,20 @@ window.addEventListener('scroll', () => {
   navItems.forEach(n => { n.classList.toggle('active', n.dataset.target === current); });
 });
 
-// ── KYC demo: before/after with progressive disclosure ──
+// ── KYC demo: progressive disclosure in the After column ──
 (function(){
-  const tabs = document.querySelectorAll('.kycd-tab');
   const upload = document.getElementById('kycd-upload');
   const doc = document.getElementById('kycd-doc');
-  const hint = document.getElementById('kycd-hint');
   const hintText = document.getElementById('kycd-hint-text');
   const initialDoc = doc.value;
-  let mode = 'after';
 
-  function apply(){
-    if(mode === 'before'){
-      upload.classList.remove('collapsed');
-      hint.style.opacity = '1';
-      hintText.textContent = 'Original flow — the upload step is always visible, even when nothing changed.';
-    } else {
-      const changed = doc.value !== initialDoc;
-      upload.classList.toggle('collapsed', !changed);
-      hint.style.opacity = '1';
-      hintText.textContent = changed
-        ? 'The document changed — only now does the upload step appear.'
-        : 'Try it — change the document type and watch the upload step appear.';
-    }
-  }
-
-  tabs.forEach(t => t.addEventListener('click', () => {
-    tabs.forEach(x => x.classList.toggle('active', x === t));
-    mode = t.dataset.mode;
-    apply();
-  }));
-
-  doc.addEventListener('change', apply);
-  apply();
+  doc.addEventListener('change', () => {
+    const changed = doc.value !== initialDoc;
+    upload.classList.toggle('collapsed', !changed);
+    hintText.textContent = changed
+      ? 'The document changed — only now does the upload step appear.'
+      : 'Try it — change the document type and watch the upload step appear.';
+  });
 })();
 </script>
 </body>
