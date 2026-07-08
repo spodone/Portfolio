@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reducing KYC Drop-off @FUIB Bank — Eugene Treiher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;900&family=Bricolage+Grotesque:wght@200;300;400;500;600&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── INTERACTIVE KYC DEMO ── */
+.kycd{margin-top:32px}
+.kycd-tabs{display:flex;gap:8px;margin-bottom:14px}
+.kycd-tab{
+  font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:100px;
+  padding:9px 22px;cursor:pointer;transition:color .25s,border-color .25s,background .25s;
+}
+.kycd-tab.active{color:#0a0a0f;background:var(--accent);border-color:var(--accent)}
+.kycd-hint{
+  font-size:12px;color:var(--muted2);font-family:'Inter',sans-serif;margin-bottom:18px;
+  display:flex;align-items:center;gap:8px;min-height:18px;transition:opacity .3s;
+}
+.kycd-hint .pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:kycd-pulse 1.6s ease-in-out infinite;flex-shrink:0}
+@keyframes kycd-pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+
+/* Light modal replica */
+.kycd-modal{
+  background:#fff;border-radius:16px;overflow:hidden;
+  font-family:'Inter',sans-serif;color:#22252a;
+  box-shadow:0 24px 80px rgba(0,0,0,.5);
+  max-width:640px;
+}
+.kycd-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 28px;border-bottom:1px solid #ececef;
+}
+.kycd-head-title{font-size:19px;font-weight:600;letter-spacing:-.01em}
+.kycd-head-x{color:#9a9ba1;font-size:18px;line-height:1}
+.kycd-body{padding:24px 28px 30px}
+.kycd-sec{font-size:15px;font-weight:600;margin-bottom:18px;letter-spacing:-.01em}
+.kycd-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.kycd-field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.kycd-field.full{grid-column:1/-1}
+.kycd-label{font-size:11.5px;color:#6b6e76}
+.kycd-input{
+  border:1px solid #d8dade;border-radius:8px;padding:10px 12px;
+  font-size:13.5px;color:#22252a;background:#fff;font-family:'Inter',sans-serif;
+}
+.kycd-select-wrap{position:relative}
+.kycd-select{
+  width:100%;appearance:none;-webkit-appearance:none;
+  border:1px solid #d8dade;border-radius:8px;padding:10px 34px 10px 12px;
+  font-size:13.5px;color:#22252a;background:#fff;font-family:'Inter',sans-serif;cursor:pointer;
+  transition:border-color .25s,box-shadow .25s;
+}
+.kycd-select:focus{outline:none;border-color:#e5173f;box-shadow:0 0 0 3px rgba(229,23,63,.08)}
+.kycd-select-wrap::after{
+  content:'';position:absolute;right:14px;top:50%;
+  width:7px;height:7px;border-right:1.5px solid #6b6e76;border-bottom:1.5px solid #6b6e76;
+  transform:translateY(-70%) rotate(45deg);pointer-events:none;
+}
+.kycd-static{font-size:13.5px;color:#22252a;padding:10px 0 0}
+.kycd-note{font-size:11.5px;color:#6b6e76}
+
+/* Upload section — the progressive disclosure target */
+.kycd-upload{
+  overflow:hidden;
+  max-height:400px;opacity:1;transform:translateY(0);
+  transition:max-height .7s cubic-bezier(.22,1,.36,1),opacity .55s ease,transform .6s cubic-bezier(.22,1,.36,1),margin-top .7s cubic-bezier(.22,1,.36,1);
+  margin-top:28px;
+}
+.kycd-upload.collapsed{max-height:0;opacity:0;transform:translateY(14px);margin-top:0}
+.kycd-upload-title{font-size:15px;font-weight:600;margin-bottom:16px;letter-spacing:-.01em}
+.kycd-drop-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.kycd-drop{
+  border:1.5px dashed #cfd1d6;border-radius:10px;
+  padding:22px 14px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+}
+.kycd-drop-side{font-size:13px;font-weight:600}
+.kycd-drop-hint{font-size:11.5px;color:#6b6e76}
+.kycd-select-file{
+  display:inline-flex;align-items:center;gap:7px;
+  border:1.5px solid #e5173f;border-radius:100px;color:#e5173f;
+  font-size:12.5px;font-weight:600;padding:7px 16px;cursor:pointer;background:#fff;
+  font-family:'Inter',sans-serif;
+}
+.kycd-formats{font-size:10.5px;color:#9a9ba1;line-height:1.5}
+
+/* demo wrapper card */
+.kycd-stage{
+  background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:16px;
+  padding:36px 28px;display:flex;justify-content:center;
+}
+@media(max-width:768px){
+  .kycd-stage{padding:20px 12px}
+  .kycd-body{padding:18px 16px 22px}
+  .kycd-head{padding:16px 16px}
+  .kycd-grid{grid-template-columns:1fr}
+  .kycd-drop-row{grid-template-columns:1fr}
+}
+
+/* Before/after compare cards */
+.kycd-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+@media(max-width:768px){.kycd-compare{grid-template-columns:1fr}}
+.kycd-cmp{border:1px solid var(--line);border-radius:12px;padding:26px 24px;background:rgba(255,255,255,.02)}
+.kycd-cmp-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px;display:block}
+.kycd-cmp-label.before{color:var(--muted)}
+.kycd-cmp-label.after{color:var(--accent)}
+.kycd-cmp li{font-size:13.5px;color:var(--muted2);line-height:1.7;list-style:none;padding-left:18px;position:relative;margin-bottom:8px;font-family:'Inter',sans-serif}
+.kycd-cmp li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.5}
+</style>
+</head>
+<body>
+
+<canvas id="blob-canvas"></canvas>
+
+<nav id="main-nav" class="case-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">EUGENE T.</a>
+    <ul class="nav-links"></ul>
+    <div class="nav-right">
+      <a href="https://www.linkedin.com/in/yevhen-t-9b0225137/" target="_blank" class="nav-linkedin">LinkedIn</a>
+      <a href="/#contact" class="nav-cta" style="text-decoration:none">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<div class="case-page">
+  <a class="case-back" href="/">Back</a>
+
+  <section class="case-hero reveal">
+    <div class="case-eyebrow">Fintech · Banking · UX Optimization</div>
+    <h1 class="case-title">Reducing KYC Drop-off<br>by Removing an Unnecessary Step</h1>
+    <div class="case-meta">
+      <div><div class="cml">Role</div><div class="cmv">Lead Product Designer</div></div>
+      <div><div class="cml">Company</div><div class="cmv">FUIB Bank</div></div>
+      <div><div class="cml">Year</div><div class="cmv">2023 — 2024</div></div>
+      <div><div class="cml">Scope</div><div class="cmv">UX optimization, A/B testing</div></div>
+    </div>
+  </section>
+
+  <section class="case-body">
+    <div class="case-sidebar">
+      <div class="csl">Contents</div>
+      <div class="cst active" data-target="overview">Overview</div>
+      <div class="cst" data-target="problem">Problem</div>
+      <div class="cst" data-target="discovery">Discovery</div>
+      <div class="cst" data-target="solution">Solution</div>
+      <div class="cst" data-target="validation">Validation</div>
+      <div class="cst" data-target="results">Results</div>
+      <div class="cst" data-target="reflection">Reflection</div>
+    </div>
+    <div class="case-content">
+
+      <div id="overview">
+        <h2 class="csh">Overview</h2>
+        <p class="csp">Users were required to periodically update their KYC information. During this process, they were always asked to upload photos of their identity document — even when they hadn't changed it. Support repeatedly reported that customers were abandoning the flow because they were unsure whether they actually needed to upload new documents.</p>
+        <div class="exec-grid" style="margin-top:28px">
+          <div class="exec-card">
+            <span class="exec-label">Context</span>
+            <div class="exec-value">Mandatory periodic KYC data update for all bank customers</div>
+          </div>
+          <div class="exec-card">
+            <span class="exec-label">Problem</span>
+            <div class="exec-value">Document upload shown to everyone — users assumed new scans were mandatory</div>
+          </div>
+          <div class="exec-card">
+            <span class="exec-label">Insight</span>
+            <div class="exec-value">Most users were not changing their identity document at all</div>
+          </div>
+          <div class="exec-card">
+            <span class="exec-label">Solution</span>
+            <div class="exec-value">Progressive disclosure — upload appears only when the document actually changes</div>
+          </div>
+          <div class="exec-card">
+            <span class="exec-label">Validation</span>
+            <div class="exec-value">A/B experiment against the original flow in production</div>
+          </div>
+          <div class="exec-card">
+            <span class="exec-label">Outcome</span>
+            <div class="exec-value accent">90% reduction in KYC flow drop-off</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="problem">
+        <h2 class="csh">The problem</h2>
+        <p class="csp">Support tickets and completion analytics pointed to the same issue: users couldn't understand when a document upload was actually required. The interface displayed the upload section by default, making people assume new scans were mandatory. This created unnecessary friction and caused users to leave the flow before completion.</p>
+        <div class="csq"><p>"Do I really need to re-upload my passport? Nothing changed." — recurring support ticket theme</p></div>
+      </div>
+
+      <div id="discovery">
+        <h2 class="csh">Discovery</h2>
+        <p class="csp">I interviewed support agents, reviewed customer feedback, and analyzed the KYC journey end to end. The key insight was surprisingly simple: most users were not changing their identity document at all. They only needed to confirm existing information — yet the interface forced everyone through the same upload step.</p>
+        <p class="csp" style="margin-top:16px"><strong style="color:var(--text);font-weight:500">Hypothesis:</strong> if document upload is shown only when it's actually required, users will experience less cognitive load, complete the flow faster, and abandon it less frequently.</p>
+      </div>
+
+      <div id="solution">
+        <h2 class="csh">Solution</h2>
+        <p class="csp">Instead of always displaying the upload area, I applied the <strong style="color:var(--text);font-weight:500">Progressive Disclosure</strong> principle. The document upload section remained hidden by default and appeared only after the user changed the Document field. This aligned the UI with the user's actual task and removed an unnecessary decision for the majority of users.</p>
+
+        <!-- ── INTERACTIVE DEMO ── -->
+        <div class="kycd">
+          <div class="kycd-tabs">
+            <button class="kycd-tab" data-mode="before">Before</button>
+            <button class="kycd-tab active" data-mode="after">After</button>
+          </div>
+          <div class="kycd-hint" id="kycd-hint"><span class="pulse-dot"></span><span id="kycd-hint-text">Try it — change the document type and watch the upload step appear.</span></div>
+
+          <div class="kycd-stage">
+            <div class="kycd-modal">
+              <div class="kycd-head">
+                <span class="kycd-head-title">Data Update</span>
+                <span class="kycd-head-x">✕</span>
+              </div>
+              <div class="kycd-body">
+                <div class="kycd-sec">Personal Information</div>
+                <div class="kycd-grid">
+                  <div class="kycd-field">
+                    <span class="kycd-label">Last Name</span>
+                    <input class="kycd-input" value="Kuchma" readonly>
+                  </div>
+                  <div class="kycd-field">
+                    <span class="kycd-label">First Name</span>
+                    <input class="kycd-input" value="Alex" readonly>
+                  </div>
+                  <div class="kycd-field full">
+                    <span class="kycd-label">Document</span>
+                    <div class="kycd-select-wrap">
+                      <select class="kycd-select" id="kycd-doc">
+                        <option selected>Passport (ID card)</option>
+                        <option>Biometric passport</option>
+                        <option>Foreign passport</option>
+                        <option>Residence permit</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="kycd-field">
+                    <span class="kycd-label">Tax ID Number</span>
+                    <span class="kycd-static">3322441155</span>
+                  </div>
+                  <div class="kycd-field">
+                    <span class="kycd-label">Date of Birth</span>
+                    <span class="kycd-static">10/30/1987</span>
+                  </div>
+                  <div class="kycd-field full">
+                    <span class="kycd-label">Citizenship</span>
+                    <span class="kycd-static" style="padding-top:2px">Ukraine</span>
+                  </div>
+                </div>
+
+                <div class="kycd-upload" id="kycd-upload">
+                  <div class="kycd-upload-title">Upload photos of your ID document</div>
+                  <div class="kycd-drop-row">
+                    <div class="kycd-drop">
+                      <span class="kycd-drop-side">Front side</span>
+                      <span class="kycd-drop-hint">Drag file here or</span>
+                      <button class="kycd-select-file" onclick="return false">Select file ⭱</button>
+                      <span class="kycd-formats">max. file size 8MB<br>Formats: PDF, PNG, JPEG, BMP, TIFF.</span>
+                    </div>
+                    <div class="kycd-drop">
+                      <span class="kycd-drop-side">Back side</span>
+                      <span class="kycd-drop-hint">Drag file here or</span>
+                      <button class="kycd-select-file" onclick="return false">Select file ⭱</button>
+                      <span class="kycd-formats">max. file size 8MB<br>Formats: PDF, PNG, JPEG, BMP, TIFF.</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kycd-compare">
+          <div class="kycd-cmp">
+            <span class="kycd-cmp-label before">Before</span>
+            <ul>
+              <li>Upload section always visible</li>
+              <li>Users assumed uploading was mandatory</li>
+              <li>High confusion and abandonment</li>
+            </ul>
+          </div>
+          <div class="kycd-cmp">
+            <span class="kycd-cmp-label after">After</span>
+            <ul>
+              <li>Upload appears only after changing the document type</li>
+              <li>Existing document → no upload required</li>
+              <li>Simpler and shorter experience for most users</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="validation">
+        <h2 class="csh">Validation</h2>
+        <p class="csp">We launched an A/B experiment comparing the original flow with the new Progressive Disclosure approach. We measured KYC completion rate, flow abandonment, and support contacts related to document upload.</p>
+      </div>
+
+      <div id="results">
+        <h2 class="csh">Results</h2>
+        <div class="crg">
+          <div class="crc"><span class="crn">−90%</span><span class="crl">Reduction in KYC flow drop-off, validated through the A/B experiment</span></div>
+          <div class="crc"><span class="crn">Fewer</span><span class="crl">Support requests about document uploads</span></div>
+          <div class="crc"><span class="crn">Faster</span><span class="crl">Completion for returning users who only confirm existing data</span></div>
+          <div class="crc"><span class="crn">Lower</span><span class="crl">Cognitive load by removing unnecessary UI from the default path</span></div>
+        </div>
+      </div>
+
+      <div id="reflection">
+        <h2 class="csh">What I learned</h2>
+        <div class="reflection-list">
+          <div class="reflection-item">
+            <div class="reflection-dot"></div>
+            <div class="reflection-text">Small UX improvements can have an outsized business impact when they remove unnecessary complexity rather than adding new functionality.</div>
+          </div>
+          <div class="reflection-item">
+            <div class="reflection-dot"></div>
+            <div class="reflection-text">Understanding when users don't need to do something can be more valuable than optimizing what they already do.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="case-next">
+    <div><div class="cnl">Next project</div><div class="cnt">KYB Verification Service @FUIB Bank</div></div>
+    <a class="cnb" href="/kyb-fuib">View case study →</a>
+  </section>
+  <footer><span>© 2026 EUGENE TREIHER</span><div class="loc"><span>Dubai, UAE</span></div></footer>
+</div>
+
+<script src="canvas.js"></script>
+<script>
+// Sidebar scroll spy
+const sections = document.querySelectorAll('.case-content > div[id]');
+const navItems = document.querySelectorAll('.cst');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 160) current = s.id; });
+  navItems.forEach(n => { n.classList.toggle('active', n.dataset.target === current); });
+});
+
+// ── KYC demo: before/after with progressive disclosure ──
+(function(){
+  const tabs = document.querySelectorAll('.kycd-tab');
+  const upload = document.getElementById('kycd-upload');
+  const doc = document.getElementById('kycd-doc');
+  const hint = document.getElementById('kycd-hint');
+  const hintText = document.getElementById('kycd-hint-text');
+  const initialDoc = doc.value;
+  let mode = 'after';
+
+  function apply(){
+    if(mode === 'before'){
+      upload.classList.remove('collapsed');
+      hint.style.opacity = '1';
+      hintText.textContent = 'Original flow — the upload step is always visible, even when nothing changed.';
+    } else {
+      const changed = doc.value !== initialDoc;
+      upload.classList.toggle('collapsed', !changed);
+      hint.style.opacity = '1';
+      hintText.textContent = changed
+        ? 'The document changed — only now does the upload step appear.'
+        : 'Try it — change the document type and watch the upload step appear.';
+    }
+  }
+
+  tabs.forEach(t => t.addEventListener('click', () => {
+    tabs.forEach(x => x.classList.toggle('active', x === t));
+    mode = t.dataset.mode;
+    apply();
+  }));
+
+  doc.addEventListener('change', apply);
+  apply();
+})();
+</script>
+</body>
+</html>
