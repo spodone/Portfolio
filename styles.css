@@ -43,6 +43,7 @@ nav.nav-hidden{transform:translateY(-120%);}
 .nav-linkedin{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);text-decoration:none;transition:color .2s}
 .nav-linkedin:hover{color:var(--text)}
 .case-nav .nav-links{display:none}
+.case-nav .nav-inner{grid-template-columns:1fr auto}
 
 .case-back{
   display:inline-flex;align-items:center;gap:10px;
