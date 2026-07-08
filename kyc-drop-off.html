@@ -195,7 +195,7 @@
 
       <div id="solution">
         <h2 class="csh">Solution</h2>
-        <p class="csp">Instead of always displaying the upload area, I applied the <strong style="color:var(--text);font-weight:500">Progressive Disclosure</strong> principle. The document upload section remained hidden by default and appeared only after the user changed the Document field. This aligned the UI with the user's actual task and removed an unnecessary decision for the majority of users.</p>
+        <p class="csp">Instead of always displaying the upload area, I applied the <strong style="color:var(--text);font-weight:500">Progressive Disclosure</strong> principle. The document upload section remained hidden by default and appeared only when the user changed something that legally requires re-verification — the document type, or their first or last name. This aligned the UI with the user's actual task and removed an unnecessary decision for the majority of users.</p>
 
         <!-- ── INTERACTIVE DEMO: BEFORE / AFTER ── -->
         <div class="kycd">
@@ -270,7 +270,7 @@
             <div>
               <div class="kycd-col-head">
                 <span class="kycd-col-label after">After</span>
-                <span class="kycd-col-cap"><span class="pulse-dot"></span><span id="kycd-hint-text">Try it — change the document type and watch the upload step appear.</span></span>
+                <span class="kycd-col-cap"><span class="pulse-dot"></span><span id="kycd-hint-text">Try it — change the document, name or surname and watch the upload step appear.</span></span>
               </div>
               <div class="kycd-stage highlight">
                 <div class="kycd-modal">
@@ -283,11 +283,11 @@
                     <div class="kycd-grid">
                       <div class="kycd-field">
                         <span class="kycd-label">Last Name</span>
-                        <input class="kycd-input" value="Kuchma" readonly>
+                        <input class="kycd-input" id="kycd-last" value="Kuchma">
                       </div>
                       <div class="kycd-field">
                         <span class="kycd-label">First Name</span>
-                        <input class="kycd-input" value="Alex" readonly>
+                        <input class="kycd-input" id="kycd-first" value="Alex">
                       </div>
                       <div class="kycd-field full">
                         <span class="kycd-label">Document</span>
@@ -346,8 +346,8 @@
           <div class="kycd-cmp">
             <span class="kycd-cmp-label after">After</span>
             <ul>
-              <li>Upload appears only after changing the document type</li>
-              <li>Existing document → no upload required</li>
+              <li>Upload appears only when the document, name or surname changes</li>
+              <li>Unchanged identity → no upload required</li>
               <li>Simpler and shorter experience for most users</li>
             </ul>
           </div>
@@ -408,16 +408,28 @@ window.addEventListener('scroll', () => {
 (function(){
   const upload = document.getElementById('kycd-upload');
   const doc = document.getElementById('kycd-doc');
+  const last = document.getElementById('kycd-last');
+  const first = document.getElementById('kycd-first');
   const hintText = document.getElementById('kycd-hint-text');
   const initialDoc = doc.value;
+  const initialLast = last.value.trim();
+  const initialFirst = first.value.trim();
+  const idle = 'Try it — change the document, name or surname and watch the upload step appear.';
 
-  doc.addEventListener('change', () => {
-    const changed = doc.value !== initialDoc;
+  function update(){
+    const docChanged = doc.value !== initialDoc;
+    const nameChanged = last.value.trim() !== initialLast || first.value.trim() !== initialFirst;
+    const changed = docChanged || nameChanged;
     upload.classList.toggle('collapsed', !changed);
-    hintText.textContent = changed
-      ? 'The document changed — only now does the upload step appear.'
-      : 'Try it — change the document type and watch the upload step appear.';
-  });
+    if(!changed){ hintText.textContent = idle; return; }
+    hintText.textContent = docChanged
+      ? 'The document changed — the upload step is now required.'
+      : 'Name or surname changed — the document must be re-verified, so upload appears.';
+  }
+
+  doc.addEventListener('change', update);
+  last.addEventListener('input', update);
+  first.addEventListener('input', update);
 })();
 </script>
 </body>
