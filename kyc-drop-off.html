@@ -522,6 +522,11 @@ window.addEventListener('scroll', () => {
   doc.addEventListener('change', update);
   last.addEventListener('input', update);
   first.addEventListener('input', update);
+
+  // Manual toggle for the After accordion (Before stays static-open)
+  document.querySelectorAll('.kycd-acc:not(.kycd-acc-static) .kycd-acc-head').forEach(head => {
+    head.addEventListener('click', () => head.closest('.kycd-acc').classList.toggle('open'));
+  });
 })();
 </script>
 </body>
