@@ -218,7 +218,7 @@
       <div id="solution">
         <h2 class="csh">Solution</h2>
         <p class="csp">Instead of always displaying the upload area, I applied the <strong style="color:var(--text);font-weight:500">Progressive Disclosure</strong> principle. The document upload section remained hidden by default and appeared only when the user changed something that legally requires re-verification — the document type, or their first or last name. This aligned the UI with the user's actual task and removed an unnecessary decision for the majority of users.</p>
-        <p class="csp" style="margin-top:16px">I applied the same principle to the <strong style="color:var(--text);font-weight:500">document detail fields</strong> — record number, document number, issuing authority, and issue / expiry dates. Rather than showing this dense block to everyone, I collapsed it behind a <strong style="color:var(--text);font-weight:500">"Document details"</strong> accordion that stays closed by default and expands automatically — together with the upload step — only when a change makes re-entering them mandatory. Same goal: keep the default view calm and reduce cognitive load, surfacing information only when it's actually needed.</p>
+        <p class="csp" style="margin-top:16px">I applied the same principle to the <strong style="color:var(--text);font-weight:500">document detail fields</strong> — record number, document number, issuing authority, and issue / expiry dates. Rather than showing this dense block to everyone, I collapsed it behind a <strong style="color:var(--text);font-weight:500">"Document details"</strong> accordion that stays closed by default and expands automatically — together with the upload step — only when a change makes re-entering them mandatory. Users can also open it manually at any time if they simply want to review the data. Same goal: keep the default view calm and reduce cognitive load, surfacing information only when it's actually needed.</p>
 
         <!-- ── INTERACTIVE DEMO: BEFORE / AFTER ── -->
         <div class="kycd">
@@ -435,7 +435,8 @@
           <div class="kycd-cmp">
             <span class="kycd-cmp-label after">After</span>
             <ul>
-              <li>Upload and document details appear only when the document, name or surname changes</li>
+              <li>Upload and document details appear automatically when the document, name or surname changes</li>
+              <li>Document details can also be opened manually anytime to review the data</li>
               <li>Unchanged identity → nothing extra to fill in</li>
               <li>Calmer default view, simpler and shorter for most users</li>
             </ul>
