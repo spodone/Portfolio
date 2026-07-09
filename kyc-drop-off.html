@@ -506,6 +506,8 @@ window.addEventListener('scroll', () => {
   const initialDoc = doc.value;
   const initialLast = last.value.trim();
   const initialFirst = first.value.trim();
+  const detailInputs = [...acc.querySelectorAll('input.kycd-input')];
+  const detailDefaults = detailInputs.map(i => i.value);
   const idle = 'Try it — change the document, name or surname and watch the hidden steps appear.';
 
   function update(){
@@ -514,9 +516,14 @@ window.addEventListener('scroll', () => {
     const changed = docChanged || nameChanged;
     upload.classList.toggle('collapsed', !changed);
     acc.classList.toggle('open', changed);
+    // New document → its details no longer apply, clear fields for re-entry
+    detailInputs.forEach((inp, i) => {
+      if(docChanged){ inp.value = ''; inp.removeAttribute('readonly'); }
+      else { inp.value = detailDefaults[i]; inp.setAttribute('readonly', ''); }
+    });
     if(!changed){ hintText.textContent = idle; return; }
     hintText.textContent = docChanged
-      ? 'The document changed — document details and upload are now required.'
+      ? 'New document selected — its details are cleared and must be re-entered, and upload is required.'
       : 'Name or surname changed — the document must be re-verified, so the hidden steps appear.';
   }
 
