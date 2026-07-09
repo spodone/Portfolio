@@ -57,6 +57,15 @@
 }
 .kycd-static{font-size:12px;color:#22252a;padding:8px 0 0}
 
+/* Collapsible document-details accordion */
+.kycd-acc{margin-top:16px;border-top:1px solid #ececef}
+.kycd-acc-head{display:flex;align-items:center;justify-content:space-between;padding:14px 0 0;cursor:pointer;user-select:none}
+.kycd-acc-title{font-size:12.5px;font-weight:600;color:#3a3d45;letter-spacing:-.01em}
+.kycd-acc-chev{width:8px;height:8px;border-right:1.5px solid #6b6e76;border-bottom:1.5px solid #6b6e76;transform:rotate(45deg);transition:transform .3s;margin-right:3px}
+.kycd-acc.open .kycd-acc-chev{transform:rotate(-135deg)}
+.kycd-acc-body{overflow:hidden;max-height:0;opacity:0;transition:max-height .55s cubic-bezier(.22,1,.36,1),opacity .4s ease,margin-top .5s cubic-bezier(.22,1,.36,1)}
+.kycd-acc.open .kycd-acc-body{max-height:340px;opacity:1;margin-top:14px}
+
 /* Upload section — the progressive disclosure target */
 .kycd-upload{
   overflow:hidden;
@@ -250,29 +259,36 @@
                         <span class="kycd-label">Date of Birth</span>
                         <span class="kycd-static">10/30/1987</span>
                       </div>
-                      <div class="kycd-field">
-                        <span class="kycd-label">Record No.</span>
-                        <input class="kycd-input" value="1234567890" readonly>
-                      </div>
-                      <div class="kycd-field">
-                        <span class="kycd-label">Document No.</span>
-                        <input class="kycd-input" value="19910824-00026" readonly>
-                      </div>
-                      <div class="kycd-field">
-                        <span class="kycd-label">Issuing Authority</span>
-                        <input class="kycd-input" value="4646" readonly>
-                      </div>
-                      <div class="kycd-field">
-                        <span class="kycd-label">Date of Issue</span>
-                        <input class="kycd-input" value="10/02/21" readonly>
-                      </div>
-                      <div class="kycd-field">
-                        <span class="kycd-label">Valid Until</span>
-                        <input class="kycd-input" value="10/02/28" readonly>
-                      </div>
                       <div class="kycd-field full">
                         <span class="kycd-label">Citizenship</span>
                         <span class="kycd-static">Ukraine</span>
+                      </div>
+                    </div>
+                    <div class="kycd-acc">
+                      <div class="kycd-acc-head"><span class="kycd-acc-title">Document details</span><span class="kycd-acc-chev"></span></div>
+                      <div class="kycd-acc-body">
+                        <div class="kycd-grid">
+                          <div class="kycd-field">
+                            <span class="kycd-label">Record No.</span>
+                            <input class="kycd-input" value="1234567890" readonly>
+                          </div>
+                          <div class="kycd-field">
+                            <span class="kycd-label">Document No.</span>
+                            <input class="kycd-input" value="19910824-00026" readonly>
+                          </div>
+                          <div class="kycd-field">
+                            <span class="kycd-label">Issuing Authority</span>
+                            <input class="kycd-input" value="4646" readonly>
+                          </div>
+                          <div class="kycd-field">
+                            <span class="kycd-label">Date of Issue</span>
+                            <input class="kycd-input" value="10/02/21" readonly>
+                          </div>
+                          <div class="kycd-field full">
+                            <span class="kycd-label">Valid Until</span>
+                            <input class="kycd-input" value="10/02/28" readonly>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div class="kycd-upload">
@@ -339,29 +355,36 @@
                         <span class="kycd-label">Date of Birth</span>
                         <span class="kycd-static">10/30/1987</span>
                       </div>
-                      <div class="kycd-field">
-                        <span class="kycd-label">Record No.</span>
-                        <input class="kycd-input" value="1234567890" readonly>
-                      </div>
-                      <div class="kycd-field">
-                        <span class="kycd-label">Document No.</span>
-                        <input class="kycd-input" value="19910824-00026" readonly>
-                      </div>
-                      <div class="kycd-field">
-                        <span class="kycd-label">Issuing Authority</span>
-                        <input class="kycd-input" value="4646" readonly>
-                      </div>
-                      <div class="kycd-field">
-                        <span class="kycd-label">Date of Issue</span>
-                        <input class="kycd-input" value="10/02/21" readonly>
-                      </div>
-                      <div class="kycd-field">
-                        <span class="kycd-label">Valid Until</span>
-                        <input class="kycd-input" value="10/02/28" readonly>
-                      </div>
                       <div class="kycd-field full">
                         <span class="kycd-label">Citizenship</span>
                         <span class="kycd-static">Ukraine</span>
+                      </div>
+                    </div>
+                    <div class="kycd-acc">
+                      <div class="kycd-acc-head"><span class="kycd-acc-title">Document details</span><span class="kycd-acc-chev"></span></div>
+                      <div class="kycd-acc-body">
+                        <div class="kycd-grid">
+                          <div class="kycd-field">
+                            <span class="kycd-label">Record No.</span>
+                            <input class="kycd-input" value="1234567890" readonly>
+                          </div>
+                          <div class="kycd-field">
+                            <span class="kycd-label">Document No.</span>
+                            <input class="kycd-input" value="19910824-00026" readonly>
+                          </div>
+                          <div class="kycd-field">
+                            <span class="kycd-label">Issuing Authority</span>
+                            <input class="kycd-input" value="4646" readonly>
+                          </div>
+                          <div class="kycd-field">
+                            <span class="kycd-label">Date of Issue</span>
+                            <input class="kycd-input" value="10/02/21" readonly>
+                          </div>
+                          <div class="kycd-field full">
+                            <span class="kycd-label">Valid Until</span>
+                            <input class="kycd-input" value="10/02/28" readonly>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div class="kycd-upload collapsed" id="kycd-upload">
@@ -487,6 +510,11 @@ window.addEventListener('scroll', () => {
   last.addEventListener('input', update);
   first.addEventListener('input', update);
 })();
+
+// ── Document-details accordion toggle ──
+document.querySelectorAll('.kycd-acc-head').forEach(head => {
+  head.addEventListener('click', () => head.closest('.kycd-acc').classList.toggle('open'));
+});
 </script>
 </body>
 </html>
