@@ -58,13 +58,18 @@
 .kycd-static{font-size:12px;color:#22252a;padding:8px 0 0}
 
 /* Collapsible document-details accordion */
-.kycd-acc{margin-top:16px;border-top:1px solid #ececef}
-.kycd-acc-head{display:flex;align-items:center;justify-content:space-between;padding:14px 0 0;cursor:pointer;user-select:none}
+.kycd-acc{margin-top:16px;border:1px solid #dcdce1;border-radius:10px;padding:0 16px;background:#fafafb;transition:border-color .3s,background .3s}
+.kycd-acc.open{border-color:#c7c7ce;background:#fff}
+.kycd-acc-head{display:flex;align-items:center;justify-content:space-between;padding:13px 0;cursor:pointer;user-select:none}
 .kycd-acc-title{font-size:12.5px;font-weight:600;color:#3a3d45;letter-spacing:-.01em}
 .kycd-acc-chev{width:8px;height:8px;border-right:1.5px solid #6b6e76;border-bottom:1.5px solid #6b6e76;transform:rotate(45deg);transition:transform .3s;margin-right:3px}
 .kycd-acc.open .kycd-acc-chev{transform:rotate(-135deg)}
-.kycd-acc-body{overflow:hidden;max-height:0;opacity:0;transition:max-height .55s cubic-bezier(.22,1,.36,1),opacity .4s ease,margin-top .5s cubic-bezier(.22,1,.36,1)}
-.kycd-acc.open .kycd-acc-body{max-height:340px;opacity:1;margin-top:14px}
+.kycd-acc-body{overflow:hidden;max-height:0;opacity:0;transition:max-height .55s cubic-bezier(.22,1,.36,1),opacity .4s ease,padding-bottom .5s cubic-bezier(.22,1,.36,1)}
+.kycd-acc.open .kycd-acc-body{max-height:360px;opacity:1;padding-bottom:16px}
+.kycd-acc.open .kycd-acc-head{border-bottom:1px solid #ececef}
+/* Always-open static variant (Before) */
+.kycd-acc-static .kycd-acc-head{cursor:default}
+.kycd-acc-static .kycd-acc-chev{display:none}
 .kycd-acc + .kycd-grid{margin-top:16px}
 
 /* Upload section — the progressive disclosure target */
@@ -213,6 +218,7 @@
       <div id="solution">
         <h2 class="csh">Solution</h2>
         <p class="csp">Instead of always displaying the upload area, I applied the <strong style="color:var(--text);font-weight:500">Progressive Disclosure</strong> principle. The document upload section remained hidden by default and appeared only when the user changed something that legally requires re-verification — the document type, or their first or last name. This aligned the UI with the user's actual task and removed an unnecessary decision for the majority of users.</p>
+        <p class="csp" style="margin-top:16px">I applied the same principle to the <strong style="color:var(--text);font-weight:500">document detail fields</strong> — record number, document number, issuing authority, and issue / expiry dates. Rather than showing this dense block to everyone, I collapsed it behind a <strong style="color:var(--text);font-weight:500">"Document details"</strong> accordion that stays closed by default and expands automatically — together with the upload step — only when a change makes re-entering them mandatory. Same goal: keep the default view calm and reduce cognitive load, surfacing information only when it's actually needed.</p>
 
         <!-- ── INTERACTIVE DEMO: BEFORE / AFTER ── -->
         <div class="kycd">
@@ -222,7 +228,7 @@
             <div>
               <div class="kycd-col-head">
                 <span class="kycd-col-label before">Before</span>
-                <span class="kycd-col-cap">Upload step always visible — even when nothing changed.</span>
+                <span class="kycd-col-cap">Document details and upload always visible — even when nothing changed.</span>
               </div>
               <div class="kycd-stage">
                 <div class="kycd-modal">
@@ -253,7 +259,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="kycd-acc">
+                    <div class="kycd-acc open kycd-acc-static">
                       <div class="kycd-acc-head"><span class="kycd-acc-title">Document details</span><span class="kycd-acc-chev"></span></div>
                       <div class="kycd-acc-body">
                         <div class="kycd-grid">
@@ -320,7 +326,7 @@
             <div>
               <div class="kycd-col-head">
                 <span class="kycd-col-label after">After</span>
-                <span class="kycd-col-cap"><span class="pulse-dot"></span><span id="kycd-hint-text">Try it — change the document, name or surname and watch the upload step appear.</span></span>
+                <span class="kycd-col-cap"><span class="pulse-dot"></span><span id="kycd-hint-text">Try it — change the document, name or surname and watch the hidden steps appear.</span></span>
               </div>
               <div class="kycd-stage highlight">
                 <div class="kycd-modal">
@@ -351,7 +357,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="kycd-acc">
+                    <div class="kycd-acc" id="kycd-acc-after">
                       <div class="kycd-acc-head"><span class="kycd-acc-title">Document details</span><span class="kycd-acc-chev"></span></div>
                       <div class="kycd-acc-body">
                         <div class="kycd-grid">
@@ -421,17 +427,17 @@
           <div class="kycd-cmp">
             <span class="kycd-cmp-label before">Before</span>
             <ul>
-              <li>Upload section always visible</li>
-              <li>Users assumed uploading was mandatory</li>
-              <li>High confusion and abandonment</li>
+              <li>Upload section and document details always visible</li>
+              <li>Users assumed everything was mandatory to re-enter</li>
+              <li>Dense form, high confusion and abandonment</li>
             </ul>
           </div>
           <div class="kycd-cmp">
             <span class="kycd-cmp-label after">After</span>
             <ul>
-              <li>Upload appears only when the document, name or surname changes</li>
-              <li>Unchanged identity → no upload required</li>
-              <li>Simpler and shorter experience for most users</li>
+              <li>Upload and document details appear only when the document, name or surname changes</li>
+              <li>Unchanged identity → nothing extra to fill in</li>
+              <li>Calmer default view, simpler and shorter for most users</li>
             </ul>
           </div>
         </div>
@@ -491,6 +497,7 @@ window.addEventListener('scroll', () => {
 // ── KYC demo: progressive disclosure in the After column ──
 (function(){
   const upload = document.getElementById('kycd-upload');
+  const acc = document.getElementById('kycd-acc-after');
   const doc = document.getElementById('kycd-doc');
   const last = document.getElementById('kycd-last');
   const first = document.getElementById('kycd-first');
@@ -498,28 +505,24 @@ window.addEventListener('scroll', () => {
   const initialDoc = doc.value;
   const initialLast = last.value.trim();
   const initialFirst = first.value.trim();
-  const idle = 'Try it — change the document, name or surname and watch the upload step appear.';
+  const idle = 'Try it — change the document, name or surname and watch the hidden steps appear.';
 
   function update(){
     const docChanged = doc.value !== initialDoc;
     const nameChanged = last.value.trim() !== initialLast || first.value.trim() !== initialFirst;
     const changed = docChanged || nameChanged;
     upload.classList.toggle('collapsed', !changed);
+    acc.classList.toggle('open', changed);
     if(!changed){ hintText.textContent = idle; return; }
     hintText.textContent = docChanged
-      ? 'The document changed — the upload step is now required.'
-      : 'Name or surname changed — the document must be re-verified, so upload appears.';
+      ? 'The document changed — document details and upload are now required.'
+      : 'Name or surname changed — the document must be re-verified, so the hidden steps appear.';
   }
 
   doc.addEventListener('change', update);
   last.addEventListener('input', update);
   first.addEventListener('input', update);
 })();
-
-// ── Document-details accordion toggle ──
-document.querySelectorAll('.kycd-acc-head').forEach(head => {
-  head.addEventListener('click', () => head.closest('.kycd-acc').classList.toggle('open'));
-});
 </script>
 </body>
 </html>
