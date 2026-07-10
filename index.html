@@ -68,7 +68,6 @@
         <span class="logo-item"><img src="logo-new-dappradar.svg" alt="DappRadar"></span>
         <span class="logo-item"><img src="logo-new-ouinex.svg" alt="Ouinex"></span>
         <span class="logo-item"><img src="logo-new-trady.svg" alt="Trady"></span>
-        <span class="logo-item"><img src="logo-new-pumb.svg" alt="PUMB"></span>
         <span class="logo-item"><img src="logo-new-tradepoint.svg" alt="Tradepoint"></span>
         <span class="logo-item"><img src="logo-new-ubereats.svg" alt="UberEats"></span>
         <span class="logo-item"><img src="logo-new-tokenman.svg" alt="Tokenman"></span>
@@ -103,7 +102,7 @@
 
   <div class="case-list reveal">
     <a class="case-row" href="/kyb-fuib" data-preview="KYB case.jpg">
-      <div class="case-row-name">KYB Verification Service @FUIB Bank<span class="case-row-desc">Saved up to <em class="case-accent">$1.1M</em> in estimated operational costs within the first 6 months.</span></div>
+      <div class="case-row-name">KYB Verification Service @Leading Ukrainian Bank<span class="case-row-desc">Saved up to <em class="case-accent">$1.1M</em> in estimated operational costs within the first 6 months.</span></div>
       <div class="case-row-tags">
         <span class="case-row-tag">Fintech</span>
         <span class="case-row-tag">Banking</span>
@@ -176,7 +175,7 @@
       <div class="t-card">
         <div class="t-avatar"><img src="avatar-valentyn.jpeg" alt="Valentyn Skliarov"></div>
         <div class="t-name">Valentyn Skliarov</div>
-        <div class="t-role">Lead Product Designer · PUMB</div>
+        <div class="t-role">Lead Product Designer · <span class="nda">Leading Ukrainian Bank</span></div>
         <p class="t-text">"As Yevhen's reviewer, I had the opportunity to closely follow his growth. As the owner of our Design System, I also worked with him on improving and expanding it. He actively suggested improvements, contributed new components, and always approached design from a strong product perspective, focusing on both user and business needs. He was also one of the first designers in our organization to embrace AI in his workflow and openly shared practical ways to use it with others. I'd gladly work with him again."</p>
         <button class="t-read-more" onclick="toggleCard(this)">Read more</button>
       </div>
@@ -221,7 +220,7 @@
       <div class="t-card">
         <div class="t-avatar">PB</div>
         <div class="t-name">Pavel Bondarenko</div>
-        <div class="t-role">CTO · FUIB Bank</div>
+        <div class="t-role">CTO · <span class="nda">Leading Ukrainian Bank</span></div>
         <p class="t-text">"The KYB flow Eugene designed cut our ops costs dramatically. He grasped the banking compliance context faster than most engineers I've worked with."</p>
       </div>
 
@@ -359,7 +358,7 @@ const MOCK = [
   },
   {
     keys: ['kyb','fuib','bank','verification','business verif'],
-    answer: "The KYB project is one of Eugene's strongest case studies.\n\nHe redesigned the entire business verification experience for FUIB Bank with the goal of moving customers from costly offline verification to a fully digital process.\n\nHis work included user research, information architecture, UX design, interaction design, prototyping, and close collaboration with product managers and engineers.\n\nThe results were significant:\n• Online completion increased from 7% to 96%\n• 45,000+ businesses completed verification within six months\n• The bank substantially reduced manual operational costs"
+    answer: "The KYB project is one of Eugene's strongest case studies.\n\nHe redesigned the entire business verification experience for a leading Ukrainian bank with the goal of moving customers from costly offline verification to a fully digital process.\n\nHis work included user research, information architecture, UX design, interaction design, prototyping, and close collaboration with product managers and engineers.\n\nThe results were significant:\n• Online completion increased from 7% to 96%\n• 45,000+ businesses completed verification within six months\n• The bank substantially reduced manual operational costs"
   },
   {
     keys: ['strongest skill','different','unique','stand out','makes eugene','what makes'],
@@ -392,7 +391,7 @@ function getBotAnswer(q) {
   for (const item of MOCK) {
     if (item.keys.some(k => lower.includes(k))) return item.answer;
   }
-  return "Great question. Eugene has 9+ years designing complex products in fintech and Web3. He's shipped work at DappRadar, FUIB Bank, and Openware — feel free to ask about any specific area.";
+  return "Great question. Eugene has 9+ years designing complex products in fintech and Web3. He's shipped work at DappRadar, a leading Ukrainian bank, and Openware — feel free to ask about any specific area.";
 }
 
 function appendMsg(text, role) {
