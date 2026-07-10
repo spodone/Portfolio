@@ -129,6 +129,15 @@
 .hypo-label svg{width:15px;height:15px}
 .hypo-text{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:20px;line-height:1.5;color:var(--text);letter-spacing:-.01em}
 @media(max-width:768px){.hypo{padding:18px 20px}.hypo-text{font-size:17px}}
+
+/* Before→after result metrics */
+.mtr-dir{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;letter-spacing:.02em;color:var(--muted2);font-family:'Inter',sans-serif;margin-bottom:18px}
+.mtr-dir svg{width:16px;height:16px;color:var(--accent)}
+.mtr-val{display:flex;align-items:baseline;gap:12px;font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.02em}
+.mtr-from{font-size:26px;font-weight:300;color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(240,237,232,.28)}
+.mtr-arrow{font-size:20px;color:var(--muted2)}
+.mtr-to{font-size:46px;font-weight:300;color:var(--accent);line-height:1}
+@media(max-width:768px){.mtr-to{font-size:38px}.mtr-from{font-size:22px}}
 </style>
 </head>
 <body>
@@ -459,10 +468,22 @@
       <div id="results">
         <h2 class="csh">Results</h2>
         <div class="crg">
-          <div class="crc"><span class="crn">−90%</span><span class="crl">Reduction in KYC flow drop-off, validated through the A/B experiment</span></div>
-          <div class="crc"><span class="crn">Fewer</span><span class="crl">Support requests about document uploads</span></div>
-          <div class="crc"><span class="crn">Faster</span><span class="crl">Completion for returning users who only confirm existing data</span></div>
-          <div class="crc"><span class="crn">Lower</span><span class="crl">Cognitive load by removing unnecessary UI from the default path</span></div>
+          <div class="crc">
+            <span class="mtr-dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M18 13l-6 6-6-6"/></svg>Drop-off Rate</span>
+            <span class="mtr-val"><span class="mtr-from">60%</span><span class="mtr-arrow">→</span><span class="mtr-to">10%</span></span>
+          </div>
+          <div class="crc">
+            <span class="mtr-dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></svg>Completion Rate</span>
+            <span class="mtr-val"><span class="mtr-from">40%</span><span class="mtr-arrow">→</span><span class="mtr-to">90%</span></span>
+          </div>
+          <div class="crc">
+            <span class="mtr-dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M18 13l-6 6-6-6"/></svg>Rejection Rate</span>
+            <span class="mtr-val"><span class="mtr-from">18%</span><span class="mtr-arrow">→</span><span class="mtr-to">8%</span></span>
+          </div>
+          <div class="crc">
+            <span class="mtr-dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></svg>Online Completion Rate</span>
+            <span class="mtr-val"><span class="mtr-from">12%</span><span class="mtr-arrow">→</span><span class="mtr-to">91%</span></span>
+          </div>
         </div>
       </div>
 
