@@ -464,7 +464,7 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .case-hero{padding:0 52px 0}
 .case-eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;display:flex;align-items:center;gap:14px}
 .case-eyebrow::before{content:'';width:24px;height:1px;background:var(--muted);display:block}
-.case-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1.02;letter-spacing:-.02em;color:var(--text);max-width:840px;margin-bottom:48px}
+.case-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1.02;letter-spacing:-.02em;color:var(--text);max-width:none;margin-bottom:48px}
 .case-meta{display:flex;gap:52px;padding-bottom:52px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .cml{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .cmv{font-family:'Inter',sans-serif;font-size:14px;font-weight:400;color:var(--text);margin-top:5px}
