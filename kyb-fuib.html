@@ -7,6 +7,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Bricolage+Grotesque:wght@200;300;400;500;600&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+/* ── Embedded prototype (responsive) ── */
+.proto-wrap{margin-top:28px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.02)}
+.proto-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.proto-dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.proto-bar-label{margin-left:12px;font-size:12px;color:var(--muted);font-family:'Inter',sans-serif;letter-spacing:.02em}
+.proto-open{margin-left:auto;font-size:12px;color:var(--muted2);text-decoration:none;font-family:'Inter',sans-serif;white-space:nowrap}
+.proto-open:hover{color:var(--text)}
+.proto-stage{position:relative;width:100%;overflow:hidden;background:#0f0f14}
+.proto-stage iframe{border:none;display:block;transform-origin:top left}
+/* mobile tap-to-open card (hidden on desktop) */
+.proto-mobile{display:none}
+@media(max-width:768px){
+  .proto-stage{display:none}
+  .proto-mobile{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:40px 24px;background:#0f0f14}
+  .proto-mobile-icon{width:52px;height:52px;border-radius:14px;background:rgba(201,168,76,.12);display:flex;align-items:center;justify-content:center;color:var(--accent)}
+  .proto-mobile-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:22px;color:var(--text)}
+  .proto-mobile-text{font-size:14px;color:var(--muted2);font-family:'Inter',sans-serif;line-height:1.6;max-width:340px}
+  .proto-mobile-btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#0a0a0f;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;padding:12px 26px;border-radius:100px;text-decoration:none;margin-top:4px}
+}
+</style>
 </head>
 <body>
 
@@ -428,15 +449,23 @@
         <span class="cs-tag">08 — Prototype</span>
         <h2 class="csh">Try the live prototype</h2>
         <p class="csp">Below is the interactive prototype I built to validate the flow — a working replica of the company data-update journey, from the dashboard prompt through the multi-step questionnaire. Client branding and data are anonymized under NDA.</p>
-        <div style="margin-top:28px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.02)">
-          <div style="display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line)">
-            <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
-            <span style="width:11px;height:11px;border-radius:50%;background:#febc2e;display:inline-block"></span>
-            <span style="width:11px;height:11px;border-radius:50%;background:#28c840;display:inline-block"></span>
-            <span style="margin-left:12px;font-size:12px;color:var(--muted);font-family:'Inter',sans-serif;letter-spacing:.02em">Company data update — interactive prototype</span>
-            <a href="/kyb-prototype/" target="_blank" style="margin-left:auto;font-size:12px;color:var(--muted2);text-decoration:none;font-family:'Inter',sans-serif">Open in new tab ↗</a>
+        <div class="proto-wrap">
+          <div class="proto-bar">
+            <span class="proto-dot" style="background:#ff5f57"></span>
+            <span class="proto-dot" style="background:#febc2e"></span>
+            <span class="proto-dot" style="background:#28c840"></span>
+            <span class="proto-bar-label">Company data update — interactive prototype</span>
+            <a href="/kyb-prototype/" target="_blank" class="proto-open">Open in new tab ↗</a>
           </div>
-          <iframe src="/kyb-prototype/" title="KYB company data update prototype" loading="lazy" style="width:100%;height:680px;border:none;display:block;background:#0f0f14"></iframe>
+          <div class="proto-stage" id="proto-stage">
+            <iframe id="proto-iframe" src="/kyb-prototype/" title="KYB company data update prototype" loading="lazy"></iframe>
+          </div>
+          <a class="proto-mobile" href="/kyb-prototype/" target="_blank">
+            <span class="proto-mobile-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></span>
+            <span class="proto-mobile-title">Open the interactive prototype</span>
+            <span class="proto-mobile-text">This prototype is built for desktop. Tap to open it full-screen — you can pinch to zoom and walk through the full flow.</span>
+            <span class="proto-mobile-btn">Open prototype ↗</span>
+          </a>
         </div>
       </div>
 
@@ -529,6 +558,28 @@ window.addEventListener('scroll', () => {
   sections.forEach(s => { if(window.scrollY >= s.offsetTop - 160) current = s.id; });
   navItems.forEach(n => { n.classList.toggle('active', n.dataset.target === current); });
 });
+
+// Scale the desktop prototype iframe to fit the case column width
+(function(){
+  const DESIGN_W = 1414;   // prototype's native design width
+  const DISPLAY_H = 600;   // on-screen height of the embed
+  const stage = document.getElementById('proto-stage');
+  const frame = document.getElementById('proto-iframe');
+  if(!stage || !frame) return;
+  function size(){
+    const w = stage.clientWidth;
+    if(!w) return;
+    const scale = w / DESIGN_W;
+    frame.style.width = DESIGN_W + 'px';
+    frame.style.height = Math.round(DISPLAY_H / scale) + 'px';
+    frame.style.transform = 'scale(' + scale + ')';
+    stage.style.height = DISPLAY_H + 'px';
+  }
+  size();
+  new ResizeObserver(size).observe(stage);
+  window.addEventListener('resize', size);
+  frame.addEventListener('load', size);
+})();
 </script>
 
 </body>
