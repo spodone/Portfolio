@@ -1,0 +1,7 @@
+node_modules/
+**/node_modules/
+.DS_Store
+**/.DS_Store
+# Figma Make source for the KYB prototype (built output lives in /kyb-prototype)
+KYB Case/
+KYB case/
