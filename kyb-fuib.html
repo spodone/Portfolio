@@ -17,15 +17,10 @@
 .proto-open:hover{color:var(--text)}
 .proto-stage{position:relative;width:100%;overflow:hidden;background:#0f0f14}
 .proto-stage iframe{border:none;display:block;transform-origin:top left}
-/* mobile tap-to-open card (hidden on desktop) */
-.proto-mobile{display:none}
 @media(max-width:768px){
-  .proto-stage{display:none}
-  .proto-mobile{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:40px 24px;background:#0f0f14}
-  .proto-mobile-icon{width:52px;height:52px;border-radius:14px;background:rgba(201,168,76,.12);display:flex;align-items:center;justify-content:center;color:var(--accent)}
-  .proto-mobile-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:22px;color:var(--text)}
-  .proto-mobile-text{font-size:14px;color:var(--muted2);font-family:'Inter',sans-serif;line-height:1.6;max-width:340px}
-  .proto-mobile-btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#0a0a0f;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;padding:12px 26px;border-radius:100px;text-decoration:none;margin-top:4px}
+  /* On mobile render the iframe at device width so the modal's own
+     responsive layout kicks in (unscaled). */
+  .proto-stage iframe{transform:none!important;width:100%!important}
 }
 </style>
 </head>
@@ -460,12 +455,6 @@
           <div class="proto-stage" id="proto-stage">
             <iframe id="proto-iframe" src="/kyb-prototype/?step=0" title="KYB company data update prototype" loading="lazy"></iframe>
           </div>
-          <a class="proto-mobile" href="/kyb-prototype/?step=0" target="_blank">
-            <span class="proto-mobile-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></span>
-            <span class="proto-mobile-title">Open the interactive prototype</span>
-            <span class="proto-mobile-text">This prototype is built for desktop. Tap to open it full-screen — you can pinch to zoom and walk through the full flow.</span>
-            <span class="proto-mobile-btn">Open prototype ↗</span>
-          </a>
         </div>
       </div>
 
@@ -569,6 +558,15 @@ window.addEventListener('scroll', () => {
   function size(){
     const w = stage.clientWidth;
     if(!w) return;
+    if(window.matchMedia('(max-width:768px)').matches){
+      // Mobile: render at device width, let the modal's own responsive layout work
+      const h = Math.max(560, Math.round(window.innerHeight * 0.82));
+      frame.style.transform = 'none';
+      frame.style.width = '100%';
+      frame.style.height = h + 'px';
+      stage.style.height = h + 'px';
+      return;
+    }
     const scale = w / DESIGN_W;
     frame.style.width = DESIGN_W + 'px';
     frame.style.height = Math.round(DISPLAY_H / scale) + 'px';
