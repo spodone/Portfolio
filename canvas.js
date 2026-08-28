@@ -142,6 +142,7 @@
     const y = window.scrollY;
     const goingDown = y > lastY && y > 80;
     nav.classList.toggle('nav-hidden', goingDown);
+    nav.classList.toggle('nav-scrolled', y > 40);
     if(felix) felix.classList.toggle('felix-hidden', goingDown);
     lastY = y;
   }, { passive: true });

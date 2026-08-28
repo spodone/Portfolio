@@ -31,6 +31,16 @@ nav.nav-hidden{transform:translateY(-120%);}
   border:1px solid var(--line);border-radius:100px;
   padding:12px 24px 12px 28px;
 }
+/* Home nav: transparent by default, solid on scroll */
+#main-nav:not(.case-nav) .nav-inner{
+  background:transparent;border-color:transparent;
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+  transition:background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
+}
+#main-nav:not(.case-nav).nav-scrolled .nav-inner{
+  background:rgba(10,10,15,0.6);border-color:var(--line);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
 .nav-right{display:flex;align-items:center;gap:16px;justify-content:flex-end;margin-left:auto}
 .nav-logo{font-family:'Bricolage Grotesque',sans-serif;font-size:24px;font-weight:400;color:var(--text);text-decoration:none;letter-spacing:.02em;cursor:pointer}
 .nav-links{display:flex;gap:28px;list-style:none;justify-content:center}
