@@ -114,13 +114,11 @@ nav.nav-hidden{transform:translateY(-120%);}
 /* Hero headline — per Figma: Bricolage 400, 124px, lh .77, tracking -.06em, uppercase */
 .hero-headwrap{
   display:flex;flex-direction:column;align-items:flex-end;
-  gap:clamp(14px,1.7vw,24px);
   width:fit-content;
 }
 .hero-headline{
   align-self:stretch;
   display:flex;flex-direction:column;align-items:flex-start;
-  gap:clamp(4px,.5vw,10px);
   font-family:'Bricolage Grotesque', sans-serif;
   font-weight:400;
   font-size:clamp(56px,12.5vw,124px);
