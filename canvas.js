@@ -19,7 +19,10 @@
   ];
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
-  const glowMul  = isMobile ? 0.5 : 1;
+  const isCasePage = Boolean(document.querySelector('.case-page'));
+  const glowMul = isCasePage
+    ? (isMobile ? 0.15 : 0.2)
+    : (isMobile ? 0.5 : 1);
 
   let mx = W * 0.5, my = H * 0.5;
   let smoothX = mx, smoothY = my;
