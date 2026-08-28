@@ -295,12 +295,17 @@ nav.nav-hidden{transform:translateY(-120%);}
   color:var(--text);letter-spacing:-.01em;line-height:1.1;
   transition:transform .4s cubic-bezier(.22,1,.36,1);
 }
+.case-row-company{
+  display:block;margin-bottom:8px;
+  font-family:'Inter',sans-serif;font-size:10px;font-weight:500;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
+}
 .case-row-desc{
   display:block;
   font-family:'Inter',sans-serif;
   font-size:14px;font-weight:300;
   color:var(--muted);letter-spacing:.02em;
-  line-height:1.5;margin-top:6px;
+  line-height:1.5;margin-top:6px;white-space:normal;
 }
 .case-accent{
   font-style:normal;
@@ -867,6 +872,39 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .mobile-menu a{font-family:'Bricolage Grotesque',sans-serif;font-weight:300;font-size:36px;color:var(--text);text-decoration:none;letter-spacing:-.01em;transition:color .2s}
 .mobile-menu a:hover{color:var(--accent)}
 .mobile-menu .nav-cta{font-size:14px;padding:12px 32px;margin-top:8px}
+
+@media(min-width:769px){
+  .work-section{padding-bottom:72px}
+  .case-list{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;
+    padding:32px 52px 0;
+  }
+  .work-section .case-row{
+    display:flex;flex-direction:column;align-items:stretch;gap:0;
+    min-width:0;padding:0;overflow:hidden;
+    border:1px solid var(--line);border-radius:18px;
+    background:rgba(255,255,255,.018);
+    transition:opacity .3s,transform .35s cubic-bezier(.22,1,.36,1),border-color .3s;
+  }
+  .work-section .case-row:first-child{border-top:1px solid var(--line)}
+  .work-section .case-row:hover{transform:translateY(-6px);border-color:rgba(240,237,232,.16)}
+  .work-section .case-row:hover .case-row-name{transform:none}
+  .case-row-cover{
+    display:block;order:-1;width:100%;aspect-ratio:16/10;height:auto;
+    object-fit:cover;border-bottom:1px solid var(--line);
+    transition:transform .55s cubic-bezier(.22,1,.36,1);
+  }
+  .case-row:hover .case-row-cover{transform:scale(1.025)}
+  .case-row-name{
+    padding:22px 22px 0;font-size:clamp(20px,1.8vw,28px);line-height:1.12;
+    white-space:nowrap;flex:1;
+  }
+  .case-row-desc{font-size:13px;line-height:1.55;margin-top:12px}
+  .case-row-tags{
+    justify-content:flex-start;padding:22px;margin-top:0;
+  }
+  .case-preview{display:none!important}
+}
 
 @media(max-width:768px){
   .burger{display:flex}
