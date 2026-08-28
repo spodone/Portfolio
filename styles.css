@@ -180,6 +180,7 @@ nav.nav-hidden{transform:translateY(-120%);}
 .hero-cta-chat:hover{border-color:rgba(240,237,232,.2);color:var(--text)}
 
 .hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;padding-top:48px;margin-top:16px;border-top:1px solid var(--line)}
+.hero-bottom--arrow-only{justify-content:center;align-items:center;border-top:none;padding-top:0}
 .hero-desc{font-size:14px;color:var(--muted2);max-width:320px;line-height:1.8}
 .hero-stats{display:flex;gap:48px}
 .stat-num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--text);display:block;letter-spacing:-.02em}
