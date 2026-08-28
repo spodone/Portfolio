@@ -111,21 +111,39 @@ nav.nav-hidden{transform:translateY(-120%);}
   align-items:center;justify-content:center;
 }
 .hero-eyebrow::before{display:none}
+/* Hero headline — per Figma: Bricolage 400, 124px, lh .77, tracking -.06em, uppercase */
+.hero-headwrap{
+  display:flex;flex-direction:column;align-items:flex-end;
+  gap:clamp(14px,1.7vw,24px);
+  width:fit-content;
+}
 .hero-headline{
+  align-self:stretch;
+  display:flex;flex-direction:column;align-items:flex-start;
+  gap:clamp(4px,.5vw,10px);
   font-family:'Bricolage Grotesque', sans-serif;
-  font-weight:300;
-  font-size:clamp(56px,6vw,80px);
-  line-height:1.05;letter-spacing:-.01em;
-  text-transform:none;
-  color:var(--text);
-  margin-bottom:0;text-align:center;
+  font-weight:400;
+  font-size:clamp(56px,12.5vw,124px);
+  line-height:.77;letter-spacing:-.06em;
+  text-transform:uppercase;
+  color:#fff;
+  margin:0;text-align:left;
   position:relative;cursor:default;
 }
 .hero-headline em{font-style:normal;color:var(--accent)}
+.hero-headline .line--i{padding-left:.67em}
+.hero-tags{
+  display:flex;gap:.95em;
+  font-family:'Bricolage Grotesque', sans-serif;
+  font-weight:300;
+  font-size:clamp(15px,1.9vw,24px);
+  line-height:1;letter-spacing:-.01em;
+  text-transform:uppercase;color:#fff;
+}
 
 .hero-headline .line{
   display:block;overflow:hidden;
-  padding-bottom:.08em;
+  padding-top:.06em;padding-bottom:.1em;
 }
 .hero-headline .line-inner{
   display:block;
