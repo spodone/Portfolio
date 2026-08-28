@@ -6,7 +6,7 @@
 <title>EUGENE TREIHER — UX/Product Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
@@ -35,9 +35,9 @@
   </div>
 </nav>
 
-<a class="felix-btn" href="#about" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'});return false;">
+<button class="felix-btn" type="button" aria-haspopup="dialog" aria-controls="ai-chat-modal" aria-expanded="false" onclick="openChat()">
   <span class="locdot" style="display:inline-block;margin-right:7px;flex-shrink:0;position:relative;top:0;vertical-align:middle;"></span>Chat with my Agent
-</a>
+</button>
 
 <div class="mobile-menu" id="mobile-menu">
   <a href="/work" onclick="toggleMenu()">Work</a>
@@ -128,33 +128,43 @@
   </div>
 </section>
 
-<section class="ai-chat-section reveal" id="about">
-  <div class="ai-chat-label">Felix · AI Assistant</div>
-  <div class="ai-chat-window" id="ai-chat-window">
-    <div class="ai-msg ai-msg--bot">
-      <span>Hey 👋 I'm Felix — Eugene's AI assistant. Ask me anything about his experience, skills, or how he can help your team.</span>
+<div class="ai-chat-modal" id="ai-chat-modal" aria-hidden="true">
+  <section class="ai-chat-section" role="dialog" aria-modal="false" aria-labelledby="ai-chat-title">
+    <header class="ai-chat-header">
+      <div>
+        <div class="ai-chat-label">Online</div>
+        <h2 class="ai-chat-title" id="ai-chat-title">Felix · AI Assistant</h2>
+      </div>
+      <button class="ai-chat-close" type="button" aria-label="Close chat" onclick="closeChat()">×</button>
+    </header>
+    <div class="ai-chat-window" id="ai-chat-window" aria-live="polite">
+      <div class="ai-msg ai-msg--bot">
+        <span>Hi, I'm Felix, Eugene's AI assistant. Ask me anything about his experience, skills, or how he can help your team.</span>
+      </div>
     </div>
-  </div>
-  <div class="ai-chips-wrap" id="ai-chips-wrap">
-    <button class="ai-chips-toggle" id="ai-chips-toggle" onclick="toggleChips()">Suggested questions <span id="ai-chips-arrow">↓</span></button>
-    <div class="ai-chips" id="ai-chips">
-      <button class="ai-chip" onclick="askChip(this)">How can Eugene help our team?</button>
-      <button class="ai-chip" onclick="askChip(this)">Tell me about the KYB case</button>
-      <button class="ai-chip" onclick="askChip(this)">What's Eugene's strongest skill?</button>
-      <button class="ai-chip" onclick="askChip(this)">How does he use AI in product design?</button>
-      <button class="ai-chip" onclick="askChip(this)">Show me measurable results</button>
-      <button class="ai-chip" onclick="askChip(this)">Tell me about his Web3 experience</button>
-      <button class="ai-chip" onclick="askChip(this)">Has he led design initiatives?</button>
-      <button class="ai-chip" onclick="askChip(this)">What kind of role is Eugene looking for?</button>
+    <div class="ai-chat-controls">
+      <div class="ai-chips-wrap" id="ai-chips-wrap">
+        <button class="ai-chips-toggle" id="ai-chips-toggle" onclick="toggleChips()">Suggested questions <span id="ai-chips-arrow">↓</span></button>
+        <div class="ai-chips ai-chips--closed" id="ai-chips">
+          <button class="ai-chip" onclick="askChip(this)">How can Eugene help our team?</button>
+          <button class="ai-chip" onclick="askChip(this)">Tell me about the KYB case</button>
+          <button class="ai-chip" onclick="askChip(this)">What's Eugene's strongest skill?</button>
+          <button class="ai-chip" onclick="askChip(this)">How does he use AI in product design?</button>
+          <button class="ai-chip" onclick="askChip(this)">Show me measurable results</button>
+          <button class="ai-chip" onclick="askChip(this)">Tell me about his Web3 experience</button>
+          <button class="ai-chip" onclick="askChip(this)">Has he led design initiatives?</button>
+          <button class="ai-chip" onclick="askChip(this)">What kind of role is Eugene looking for?</button>
+        </div>
+      </div>
+      <div class="ai-input-row">
+        <input class="ai-input" id="ai-input" type="text" placeholder="Ask something…" autocomplete="off" />
+        <button class="ai-send" id="ai-send" type="button" aria-label="Send message" onclick="sendMessage()">↑</button>
+      </div>
     </div>
-  </div>
-  <div class="ai-input-row">
-    <input class="ai-input" id="ai-input" type="text" placeholder="Ask something…" autocomplete="off" />
-    <button class="ai-send" id="ai-send" onclick="sendMessage()">↑</button>
-  </div>
-</section>
+  </section>
+</div>
 
-<section class="testimonials-section reveal">
+<section class="testimonials-section reveal" id="about">
   <div class="testimonials-header">
     <span class="sec-num">Testimonials</span>
   </div>
@@ -425,6 +435,31 @@ function sendMessage(text) {
 function askChip(btn) {
   sendMessage(btn.textContent);
 }
+
+let chatTrigger = null;
+
+function openChat() {
+  const modal = document.getElementById('ai-chat-modal');
+  chatTrigger = document.activeElement;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.querySelector('.felix-btn').setAttribute('aria-expanded', 'true');
+  window.setTimeout(() => document.getElementById('ai-input').focus(), 120);
+}
+
+function closeChat() {
+  const modal = document.getElementById('ai-chat-modal');
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.querySelector('.felix-btn').setAttribute('aria-expanded', 'false');
+  if (chatTrigger) chatTrigger.focus();
+}
+
+document.addEventListener('keydown', e => {
+  const modal = document.getElementById('ai-chat-modal');
+  if (!modal.classList.contains('open')) return;
+  if (e.key === 'Escape') closeChat();
+});
 
 document.getElementById('ai-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') sendMessage();
