@@ -7,7 +7,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=18">
+<link rel="stylesheet" href="styles.css?v=19">
 </head>
 <body>
 
@@ -494,53 +494,45 @@ function askChip(btn) {
     revealNextMobileCard();
   }, { threshold: .04, rootMargin: '0px 0px -8% 0px' });
 
-  let firstRowStarted = false;
-  let secondRowStarted = false;
+  const desktopRowSize = 2;
+  const desktopRowCount = Math.ceil(caseCards.length / desktopRowSize);
+  let nextDesktopRow = 0;
 
-  const revealRow = start => {
-    caseCards.slice(start, start + 3).forEach(card => card.classList.add('in-view'));
+  const revealDesktopRow = rowIndex => {
+    if (rowIndex !== nextDesktopRow) return;
+    const start = rowIndex * desktopRowSize;
+    caseCards.slice(start, start + desktopRowSize).forEach(card => card.classList.add('in-view'));
+    nextDesktopRow += 1;
+    watchDesktopRow(nextDesktopRow);
   };
 
-  const secondRowObserver = new IntersectionObserver(entries => {
-    if (!entries[0].isIntersecting || secondRowStarted) return;
-    secondRowStarted = true;
-    revealRow(3);
-    secondRowObserver.disconnect();
+  const desktopRowObserver = new IntersectionObserver(entries => {
+    const entry = entries.find(item => item.isIntersecting);
+    if (!entry) return;
+    const rowIndex = Number(entry.target.dataset.desktopRow);
+    desktopRowObserver.unobserve(entry.target);
+    window.setTimeout(() => revealDesktopRow(rowIndex), rowIndex === 0 ? 280 : 0);
   }, { threshold: .04, rootMargin: '0px 0px -8% 0px' });
 
-  const watchSecondRow = () => {
-    if (!caseCards[3] || secondRowStarted) return;
-    if (caseCards[3].getBoundingClientRect().top <= window.innerHeight * .92) {
-      secondRowStarted = true;
-      revealRow(3);
-      return;
+  function watchDesktopRow(rowIndex){
+    if (rowIndex >= desktopRowCount) return;
+    const card = caseCards[rowIndex * desktopRowSize];
+    if (!card) return;
+    card.dataset.desktopRow = String(rowIndex);
+    if (card.getBoundingClientRect().top <= window.innerHeight * .92) {
+      window.setTimeout(() => revealDesktopRow(rowIndex), rowIndex === 0 ? 280 : 0);
+    } else {
+      desktopRowObserver.observe(card);
     }
-    secondRowObserver.observe(caseCards[3]);
-  };
-
-  const startFirstRow = () => {
-    if (firstRowStarted) return;
-    firstRowStarted = true;
-    window.setTimeout(() => {
-      revealRow(0);
-      watchSecondRow();
-    }, 280);
-  };
-
-  const firstRowObserver = new IntersectionObserver(entries => {
-    if (!entries[0].isIntersecting) return;
-    startFirstRow();
-    firstRowObserver.disconnect();
-  }, { threshold: .04, rootMargin: '0px 0px -8% 0px' });
+  }
 
   const surfaceObserver = new IntersectionObserver(entries => {
     if (!entries[0].isIntersecting) return;
     work.classList.add('surface-visible');
     if (isMobile) {
       caseCards.slice(0, 3).forEach(card => mobileCardObserver.observe(card));
-    } else if (caseCards[0]) {
-      if (caseCards[0].getBoundingClientRect().top <= window.innerHeight * .92) startFirstRow();
-      else firstRowObserver.observe(caseCards[0]);
+    } else {
+      watchDesktopRow(0);
     }
     surfaceObserver.disconnect();
   }, { threshold: .04 });

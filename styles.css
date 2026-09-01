@@ -979,7 +979,7 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 @media(min-width:769px){
   .work-section{padding-bottom:72px}
   .case-list{
-    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;
     padding:32px 52px 0;
   }
   .work-section .case-row{
@@ -999,12 +999,12 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
   }
   .case-row:hover .case-row-cover{transform:scale(1.025)}
   .case-row-name{
-    padding:22px 22px 0;font-size:clamp(20px,1.8vw,28px);line-height:1.12;
+    padding:26px 26px 0;font-size:clamp(24px,2.2vw,34px);line-height:1.12;
     white-space:nowrap;flex:1;
   }
-  .case-row-desc{font-size:13px;line-height:1.55;margin-top:12px}
+  .case-row-desc{font-size:14px;line-height:1.55;margin-top:12px}
   .case-row-tags{
-    justify-content:flex-start;padding:22px;margin-top:0;
+    justify-content:flex-start;padding:24px 26px 26px;margin-top:0;
   }
   .case-preview{display:none!important}
 }
