@@ -150,3 +150,111 @@
     lastY = y;
   }, { passive: true });
 })();
+
+// ── CONNECT DROPDOWN ──
+(function(){
+  const linkedInUrl = 'https://www.linkedin.com/in/eugene-t-9b0225137/';
+  const email = 'e.treiher@gmail.com';
+
+  function closeConnectMenus(except){
+    document.querySelectorAll('.connect-menu.open').forEach(menu => {
+      if(menu === except) return;
+      menu.classList.remove('open');
+      const button = menu.querySelector('.nav-cta');
+      if(button) button.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  async function copyEmail(button){
+    try{
+      if(navigator.clipboard && window.isSecureContext){
+        await navigator.clipboard.writeText(email);
+      }else{
+        const field = document.createElement('textarea');
+        field.value = email;
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.appendChild(field);
+        field.select();
+        document.execCommand('copy');
+        field.remove();
+      }
+      button.classList.add('copied');
+      button.setAttribute('aria-label', 'Email copied');
+      window.setTimeout(() => {
+        button.classList.remove('copied');
+        button.setAttribute('aria-label', 'Copy email address');
+      }, 1600);
+    }catch(error){
+      button.classList.add('copy-error');
+      window.setTimeout(() => button.classList.remove('copy-error'), 1600);
+    }
+  }
+
+  function createConnectMenu(trigger, index){
+    const wrapper = document.createElement('div');
+    wrapper.className = 'connect-menu';
+    if(trigger.closest('.mobile-menu')) wrapper.classList.add('connect-menu--mobile');
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = trigger.className;
+    button.setAttribute('aria-haspopup', 'menu');
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', `connect-dropdown-${index}`);
+    button.innerHTML = 'Connect <span class="connect-chevron" aria-hidden="true">⌄</span>';
+
+    const dropdown = document.createElement('div');
+    dropdown.className = 'connect-dropdown';
+    dropdown.id = `connect-dropdown-${index}`;
+    dropdown.setAttribute('role', 'menu');
+    dropdown.innerHTML = `
+      <a href="${linkedInUrl}" target="_blank" rel="noopener noreferrer" role="menuitem">
+        <span>LinkedIn</span><span class="connect-dropdown-arrow" aria-hidden="true">↗</span>
+      </a>
+      <div class="connect-email-row">
+        <a href="mailto:${email}" role="menuitem"><span>${email}</span></a>
+        <button class="connect-copy" type="button" aria-label="Copy email address">
+          <svg class="connect-copy-icon" viewBox="0 0 20 20" aria-hidden="true">
+            <rect x="6.5" y="6.5" width="9" height="10" rx="2"></rect>
+            <path d="M4.5 13.5h-1a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <svg class="connect-check-icon" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="m4.5 10.5 3.4 3.4 7.6-8"></path>
+          </svg>
+          <span class="connect-copy-feedback" role="status">Copied</span>
+        </button>
+      </div>`;
+
+    button.addEventListener('click', () => {
+      const shouldOpen = !wrapper.classList.contains('open');
+      closeConnectMenus(wrapper);
+      wrapper.classList.toggle('open', shouldOpen);
+      button.setAttribute('aria-expanded', String(shouldOpen));
+    });
+    dropdown.querySelector('.connect-copy').addEventListener('click', event => {
+      event.stopPropagation();
+      copyEmail(event.currentTarget);
+    });
+    dropdown.addEventListener('click', event => {
+      if(event.target.closest('a')) closeConnectMenus();
+    });
+
+    wrapper.append(button, dropdown);
+    trigger.replaceWith(wrapper);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.mobile-menu > a[href*="linkedin.com/in/"]').forEach(link => link.remove());
+    [...document.querySelectorAll('.nav-cta')].forEach(createConnectMenu);
+
+    document.addEventListener('click', event => {
+      if(!event.target.closest('.connect-menu')) closeConnectMenus();
+    });
+    document.addEventListener('keydown', event => {
+      if(event.key !== 'Escape') return;
+      closeConnectMenus();
+    });
+  });
+})();
