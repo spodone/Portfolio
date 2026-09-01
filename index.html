@@ -7,7 +7,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=12">
+<link rel="stylesheet" href="styles.css?v=15">
 </head>
 <body>
 
@@ -55,10 +55,10 @@
         <span class="line"><span class="line-inner">Product</span></span>
         <span class="line line--i"><span class="line-inner">Designer</span></span>
       </h1>
-      <div class="hero-tags reveal reveal-delay-3">
-        <span>Fintech</span>
-        <span>Web3</span>
-        <span>Trading</span>
+      <div class="hero-tags">
+        <span class="hero-tag-line"><span class="hero-tag-inner">Fintech</span></span>
+        <span class="hero-tag-line"><span class="hero-tag-inner">Web3</span></span>
+        <span class="hero-tag-line"><span class="hero-tag-inner">Trading</span></span>
       </div>
     </div>
   </div>
@@ -88,7 +88,7 @@
   </div>
 </section>
 
-<section class="work-section" id="work">
+<section class="work-section work-reveal" id="work">
   <div class="sec-header reveal">
     <span class="sec-num">Selected work</span>
   </div>
@@ -98,7 +98,7 @@
     <video id="case-preview-vid" muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:none;"></video>
   </div>
 
-  <div class="case-list reveal">
+  <div class="case-list case-scroll-reveal">
     <a class="case-row" href="/kyc-drop-off" data-preview="KYC Case.jpg">
       <div class="case-row-name"><span class="case-row-company">Leading Ukrainian Bank</span>KYC Re-verification<span class="case-row-desc">Cut KYC flow drop-off from 38% to <em class="case-accent">8%</em> by removing an unnecessary step.</span></div>
       <div class="case-row-tags">
@@ -189,12 +189,12 @@
   </section>
 </div>
 
-<section class="testimonials-section reveal" id="about">
-  <div class="testimonials-header">
+<section class="testimonials-section" id="about">
+  <div class="testimonials-header reveal">
     <span class="sec-num">Testimonials</span>
   </div>
   <div class="testimonials-track-wrap">
-    <div class="testimonials-track">
+    <div class="testimonials-track testimonials-scroll-reveal">
 
       <div class="t-card">
         <div class="t-avatar"><img src="avatar-dima.jpeg" alt="Dima Serhieiev"></div>
@@ -279,6 +279,8 @@ window.addEventListener('load', () => {
       });
       const h1 = document.querySelector('.hero-headline');
       if(h1) h1.classList.add('revealed');
+      const heroTags = document.querySelector('.hero-tags');
+      if(heroTags) heroTags.classList.add('revealed');
     }, 100);
   }, 1800);
 });
@@ -460,6 +462,99 @@ function sendMessage(text) {
 function askChip(btn) {
   sendMessage(btn.textContent);
 }
+
+// ── SCROLL REVEALS ──
+(function(){
+  const work = document.querySelector('.work-reveal');
+  const caseCards = [...document.querySelectorAll('.case-scroll-reveal > .case-row')];
+  const testimonialCards = [...document.querySelectorAll('.testimonials-scroll-reveal > .t-card')];
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+  const mobileRevealQueue = [];
+  let mobileRevealBusy = false;
+
+  const revealNextMobileCard = () => {
+    if (mobileRevealBusy || !mobileRevealQueue.length) return;
+    mobileRevealBusy = true;
+    mobileRevealQueue.shift().classList.add('in-view');
+    window.setTimeout(() => {
+      mobileRevealBusy = false;
+      revealNextMobileCard();
+    }, 220);
+  };
+
+  const mobileCardObserver = new IntersectionObserver(entries => {
+    entries
+      .filter(entry => entry.isIntersecting)
+      .sort((a, b) => caseCards.indexOf(a.target) - caseCards.indexOf(b.target))
+      .forEach(entry => {
+        mobileRevealQueue.push(entry.target);
+        mobileCardObserver.unobserve(entry.target);
+      });
+    revealNextMobileCard();
+  }, { threshold: .04, rootMargin: '0px 0px -8% 0px' });
+
+  let firstRowStarted = false;
+  let secondRowStarted = false;
+
+  const revealRow = start => {
+    caseCards.slice(start, start + 3).forEach(card => card.classList.add('in-view'));
+  };
+
+  const secondRowObserver = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting || secondRowStarted) return;
+    secondRowStarted = true;
+    revealRow(3);
+    secondRowObserver.disconnect();
+  }, { threshold: .04, rootMargin: '0px 0px -8% 0px' });
+
+  const watchSecondRow = () => {
+    if (!caseCards[3] || secondRowStarted) return;
+    if (caseCards[3].getBoundingClientRect().top <= window.innerHeight * .92) {
+      secondRowStarted = true;
+      revealRow(3);
+      return;
+    }
+    secondRowObserver.observe(caseCards[3]);
+  };
+
+  const startFirstRow = () => {
+    if (firstRowStarted) return;
+    firstRowStarted = true;
+    window.setTimeout(() => {
+      revealRow(0);
+      watchSecondRow();
+    }, 280);
+  };
+
+  const firstRowObserver = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    startFirstRow();
+    firstRowObserver.disconnect();
+  }, { threshold: .04, rootMargin: '0px 0px -8% 0px' });
+
+  const surfaceObserver = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    work.classList.add('surface-visible');
+    if (isMobile) {
+      caseCards.slice(0, 3).forEach(card => mobileCardObserver.observe(card));
+    } else if (caseCards[0]) {
+      if (caseCards[0].getBoundingClientRect().top <= window.innerHeight * .92) startFirstRow();
+      else firstRowObserver.observe(caseCards[0]);
+    }
+    surfaceObserver.disconnect();
+  }, { threshold: .04 });
+
+  const testimonialObserver = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    testimonialCards.forEach(card => card.classList.add('in-view'));
+    testimonialObserver.disconnect();
+  }, { threshold: .14, rootMargin: '0px 0px -8% 0px' });
+
+  if (work) surfaceObserver.observe(work);
+  const testimonials = document.querySelector('.testimonials-section');
+  if (testimonials) testimonialObserver.observe(testimonials);
+})();
 
 let chatTrigger = null;
 
