@@ -594,6 +594,9 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .case-meta{display:flex;gap:52px;padding-bottom:52px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .cml{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .cmv{font-family:'Inter',sans-serif;font-size:14px;font-weight:400;color:var(--text);margin-top:5px}
+.case-meta-team{min-width:260px}
+.case-team-credits{display:flex;flex-direction:column;gap:3px;margin-top:5px;font-size:11px;line-height:1.45;color:var(--muted2)}
+.case-team-credits strong{font-weight:500;color:var(--text)}
 .case-cover{width:100%;height:520px;overflow:hidden;margin-top:52px;border-radius:10px;border:1px solid var(--line)}
 .case-cover svg{width:100%;height:100%;display:block}
 .case-body{padding:80px 52px 96px;display:grid;grid-template-columns:200px 1fr;gap:72px;align-items:start;border-bottom:1px solid var(--line)}
