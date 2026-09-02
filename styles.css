@@ -565,9 +565,16 @@ nav.nav-hidden{transform:translateY(-120%);}
 .t-role{font-size:11px;letter-spacing:.08em;color:var(--muted);margin-top:-10px}
 .t-text{font-size:14px;color:var(--muted2);line-height:1.75;margin:0;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;transition:all .35s ease}
 .t-card.expanded .t-text{-webkit-line-clamp:unset;display:block}
-.t-read-more{font-size:12px;letter-spacing:.06em;color:var(--muted);cursor:pointer;border:none;background:none;padding:0;font-family:inherit;text-transform:uppercase;margin-top:-4px;flex-shrink:0;align-self:flex-end}
-.t-read-more:hover{color:var(--text)}
-.t-card.expanded .t-read-more{color:var(--muted)}
+.t-read-more{
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  font-size:0;color:var(--muted);cursor:pointer;
+  border:1px solid var(--line);border-radius:50%;background:transparent;padding:0;
+  margin-top:-4px;flex-shrink:0;align-self:flex-end;
+  transition:color .2s,border-color .2s,transform .35s cubic-bezier(.22,1,.36,1);
+}
+.t-read-more::before{content:'↓';font-family:var(--sans);font-size:18px;font-weight:300;line-height:1}
+.t-read-more:hover{color:var(--text);border-color:rgba(240,237,232,.2)}
+.t-card.expanded .t-read-more{color:var(--muted);transform:rotate(180deg)}
 
 /* ── CONTACT ── */
 .contact-section{padding:96px 52px;overflow:hidden;position:relative;z-index:1}
