@@ -7,7 +7,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Bricolage+Grotesque:wght@200;300;400;500;600&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=22">
+<link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body>
 
@@ -55,15 +55,134 @@
       <div class="cst" data-target="my-role">My role</div>
       <div class="cst" data-target="problem">The problem</div>
       <div class="cst" data-target="goal">The goal</div>
+      <div class="cst" data-target="market-research">Market research</div>
+      <div class="cst" data-target="user-research">User research</div>
       <div class="cst" data-target="approach">Approach</div>
+      <div class="cst" data-target="mobile-layout">Mobile layout</div>
       <div class="cst" data-target="results">Results</div>
     </div>
     <div class="case-content">
-      <div id="overview"><h2 class="csh">Overview</h2><p class="csp">DappRadar launched RADAR token staking as a core monetization and retention mechanic - users who stake earn PRO benefits including advanced analytics, portfolio tracking, and exclusive data. My role was to design the staking experience from wallet connection through to active staking dashboard.</p></div>
+      <div class="csq case-announcement reveal"><p>"5M+ tokens staked and 100+ new PRO subscribers in the first month - the simplicity paid off."</p></div>
+      <div id="overview">
+        <h2 class="csh">Overview</h2>
+        <p class="csp">DappRadar launched RADAR token staking as a core monetization and retention mechanic - users who stake earn PRO benefits including advanced analytics, portfolio tracking, and exclusive data. My role was to design the staking experience from wallet connection through to active staking dashboard.</p>
+        <figure class="case-media case-media--wide case-media--inline case-media--borderless reveal">
+          <img src="PRO membership.jpg" alt="DappRadar PRO membership benefits and staking activation requirements" loading="lazy" decoding="async">
+          <figcaption>DappRadar PRO membership and its staking-based benefits.</figcaption>
+        </figure>
+      </div>
       <div id="my-role"><h2 class="csh">My role</h2><p class="csp">As the Product Designer, I redesigned the staking flow and oversaw the project from initial research through to final design validation.</p></div>
       <div id="problem"><h2 class="csh">The problem</h2><p class="csp">The original staking model encouraged unsustainable growth and short-term engagement because of its high APY and lack of minimum staking requirements. The complexity typical of Web3 products also created a significant barrier to broader user adoption.</p></div>
-      <div id="goal"><h2 class="csh">The goal</h2><p class="csp">The primary goal was to increase long-term engagement through a 30-day cool-down period and a more sustainable APY, while making the experience easier for newcomers. Clear communication about these changes was essential. We aimed to simplify the Web3 user experience, showcase the value of PRO features, and attract more than 100 new PRO users within the first month.</p><div class="csq"><p>"5M+ tokens staked and 100+ new PRO subscribers in the first month - the simplicity paid off."</p></div></div>
-      <div id="approach"><h2 class="csh">Approach</h2><p class="csp">I mapped every state of the staking flow - wallet not connected, insufficient balance, pending transaction, confirmed, earning. Each state got a dedicated design with clear next action and zero ambiguity. I removed all jargon from the primary flow and moved technical details (contract address, block confirmations) into expandable sections for power users.</p></div>
+      <div id="goal"><h2 class="csh">The goal</h2><p class="csp">The primary goal was to increase long-term engagement through a 30-day cool-down period and a more sustainable APY, while making the experience easier for newcomers. Clear communication about these changes was essential. We aimed to simplify the Web3 user experience, showcase the value of PRO features, and attract more than 100 new PRO users within the first month.</p></div>
+      <div class="case-section-divider" aria-hidden="true"></div>
+      <div id="market-research">
+        <h2 class="csh">Market research</h2>
+        <p class="csp">The concept of PRO staking was born from the need to drive user engagement and loyalty. Market data revealed an opportunity for a staking mechanism that offered premium features and differentiated DappRadar from competing platforms.</p>
+        <p class="csp">I conducted a thorough analysis of competitor staking flows to identify gaps and opportunities. These findings informed our approach and helped us create a differentiated, compelling user experience.</p>
+        <figure class="case-media case-media--wide case-media--inline reveal">
+          <img src="Token-Staking-Market Research.webp" alt="Competitive research into Web3 token staking experiences" loading="lazy" decoding="async">
+          <figcaption>Competitive analysis of staking models, interaction patterns, and onboarding approaches.</figcaption>
+        </figure>
+      </div>
+      <div id="user-research">
+        <h2 class="csh">User research</h2>
+        <p class="csp">We conducted user interviews and surveys to understand the needs and expectations of our users. We identified three main user personas: the Casual User, the Pro Trader, and the Enthusiast. Each has unique needs and expectations, shaping our design choices.</p>
+        <figure class="case-media case-media--wide case-media--inline reveal">
+          <img src="Token-Staking-User-Research.webp" alt="User research findings organized into an affinity map" loading="lazy" decoding="async">
+          <figcaption>User research synthesis across onboarding, motivation, trust, rewards, and PRO value.</figcaption>
+        </figure>
+        <div class="persona-grid reveal">
+          <article class="persona-card">
+            <span class="persona-avatar persona-avatar--casual" aria-hidden="true"></span>
+            <h3>Casual User</h3>
+            <p class="persona-name">Chad, 24 years</p>
+            <div class="persona-meta">
+              <p><strong>Location:</strong> Chiang Mai, Thailand</p>
+              <p><strong>Job:</strong> Freelance Web Developer</p>
+            </div>
+            <div class="persona-section">
+              <h4>Pain points</h4>
+              <ul>
+                <li>Wants quick returns but finds most staking options too complex or too long-term.</li>
+                <li>Finds Web3 interactions intimidating.</li>
+              </ul>
+            </div>
+            <div class="persona-section">
+              <h4>Needs</h4>
+              <ul>
+                <li>A simple, straightforward interface.</li>
+                <li>Clear information on expected returns and risks.</li>
+                <li>A low entry barrier to start staking.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="persona-card">
+            <span class="persona-avatar persona-avatar--pro" aria-hidden="true"></span>
+            <h3>Pro Trader</h3>
+            <p class="persona-name">Alex, 38 years</p>
+            <div class="persona-meta">
+              <p><strong>Location:</strong> New York, USA</p>
+              <p><strong>Job:</strong> Financial Analyst</p>
+            </div>
+            <div class="persona-section">
+              <h4>Pain points</h4>
+              <ul>
+                <li>Wants to diversify investments but finds many platforms lack cross-chain support.</li>
+                <li>Looks for stable, long-term investment options.</li>
+              </ul>
+            </div>
+            <div class="persona-section">
+              <h4>Needs</h4>
+              <ul>
+                <li>A diversified pool for long-term staking.</li>
+                <li>Cross-chain staking options.</li>
+                <li>Tools to optimize investment strategies.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="persona-card">
+            <span class="persona-avatar persona-avatar--enthusiast" aria-hidden="true"></span>
+            <h3>Enthusiast</h3>
+            <p class="persona-name">Elena, 26 years</p>
+            <div class="persona-meta">
+              <p><strong>Location:</strong> Berlin, Germany</p>
+              <p><strong>Job:</strong> Software Engineer</p>
+            </div>
+            <div class="persona-section">
+              <h4>Pain points</h4>
+              <ul>
+                <li>Expects more benefits than APY alone from holding and staking a token.</li>
+                <li>Lacks clear information about the wider ecosystem.</li>
+              </ul>
+            </div>
+            <div class="persona-section">
+              <h4>Needs</h4>
+              <ul>
+                <li>Detailed ecosystem and token information.</li>
+                <li>PRO features with benefits beyond financial returns.</li>
+                <li>Transparent staking mechanics and future plans.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div id="approach">
+        <h2 class="csh">Approach</h2>
+        <p class="csp">I briefed key stakeholders across product, engineering, and business teams to align on the staking model, technical constraints, edge cases, and success criteria. I translated these inputs into an activation flow that gave the team a shared reference before we moved into interface design.</p>
+        <p class="csp">I mapped every state of the staking flow - wallet not connected, insufficient balance, pending transaction, confirmed, earning. Each state got a dedicated design with clear next action and zero ambiguity. I removed all jargon from the primary flow and moved technical details (contract address, block confirmations) into expandable sections for power users.</p>
+        <figure class="case-media case-media--wide case-media--inline reveal">
+          <img src="Staking activation flow.webp" alt="Diagram mapping the staking activation flow and its decision points" loading="lazy" decoding="async">
+          <figcaption>Staking activation flow.</figcaption>
+        </figure>
+      </div>
+      <div id="mobile-layout">
+        <h2 class="csh">Mobile layout</h2>
+        <div class="mobile-layout-grid reveal">
+          <figure><img src="staking-mob1.webp" alt="DappRadar PRO mobile boosting experience" loading="lazy" decoding="async"></figure>
+          <figure><img src="staking-mob-2.webp" alt="DappRadar PRO mobile membership activation screen" loading="lazy" decoding="async"></figure>
+          <figure><img src="staking-mob-3.webp" alt="DappRadar mobile staking dashboard" loading="lazy" decoding="async"></figure>
+        </div>
+      </div>
       <div id="results"><h2 class="csh">Results</h2><div class="crg"><div class="crc"><span class="crn">5M+</span><span class="crl">RADAR tokens staked within the first month</span></div><div class="crc"><span class="crn">100+</span><span class="crl">New PRO subscribers acquired through staking</span></div><div class="crc"><span class="crn">+41%</span><span class="crl">Wallet connection completion rate vs. previous flow</span></div><div class="crc"><span class="crn">3×</span><span class="crl">Faster task completion vs. competitor staking UIs</span></div></div></div>
     </div>
   </section>
