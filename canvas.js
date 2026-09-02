@@ -128,10 +128,10 @@
     // Existing explicit markup
     document.querySelectorAll('.reveal, .reveal-children').forEach(el => observer.observe(el));
 
-    // Case page content — individual elements
+    // Case page content - individual elements
     autoReveal('.csh, .csp, .csq, .case-cover, .strategy-item, .reflection-item', 'reveal');
 
-    // Card grids — staggered children
+    // Card grids - staggered children
     autoReveal('.crg, .exec-grid, .insights-grid, .discovery-grid, .ds-grid', 'reveal-children');
   });
 })();

@@ -171,7 +171,7 @@ nav.nav-hidden{transform:translateY(-120%);}
   align-items:center;justify-content:center;
 }
 .hero-eyebrow::before{display:none}
-/* Hero headline — per Figma: Bricolage 400, 124px, lh .77, tracking -.06em, uppercase */
+/* Hero headline - per Figma: Bricolage 400, 124px, lh .77, tracking -.06em, uppercase */
 .hero-headwrap{
   display:flex;flex-direction:column;align-items:flex-end;
   width:fit-content;

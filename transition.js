@@ -5,7 +5,7 @@
   document.body.appendChild(el);
 
   // Entry: panel starts covering, sweeps upward to reveal page
-  // Skip on home page — the loader already handles the entry reveal
+  // Skip on home page - the loader already handles the entry reveal
   if(document.getElementById('loader')){
     el.style.transition = 'none';
     el.classList.add('pt-revealed'); // instantly hide panel
