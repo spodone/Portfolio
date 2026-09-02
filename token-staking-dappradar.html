@@ -7,7 +7,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Bricolage+Grotesque:wght@200;300;400;500;600&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=31">
+<link rel="stylesheet" href="styles.css?v=36">
 </head>
 <body>
 
@@ -58,6 +58,9 @@
       <div class="cst" data-target="market-research">Market research</div>
       <div class="cst" data-target="user-research">User research</div>
       <div class="cst" data-target="approach">Approach</div>
+      <div class="cst" data-target="wireframing">Wireframing</div>
+      <div class="cst" data-target="main-layout">Main layout UI</div>
+      <div class="cst" data-target="staking-component">Staking component</div>
       <div class="cst" data-target="mobile-layout">Mobile layout</div>
       <div class="cst" data-target="results">Results</div>
     </div>
@@ -175,6 +178,69 @@
           <figcaption>Staking activation flow.</figcaption>
         </figure>
       </div>
+      <div id="wireframing">
+        <h2 class="csh">Concept &amp; wireframing</h2>
+        <p class="csp">I translated the agreed activation flow into low-fidelity wireframes to validate the information hierarchy, placement of PRO benefits, network selection, and the main staking action before investing in visual design.</p>
+        <figure class="case-media case-media--wide case-media--inline reveal">
+          <img src="Wireframing.webp" alt="Low-fidelity wireframe for the DappRadar PRO staking experience" loading="lazy" decoding="async">
+          <figcaption>Early concept for the PRO membership and staking experience.</figcaption>
+        </figure>
+      </div>
+      <div id="main-layout">
+        <h2 class="csh">Main layout UI</h2>
+        <figure class="case-media case-media--wide case-media--inline case-media--borderless reveal">
+          <img src="staking-page.webp" alt="DappRadar PRO membership staking page" loading="lazy" decoding="async">
+          <figcaption>PRO membership page with staking activation and benefits.</figcaption>
+        </figure>
+        <figure class="case-media case-media--wide case-media--inline case-media--borderless reveal">
+          <img src="updated-profile-page.webp" alt="Updated DappRadar profile page with PRO membership entry point" loading="lazy" decoding="async">
+          <figcaption>Updated profile page with a clear path to PRO membership.</figcaption>
+        </figure>
+        <figure class="case-media case-media--wide case-media--inline case-media--borderless reveal">
+          <img src="pro-benefits-modal.webp" alt="Modal explaining the benefits of DappRadar PRO membership" loading="lazy" decoding="async">
+          <figcaption>PRO benefits modal.</figcaption>
+        </figure>
+        <div class="modal-variations reveal">
+          <div class="modal-variations-head">
+            <h3>PRO benefits modal variations</h3>
+            <div class="modal-variations-controls" aria-label="Modal variation controls">
+              <button type="button" data-modal-slider="-1" aria-controls="modal-variations-track" aria-label="Previous variation">←</button>
+              <button type="button" data-modal-slider="1" aria-controls="modal-variations-track" aria-label="Next variation">→</button>
+            </div>
+          </div>
+          <div class="modal-variations-track" id="modal-variations-track">
+            <figure><img src="PRObenefits-1.png" alt="PRO benefits modal variation 1" loading="lazy" decoding="async"></figure>
+            <figure><img src="PRObenefits-2.png" alt="PRO benefits modal variation 2" loading="lazy" decoding="async"></figure>
+            <figure><img src="PRObenefits-3.png" alt="PRO benefits modal variation 3" loading="lazy" decoding="async"></figure>
+            <figure><img src="PRObenefits-4.png" alt="PRO benefits modal variation 4" loading="lazy" decoding="async"></figure>
+            <figure><img src="PRObenefits-5.png" alt="PRO benefits modal variation 5" loading="lazy" decoding="async"></figure>
+            <figure><img src="PRObenefits-6.png" alt="PRO benefits modal variation 6" loading="lazy" decoding="async"></figure>
+          </div>
+        </div>
+        <figure class="case-media case-media--wide case-media--inline case-media--borderless reveal">
+          <img src="activated.webp" alt="DappRadar PRO membership activated state" loading="lazy" decoding="async">
+          <figcaption>Activated PRO membership state.</figcaption>
+        </figure>
+        <figure class="case-media case-media--wide case-media--inline case-media--borderless reveal">
+          <img src="activation-pro.webp" alt="DappRadar PRO membership activation interface" loading="lazy" decoding="async">
+          <figcaption>PRO membership activation interface.</figcaption>
+        </figure>
+      </div>
+      <div id="staking-component">
+        <h2 class="csh">The staking component</h2>
+        <p class="csp">I developed the component as a reusable, state-driven interface covering activation, adding tokens, harvesting rewards, unstaking, validation, and transaction feedback. Keeping these actions inside one consistent surface reduced context switching and made complex Web3 operations easier to understand.</p>
+        <div class="staking-component-grid reveal">
+          <figure class="staking-component-item"><img src="Staking-c-1.png" alt="Staking component interface state 1" loading="lazy" decoding="async"></figure>
+          <figure class="staking-component-item"><img src="Staking-c-2.png" alt="Staking component interface state 2" loading="lazy" decoding="async"></figure>
+          <figure class="staking-component-item"><img src="Staking-c-3.png" alt="Staking component interface state 3" loading="lazy" decoding="async"></figure>
+          <figure class="staking-component-item"><img src="Staking-c-4.png" alt="Staking component interface state 4" loading="lazy" decoding="async"></figure>
+          <figure class="staking-component-item"><img src="Staking-c-5.png" alt="Staking component interface state 5" loading="lazy" decoding="async"></figure>
+          <figure class="staking-component-item"><img src="Staking-c-6.png" alt="Staking component interface state 6" loading="lazy" decoding="async"></figure>
+          <figure class="staking-component-item"><img src="Staking-c-7.png" alt="Staking component interface state 7" loading="lazy" decoding="async"></figure>
+          <figure class="staking-component-item"><img src="Staking-c-8.png" alt="Staking component interface state 8" loading="lazy" decoding="async"></figure>
+          <figure class="staking-component-item"><img src="Staking-c-9.png" alt="Staking component interface state 9" loading="lazy" decoding="async"></figure>
+        </div>
+      </div>
       <div id="mobile-layout">
         <h2 class="csh">Mobile layout</h2>
         <div class="mobile-layout-grid reveal">
@@ -183,7 +249,7 @@
           <figure><img src="staking-mob-3.webp" alt="DappRadar mobile staking dashboard" loading="lazy" decoding="async"></figure>
         </div>
       </div>
-      <div id="results"><h2 class="csh">Results</h2><div class="crg"><div class="crc"><span class="crn">5M+</span><span class="crl">RADAR tokens staked within the first month</span></div><div class="crc"><span class="crn">1000+</span><span class="crl">New PRO subscribers acquired through staking</span></div><div class="crc"><span class="crn">+41%</span><span class="crl">Wallet connection completion rate vs. previous flow</span></div><div class="crc"><span class="crn">3×</span><span class="crl">Faster task completion vs. competitor staking UIs</span></div></div></div>
+      <div id="results"><h2 class="csh">Results</h2><div class="crg"><div class="crc"><span class="crn">5M+</span><span class="crl">RADAR tokens staked within the first month</span></div><div class="crc"><span class="crn">1000+</span><span class="crl">New PRO subscribers acquired through staking</span></div></div></div>
     </div>
   </section>
   <section class="case-next">
@@ -202,6 +268,15 @@ window.addEventListener('scroll', () => {
   let current = '';
   sections.forEach(s => { if(window.scrollY >= s.offsetTop - 160) current = s.id; });
   navItems.forEach(n => { n.classList.toggle('active', n.dataset.target === current); });
+});
+const modalVariationsTrack = document.getElementById('modal-variations-track');
+document.querySelectorAll('[data-modal-slider]').forEach(button => {
+  button.addEventListener('click', () => {
+    const firstCard = modalVariationsTrack.querySelector('figure');
+    const gap = parseFloat(getComputedStyle(modalVariationsTrack).columnGap) || 0;
+    const distance = firstCard.getBoundingClientRect().width + gap;
+    modalVariationsTrack.scrollBy({ left: distance * Number(button.dataset.modalSlider), behavior: 'smooth' });
+  });
 });
 </script>
 
