@@ -628,6 +628,20 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .ds-capability-grid span{font-size:10px;line-height:1.4;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .ds-capability-grid strong{font-family:'Bricolage Grotesque',sans-serif;font-size:17px;line-height:1.3;font-weight:400;color:var(--text)}
 .ds-results-list{margin-top:28px}
+.audit-flow{display:grid;grid-template-columns:minmax(280px,1.35fr) 44px minmax(190px,.85fr) 44px minmax(190px,.85fr);gap:14px;align-items:center;margin:28px 0 0;padding:28px;border:1px solid var(--line);border-radius:16px;background:rgba(240,237,232,.025)}
+.audit-flow-issues{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.audit-flow-issues div,.audit-flow-stage{min-width:0;border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:17px 16px}
+.audit-flow-issues div{display:flex;align-items:center}
+.audit-flow-issues span,.audit-flow-stage>span{font-size:9px;line-height:1;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.audit-flow-issues strong{font-size:12px;line-height:1.4;font-weight:400;color:var(--text)}
+.audit-flow-arrow{text-align:center;font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:300;color:var(--text)}
+.audit-flow-stage{display:flex;min-height:128px;flex-direction:column;justify-content:center;gap:10px}
+.audit-flow-stage strong{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;line-height:1.2;font-weight:400;color:var(--text)}
+.audit-flow-stage small{font-size:10px;line-height:1.45;color:var(--muted)}
+.audit-flow-stage--result{border-color:var(--text);background:rgba(240,237,232,.07)}
+.audit-flow-stage--result>span{color:var(--muted)}
+.audit-flow-stage--result strong{color:var(--text)}
+.audit-flow figcaption{grid-column:1/-1;margin-top:4px;font-size:11px;line-height:1.5;letter-spacing:.04em;color:var(--muted)}
 .design-system-case .case-media img,.design-system-case .case-media-grid img,.design-system-case .ds-gallery img{border:0}
 .ds-subheading{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:300;line-height:1.3;color:var(--text);margin-top:42px;margin-bottom:14px}
 .ds-gallery{display:grid;gap:16px;margin-top:28px;min-width:0}
@@ -640,7 +654,6 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .ds-comparisons section{padding:22px;border:1px solid var(--line);border-radius:14px;background:rgba(240,237,232,.02)}
 .ds-comparisons .ds-subheading{margin-top:0}
 .ds-compare-label{display:block;margin-bottom:10px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.ds-device-grid figure:last-child img{display:block;width:auto;max-width:46%;margin-inline:auto}
 .ds-testimonials{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px}
 .ds-testimonials blockquote{margin:0;padding:24px;border:1px solid var(--line);border-radius:14px;background:rgba(240,237,232,.025)}
 .ds-testimonials img{display:block;width:46px;height:46px;object-fit:cover;border-radius:50%;margin-bottom:20px}
@@ -1148,6 +1161,11 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
   .case-intro-grid{grid-template-columns:1fr;gap:12px}
   .case-intro-card{padding:22px 20px;border-radius:12px}
   .case-intro-grid>.case-media{grid-column:auto;margin-top:16px}
+  .audit-flow{grid-template-columns:1fr;padding:18px;gap:12px}
+  .audit-flow-issues{grid-template-columns:1fr}
+  .audit-flow-arrow{transform:rotate(90deg);font-size:24px}
+  .audit-flow-stage{min-height:0;padding:20px}
+  .audit-flow figcaption{grid-column:auto}
   .ds-capability-grid{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:22px}
   .ds-capability-grid article{padding:18px 16px}
   .ds-subheading{font-size:20px;margin-top:32px}
@@ -1155,7 +1173,6 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
   .ds-gallery::-webkit-scrollbar{display:none}
   .ds-gallery figure{scroll-snap-align:start}
   .ds-comparisons section{padding:18px 16px}
-  .ds-device-grid figure:last-child img{max-width:72%}
   .ds-testimonials{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(82vw,340px);overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-inline:contain;padding:0 20px 8px 0;margin-right:-20px;scrollbar-width:none}
   .ds-testimonials::-webkit-scrollbar{display:none}
   .ds-testimonials blockquote{scroll-snap-align:start}

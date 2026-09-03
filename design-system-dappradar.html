@@ -57,7 +57,19 @@
       <div id="audit">
         <h2 class="csh">Starting with a design audit</h2>
         <p class="csp">Before creating the new design system, a foundational design audit was crucial. I gathered all design assets, from UI to colors, into one repository for analysis. I streamlined a myriad of colors into a functional palette, harmonized typography, and assessed the existing grid and spacing systems to identify inconsistencies.</p>
-        <figure class="case-media case-media--wide case-media--inline reveal"><img src="assets/design-system/audit.png" alt="DappRadar design audit and systematization process" loading="lazy" decoding="async"><figcaption>Collecting and systematizing UI patterns across products.</figcaption></figure>
+        <figure class="audit-flow reveal" aria-label="Design audit process: inconsistent product patterns were collected in an analysis repository and transformed into a systematic design foundation">
+          <div class="audit-flow-issues">
+            <div><strong>Duplicated components</strong></div>
+            <div><strong>Disorganized colors</strong></div>
+            <div><strong>Inconsistent typography</strong></div>
+            <div><strong>Conflicting guidelines</strong></div>
+          </div>
+          <span class="audit-flow-arrow" aria-hidden="true">→</span>
+          <div class="audit-flow-stage"><span>Audit</span><strong>Analysis repository</strong><small>Collect · compare · prioritize</small></div>
+          <span class="audit-flow-arrow" aria-hidden="true">→</span>
+          <div class="audit-flow-stage audit-flow-stage--result"><span>Outcome</span><strong>One shared system</strong><small>Reusable · consistent · scalable</small></div>
+          <figcaption>Turning fragmented interface patterns into one shared design foundation.</figcaption>
+        </figure>
         <div class="ds-gallery ds-gallery--four reveal">
           <figure><img src="assets/design-system/audit-rankings.png" alt="Rankings interface before the design system"><figcaption>Rankings product.</figcaption></figure>
           <figure><img src="assets/design-system/audit-portfolio.png" alt="Portfolio interface before the design system"><figcaption>Portfolio product.</figcaption></figure>
@@ -88,10 +100,6 @@
         <h3 class="ds-subheading">Typography system</h3>
         <p class="csp">The type system combined Poppins headlines with Roboto body styles and defined consistent size, weight, line-height, and letter-spacing tokens. A specialized mobile scale adjusted sizes and rhythm to improve readability across smaller screens.</p>
         <figure class="case-media case-media--wide case-media--inline reveal"><img src="assets/design-system/type-system.png" alt="Desktop and mobile typography system" loading="lazy" decoding="async"><figcaption>Desktop and mobile type specifications.</figcaption></figure>
-        <h3 class="ds-subheading">Multi-layered color scheme</h3>
-        <p class="csp">A layered color scheme for body surfaces maintained required contrast levels and remained compatible with the wider token palette. Testing these relationships created a dependable hierarchy for nested product surfaces.</p>
-        <figure class="case-media case-media--wide case-media--inline reveal"><img src="assets/design-system/layered-scheme.png" alt="Multi-layered background color scheme" loading="lazy" decoding="async"><figcaption>The layered surface model.</figcaption></figure>
-        <figure class="case-media case-media--wide case-media--inline reveal"><img src="assets/design-system/layers.png" alt="DappRadar layered surface color system" loading="lazy" decoding="async"><figcaption>Multi-layered surfaces designed for reliable contrast.</figcaption></figure>
       </div>
 
       <div id="components">
@@ -139,7 +147,6 @@
         <p class="csp">Before-and-after comparisons showed how the shared foundations improved navigation, page structure, content hierarchy, and product surfaces across the DappRadar ecosystem.</p>
         <div class="ds-comparisons">
           <section><h3 class="ds-subheading">Home page hero</h3><div class="case-media-grid"><figure><span class="ds-compare-label">Before</span><img src="assets/design-system/home-before.png" alt="DappRadar homepage hero before"></figure><figure><span class="ds-compare-label">After</span><img src="assets/design-system/home-after.png" alt="DappRadar homepage hero after"></figure></div></section>
-          <section><h3 class="ds-subheading">PRO membership</h3><div class="case-media-grid ds-device-grid"><figure><span class="ds-compare-label">Desktop</span><img src="staking-page.webp" alt="DappRadar PRO membership desktop page"></figure><figure><span class="ds-compare-label">Mobile</span><img src="staking-mob-2.webp" alt="DappRadar PRO membership mobile page"></figure></div></section>
           <section><h3 class="ds-subheading">Home page section</h3><div class="case-media-grid"><figure><span class="ds-compare-label">Before</span><img src="assets/design-system/home-section-before.png" alt="DappRadar homepage section before"></figure><figure><span class="ds-compare-label">After</span><img src="assets/design-system/home-section-after.png" alt="DappRadar homepage section after"></figure></div></section>
           <section><h3 class="ds-subheading">Footer</h3><div class="case-media-grid"><figure><span class="ds-compare-label">Before</span><img src="assets/design-system/footer-before.png" alt="DappRadar footer before"></figure><figure><span class="ds-compare-label">After</span><img src="assets/design-system/footer-after.png" alt="DappRadar footer after"></figure></div></section>
           <section><h3 class="ds-subheading">Single project page</h3><div class="case-media-grid"><figure><span class="ds-compare-label">Before</span><img src="assets/design-system/project-before.png" alt="Single project page before"></figure><figure><span class="ds-compare-label">After</span><img src="assets/design-system/project-after.png" alt="Single project page after"></figure></div></section>
