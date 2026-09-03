@@ -155,6 +155,22 @@ html, body { height: 100%; overflow: hidden; }
 }
 .work-hint.hidden { opacity: 0; pointer-events: none; }
 
+/* Coming-soon (non-clickable) card */
+.pf-visual--soon { cursor: default; }
+.pf.active .pf-visual--soon img { transform: none; }
+.pf-soon-badge {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.pf-soon-badge span {
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,.4); border-radius: 100px;
+  padding: 9px 20px; background: rgba(10,10,15,.5);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+
 /* ── PAGE ENTRANCE ── */
 .pf-visual-wrap.wp-enter{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.22,1,.36,1) .08s,transform .9s cubic-bezier(.22,1,.36,1) .08s;}
 .pf-visual-wrap.wp-enter.wp-in{opacity:1;transform:translateY(0);}
@@ -228,29 +244,6 @@ html, body { height: 100%; overflow: hidden; }
   <section class="pf" data-idx="0">
     <div class="pf-num"><span class="pf-num-val">01</span></div>
     <div class="pf-visual-wrap wp-enter">
-      <a href="/kyb-fuib" class="pf-visual">
-        <img src="KYB case.jpg" alt="KYB Verification">
-        <div class="pf-visual-overlay"></div>
-      </a>
-    </div>
-    <h2 class="pf-title"><span class="line"><span class="line-inner">KYB Service</span></span></h2>
-    <div class="pf-meta">
-      <div class="pf-meta-block">
-        <span class="pf-meta-label"><strong>KYB Verification Service</strong></span>
-        <span class="pf-meta-label">Leading Ukrainian Bank · Fintech · Banking</span>
-
-      </div>
-      <div class="pf-meta-block">
-        <span class="pf-meta-label">Impact</span>
-        <span class="pf-meta-label"><strong style="color:var(--accent);font-size:1.3em">$1.1M</strong> operational savings</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- 02 -->
-  <section class="pf" data-idx="1">
-    <div class="pf-num"><span class="pf-num-val">02</span></div>
-    <div class="pf-visual-wrap">
       <a href="/rankings-dappradar" class="pf-visual">
         <img src="dApp Rankings.jpg" alt="dApp Rankings">
         <div class="pf-visual-overlay"></div>
@@ -270,9 +263,9 @@ html, body { height: 100%; overflow: hidden; }
     </div>
   </section>
 
-  <!-- 03 -->
-  <section class="pf" data-idx="2">
-    <div class="pf-num"><span class="pf-num-val">03</span></div>
+  <!-- 02 -->
+  <section class="pf" data-idx="1">
+    <div class="pf-num"><span class="pf-num-val">02</span></div>
     <div class="pf-visual-wrap">
       <a href="/token-staking-dappradar" class="pf-visual">
         <img src="RADAR Staking.jpg" alt="RADAR Staking">
@@ -293,9 +286,9 @@ html, body { height: 100%; overflow: hidden; }
     </div>
   </section>
 
-  <!-- 04 -->
-  <section class="pf" data-idx="3">
-    <div class="pf-num"><span class="pf-num-val">04</span></div>
+  <!-- 03 -->
+  <section class="pf" data-idx="2">
+    <div class="pf-num"><span class="pf-num-val">03</span></div>
     <div class="pf-visual-wrap">
       <a href="/kyc-drop-off" class="pf-visual">
         <img src="KYC Case.jpg" alt="Reducing KYC Drop-off">
@@ -315,9 +308,9 @@ html, body { height: 100%; overflow: hidden; }
     </div>
   </section>
 
-  <!-- 05 -->
-  <section class="pf" data-idx="4">
-    <div class="pf-num"><span class="pf-num-val">05</span></div>
+  <!-- 04 -->
+  <section class="pf" data-idx="3">
+    <div class="pf-num"><span class="pf-num-val">04</span></div>
     <div class="pf-visual-wrap">
       <a href="/trady" class="pf-visual">
         <img src="Trady-cover.jpg" alt="Trady Rebrand">
@@ -338,9 +331,9 @@ html, body { height: 100%; overflow: hidden; }
     </div>
   </section>
 
-  <!-- 06 -->
-  <section class="pf" data-idx="5">
-    <div class="pf-num"><span class="pf-num-val">06</span></div>
+  <!-- 05 -->
+  <section class="pf" data-idx="4">
+    <div class="pf-num"><span class="pf-num-val">05</span></div>
     <div class="pf-visual-wrap">
       <a href="/design-system-dappradar" class="pf-visual">
         <img src="DappRadarDS.jpg" alt="Design System @DappRadar">
@@ -360,9 +353,9 @@ html, body { height: 100%; overflow: hidden; }
     </div>
   </section>
 
-  <!-- 07 -->
-  <section class="pf" data-idx="6">
-    <div class="pf-num"><span class="pf-num-val">07</span></div>
+  <!-- 06 -->
+  <section class="pf" data-idx="5">
+    <div class="pf-num"><span class="pf-num-val">06</span></div>
     <div class="pf-visual-wrap">
       <a href="/white-label-opendax" class="pf-visual">
         <img src="White-label.png" alt="White-label Exchange">
@@ -383,9 +376,9 @@ html, body { height: 100%; overflow: hidden; }
     </div>
   </section>
 
-  <!-- 08 -->
-  <section class="pf" data-idx="7">
-    <div class="pf-num"><span class="pf-num-val">08</span></div>
+  <!-- 07 -->
+  <section class="pf" data-idx="6">
+    <div class="pf-num"><span class="pf-num-val">07</span></div>
     <div class="pf-visual-wrap">
       <a href="/ouinex" class="pf-visual">
         <img src="ouinex-cover.jpg" alt="OUINEX Trading Platform">
@@ -402,6 +395,30 @@ html, body { height: 100%; overflow: hidden; }
       <div class="pf-meta-block">
         <span class="pf-meta-label">Scope</span>
         <span class="pf-meta-label"><strong style="color:var(--accent)">Multi-asset</strong> trading with crypto collateral</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section class="pf" data-idx="7">
+    <div class="pf-num"><span class="pf-num-val">08</span></div>
+    <div class="pf-visual-wrap">
+      <div class="pf-visual pf-visual--soon">
+        <img src="KYB case.jpg" alt="KYB Verification">
+        <div class="pf-visual-overlay"></div>
+        <div class="pf-soon-badge"><span>Coming soon</span></div>
+      </div>
+    </div>
+    <h2 class="pf-title"><span class="line"><span class="line-inner">KYB Service</span></span></h2>
+    <div class="pf-meta">
+      <div class="pf-meta-block">
+        <span class="pf-meta-label"><strong>KYB Verification Service</strong></span>
+        <span class="pf-meta-label">Leading Ukrainian Bank · Fintech · Banking</span>
+
+      </div>
+      <div class="pf-meta-block">
+        <span class="pf-meta-label">Status</span>
+        <span class="pf-meta-label"><strong style="color:var(--accent)">Coming soon</strong></span>
       </div>
     </div>
   </section>

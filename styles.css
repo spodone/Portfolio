@@ -391,6 +391,10 @@ nav.nav-hidden{transform:translateY(-120%);}
   transition:border-color .3s,color .3s;
 }
 .case-row:hover .case-row-tag{border-color:var(--accent);color:var(--accent)}
+.case-row--soon{cursor:default}
+.case-row--soon:hover .case-row-name{transform:none}
+.case-row--soon:hover .case-row-tag{border-color:var(--line);color:var(--muted)}
+.case-row-tag--soon{color:var(--accent);border-color:var(--accent)}
 .case-row-year{font-size:11px;color:var(--muted);letter-spacing:.04em;text-align:right;white-space:nowrap}
 .case-row-cover{display:none}
 
