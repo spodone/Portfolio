@@ -36,7 +36,7 @@
 </nav>
 
 <button class="felix-btn" type="button" aria-haspopup="dialog" aria-controls="ai-chat-modal" aria-expanded="false" onclick="openChat()">
-  <span class="locdot" style="display:inline-block;margin-right:7px;flex-shrink:0;position:relative;top:0;vertical-align:middle;"></span>Chat with my Agent
+  <span class="locdot" style="display:inline-block;margin-right:7px;flex-shrink:0;position:relative;top:0;vertical-align:middle;"></span>Felix is learning…
 </button>
 
 <div class="mobile-menu" id="mobile-menu">
@@ -170,18 +170,25 @@
   <section class="ai-chat-section" role="dialog" aria-modal="false" aria-labelledby="ai-chat-title">
     <header class="ai-chat-header">
       <div>
-        <div class="ai-chat-label">Online</div>
+        <div class="ai-chat-label">Away · in training</div>
         <h2 class="ai-chat-title" id="ai-chat-title">Felix · AI Assistant</h2>
       </div>
       <button class="ai-chat-close" type="button" aria-label="Close chat" onclick="closeChat()">×</button>
     </header>
     <div class="ai-chat-window" id="ai-chat-window" aria-live="polite">
       <div class="ai-msg ai-msg--bot">
-        <span>Hi, I'm Felix, Eugene's AI assistant. Ask me anything about his experience, skills, or how he can help your team.</span>
+        <span>🎓 Felix is in training right now.</span>
+      </div>
+      <div class="ai-msg ai-msg--bot">
+        <span>Eugene is feeding him every case study, metric, and questionable memecoin decision. He'll be back soon — smarter, faster, and slightly more caffeinated.</span>
+      </div>
+      <div class="ai-msg ai-msg--bot">
+        <span>In the meantime, the human answers fastest: treiher94@gmail.com</span>
       </div>
     </div>
     <div class="ai-chat-controls">
-      <div class="ai-chips-wrap" id="ai-chips-wrap">
+      <!-- Suggested questions hidden while Felix is in training. -->
+      <div class="ai-chips-wrap" id="ai-chips-wrap" style="display:none;">
         <button class="ai-chips-toggle" id="ai-chips-toggle" onclick="toggleChips()">Suggested questions <span id="ai-chips-arrow">↓</span></button>
         <div class="ai-chips ai-chips--closed" id="ai-chips">
           <button class="ai-chip" onclick="askChip(this)">How can Eugene help our team?</button>
@@ -195,8 +202,8 @@
         </div>
       </div>
       <div class="ai-input-row">
-        <input class="ai-input" id="ai-input" type="text" placeholder="Ask something…" autocomplete="off" />
-        <button class="ai-send" id="ai-send" type="button" aria-label="Send message" onclick="sendMessage()">↑</button>
+        <input class="ai-input" id="ai-input" type="text" placeholder="Felix is hitting the books — back soon 📚" autocomplete="off" disabled aria-disabled="true" />
+        <button class="ai-send" id="ai-send" type="button" aria-label="Send message" onclick="sendMessage()" disabled aria-disabled="true">↑</button>
       </div>
     </div>
   </section>
@@ -468,6 +475,7 @@ function toggleChips() {
 
 function sendMessage(text) {
   const input = document.getElementById('ai-input');
+  if (!input || input.disabled) return; // Felix is in training — chat disabled
   const q = text || input.value.trim();
   if (!q) return;
   input.value = '';
