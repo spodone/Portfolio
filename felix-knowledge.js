@@ -43,7 +43,7 @@ window.FELIX_KB = {
     {
       topic: "contact",
       keys: ["contact","email","reach him","reach out","get in touch","hire eugene","how do i contact","linkedin","connect","talk to eugene","email address"],
-      answer: "You can reach Eugene directly:\n\n• Email: treiher94@gmail.com\n• LinkedIn: linkedin.com/in/eugene-t-9b0225137\n\nHe's based in Dubai, UAE, and open to talking about senior product design roles and interesting product challenges."
+      answer: "You can reach Eugene directly:\n\n• Email: e.treiher@gmail.com\n• LinkedIn: linkedin.com/in/eugene-t-9b0225137\n\nHe's based in Dubai, UAE, and open to talking about senior product design roles and interesting product challenges."
     },
 
     /* ---- What role he's looking for ---------------------------------- */
