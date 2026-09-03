@@ -7,7 +7,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Bricolage+Grotesque:wght@200;300;400;500;600&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=40">
+<link rel="stylesheet" href="styles.css?v=42">
 </head>
 <body>
 
@@ -68,17 +68,19 @@
     </div>
     <div class="case-content">
       <div class="csq case-announcement reveal"><p>"5M+ tokens staked and 100+ new PRO subscribers in the first month - the simplicity paid off."</p></div>
-      <div id="overview">
-        <h2 class="csh">Overview</h2>
-        <p class="csp">DappRadar launched RADAR token staking as a core monetization and retention mechanic - users who stake earn PRO benefits including advanced analytics, portfolio tracking, and exclusive data. My role was to design the staking experience from wallet connection through to active staking dashboard.</p>
+      <div class="case-intro-grid">
+        <div class="case-intro-card" id="overview">
+          <h2 class="csh">Overview</h2>
+          <p class="csp">DappRadar launched RADAR token staking as a core monetization and retention mechanic - users who stake earn PRO benefits including advanced analytics, portfolio tracking, and exclusive data. My role was to design the staking experience from wallet connection through to active staking dashboard.</p>
+        </div>
+        <div class="case-intro-card" id="my-role"><h2 class="csh">My role</h2><p class="csp">As the Product Designer, I redesigned the staking flow and oversaw the project from initial research through to final design validation.</p></div>
+        <div class="case-intro-card" id="problem"><h2 class="csh">The problem</h2><p class="csp">The original staking model encouraged unsustainable growth and short-term engagement because of its high APY and lack of minimum staking requirements. The complexity typical of Web3 products also created a significant barrier to broader user adoption.</p></div>
+        <div class="case-intro-card" id="goal"><h2 class="csh">The goal</h2><p class="csp">The primary goal was to increase long-term engagement through a 30-day cool-down period and a more sustainable APY, while making the experience easier for newcomers. Clear communication about these changes was essential. We aimed to simplify the Web3 user experience, showcase the value of PRO features, and attract more than 100 new PRO users within the first month.</p></div>
         <figure class="case-media case-media--wide case-media--inline case-media--borderless reveal">
           <img src="PRO membership.jpg" alt="DappRadar PRO membership benefits and staking activation requirements" loading="lazy" decoding="async">
           <figcaption>DappRadar PRO membership and its staking-based benefits.</figcaption>
         </figure>
       </div>
-      <div id="my-role"><h2 class="csh">My role</h2><p class="csp">As the Product Designer, I redesigned the staking flow and oversaw the project from initial research through to final design validation.</p></div>
-      <div id="problem"><h2 class="csh">The problem</h2><p class="csp">The original staking model encouraged unsustainable growth and short-term engagement because of its high APY and lack of minimum staking requirements. The complexity typical of Web3 products also created a significant barrier to broader user adoption.</p></div>
-      <div id="goal"><h2 class="csh">The goal</h2><p class="csp">The primary goal was to increase long-term engagement through a 30-day cool-down period and a more sustainable APY, while making the experience easier for newcomers. Clear communication about these changes was essential. We aimed to simplify the Web3 user experience, showcase the value of PRO features, and attract more than 100 new PRO users within the first month.</p></div>
       <div class="case-section-divider" aria-hidden="true"></div>
       <div id="market-research">
         <h2 class="csh">Market research</h2>
@@ -285,7 +287,7 @@
 
 <script src="canvas.js?v=6"></script>
 <script>
-const sections = document.querySelectorAll('.case-content > div[id]');
+const sections = document.querySelectorAll('.case-content [id]');
 const navItems = document.querySelectorAll('.cst');
 navItems.forEach(item => {
   item.addEventListener('click', () => {

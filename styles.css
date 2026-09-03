@@ -604,8 +604,8 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .cml{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .cmv{font-family:'Inter',sans-serif;font-size:14px;font-weight:400;color:var(--text);margin-top:5px}
 .case-meta-team{min-width:260px}
-.case-team-credits{display:flex;flex-direction:column;gap:3px;margin-top:5px;font-size:11px;line-height:1.45;color:var(--muted2)}
-.case-team-credits strong{font-weight:500;color:var(--text)}
+.case-team-credits{display:flex;flex-direction:column;gap:4px;margin-top:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:400;line-height:1.4;color:var(--text)}
+.case-team-credits strong{font-weight:400;color:var(--muted2)}
 .case-cover{width:100%;height:520px;overflow:hidden;margin-top:52px;border-radius:10px;border:1px solid var(--line)}
 .case-cover svg{width:100%;height:100%;display:block}
 .case-body{padding:80px 52px 96px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:72px;align-items:start;border-bottom:1px solid var(--line);min-width:0}
@@ -617,6 +617,11 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .cst:focus-visible{outline:1px solid var(--accent);outline-offset:3px;border-radius:2px}
 .case-content{display:flex;flex-direction:column;gap:60px;min-width:0;width:100%;max-width:100%}
 .case-content>div{min-width:0;max-width:100%}
+.case-intro-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.case-intro-card{padding:28px;border:1px solid var(--line);border-radius:16px;background:rgba(240,237,232,.025)}
+.case-intro-card .csh{font-size:clamp(24px,2.3vw,30px);margin-bottom:14px}
+.case-intro-card .csp{font-size:14px;line-height:1.75;color:var(--muted2)}
+.case-intro-grid>.case-media{grid-column:1/-1;margin-top:20px}
 .case-section-divider{height:1px;background:var(--line);margin:-30px 0}
 .case-media,.case-media-grid figure{margin:0;min-width:0;max-width:100%}
 .case-media img,.case-media-grid img{
@@ -1116,6 +1121,9 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
   .case-content,.case-content>div,.case-media,.case-media-grid{width:100%;max-width:100%}
   .case-media figcaption,.case-media-grid figcaption{overflow-wrap:anywhere}
   .case-content{gap:52px}
+  .case-intro-grid{grid-template-columns:1fr;gap:12px}
+  .case-intro-card{padding:22px 20px;border-radius:12px}
+  .case-intro-grid>.case-media{grid-column:auto;margin-top:16px}
   .case-section-divider{margin:-26px 0}
   .case-announcement{padding:18px 20px}
   .case-announcement p{font-size:18px}
