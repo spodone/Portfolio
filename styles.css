@@ -698,7 +698,7 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .mobile-slider::-webkit-scrollbar{height:8px}
 .mobile-slider::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
 .mobile-slider::-webkit-scrollbar-track{background:transparent}
-.mobile-slider figure{margin:0;flex:0 0 auto;height:600px;overflow:hidden;border:1px solid var(--line);border-radius:24px;background:#061c40;scroll-snap-align:start}
+.mobile-slider figure{margin:0;flex:0 0 auto;height:600px;overflow:hidden;border-radius:24px;background:transparent;scroll-snap-align:start}
 .mobile-slider img{display:block;height:100%;width:auto}
 .staking-component-controls{display:flex;justify-content:flex-end;gap:8px;margin-top:20px;margin-bottom:16px}
 .staking-component-controls button{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--text);font:inherit;font-size:18px;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
