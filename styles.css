@@ -695,6 +695,7 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .mobile-layout-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
 .mobile-layout-grid figure{margin:0;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#061c40}
 .mobile-layout-grid img{display:block;width:100%;height:auto}
+@media(min-width:769px){#mobile-layout .mobile-layout-grid{width:70%;margin-left:auto;margin-right:auto}}
 .mobile-slider{display:flex;align-items:flex-start;gap:20px;margin-top:28px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-inline:contain;padding-bottom:16px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
 .mobile-slider::-webkit-scrollbar{height:8px}
 .mobile-slider::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
