@@ -555,7 +555,9 @@ function askChip(btn) {
     if (!entries[0].isIntersecting) return;
     work.classList.add('surface-visible');
     if (isMobile) {
-      caseCards.slice(0, 3).forEach(card => mobileCardObserver.observe(card));
+      caseCards
+        .filter(card => window.getComputedStyle(card).display !== 'none')
+        .forEach(card => mobileCardObserver.observe(card));
     } else {
       watchDesktopRow(0);
     }
