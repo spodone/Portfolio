@@ -7,7 +7,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Bricolage+Grotesque:wght@200;300;400;500;600&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=38">
+<link rel="stylesheet" href="styles.css?v=40">
 </head>
 <body>
 
@@ -51,19 +51,19 @@
   <section class="case-body">
     <div class="case-sidebar">
       <div class="csl">Contents</div>
-      <div class="cst active" data-target="overview">Overview</div>
-      <div class="cst" data-target="my-role">My role</div>
-      <div class="cst" data-target="problem">The problem</div>
-      <div class="cst" data-target="goal">The goal</div>
-      <div class="cst" data-target="market-research">Market research</div>
-      <div class="cst" data-target="user-research">User research</div>
-      <div class="cst" data-target="approach">Approach</div>
-      <div class="cst" data-target="wireframing">Wireframing</div>
-      <div class="cst" data-target="main-layout">Main layout UI</div>
-      <div class="cst" data-target="staking-component">Staking component</div>
-      <div class="cst" data-target="mobile-layout">Mobile layout</div>
-      <div class="cst" data-target="results">Results</div>
-      <div class="cst" data-target="reflection">What I learned</div>
+      <button type="button" class="cst active" data-target="overview">Overview</button>
+      <button type="button" class="cst" data-target="my-role">My role</button>
+      <button type="button" class="cst" data-target="problem">The problem</button>
+      <button type="button" class="cst" data-target="goal">The goal</button>
+      <button type="button" class="cst" data-target="market-research">Market research</button>
+      <button type="button" class="cst" data-target="user-research">User research</button>
+      <button type="button" class="cst" data-target="approach">Approach</button>
+      <button type="button" class="cst" data-target="wireframing">Wireframing</button>
+      <button type="button" class="cst" data-target="main-layout">Main layout UI</button>
+      <button type="button" class="cst" data-target="staking-component">Staking component</button>
+      <button type="button" class="cst" data-target="mobile-layout">Mobile layout</button>
+      <button type="button" class="cst" data-target="results">Results</button>
+      <button type="button" class="cst" data-target="reflection">What I learned</button>
     </div>
     <div class="case-content">
       <div class="csq case-announcement reveal"><p>"5M+ tokens staked and 100+ new PRO subscribers in the first month - the simplicity paid off."</p></div>
@@ -230,7 +230,11 @@
       <div id="staking-component">
         <h2 class="csh">The staking component</h2>
         <p class="csp">I developed the component as a reusable, state-driven interface covering activation, adding tokens, harvesting rewards, unstaking, validation, and transaction feedback. Keeping these actions inside one consistent surface reduced context switching and made complex Web3 operations easier to understand.</p>
-        <div class="staking-component-grid reveal">
+        <div class="staking-component-controls reveal" aria-label="Staking component controls">
+          <button type="button" data-staking-slider="-1" aria-controls="staking-component-track" aria-label="Previous component">←</button>
+          <button type="button" data-staking-slider="1" aria-controls="staking-component-track" aria-label="Next component">→</button>
+        </div>
+        <div class="staking-component-grid reveal" id="staking-component-track">
           <figure class="staking-component-item"><img src="Staking-c-1.png" alt="Staking component interface state 1" loading="lazy" decoding="async"></figure>
           <figure class="staking-component-item"><img src="Staking-c-2.png" alt="Staking component interface state 2" loading="lazy" decoding="async"></figure>
           <figure class="staking-component-item"><img src="Staking-c-3.png" alt="Staking component interface state 3" loading="lazy" decoding="async"></figure>
@@ -282,6 +286,14 @@
 <script>
 const sections = document.querySelectorAll('.case-content > div[id]');
 const navItems = document.querySelectorAll('.cst');
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const target = document.getElementById(item.dataset.target);
+    if (!target) return;
+    const top = target.getBoundingClientRect().top + window.scrollY - 120;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
 window.addEventListener('scroll', () => {
   let current = '';
   sections.forEach(s => { if(window.scrollY >= s.offsetTop - 160) current = s.id; });
@@ -294,6 +306,15 @@ document.querySelectorAll('[data-modal-slider]').forEach(button => {
     const gap = parseFloat(getComputedStyle(modalVariationsTrack).columnGap) || 0;
     const distance = firstCard.getBoundingClientRect().width + gap;
     modalVariationsTrack.scrollBy({ left: distance * Number(button.dataset.modalSlider), behavior: 'smooth' });
+  });
+});
+const stakingComponentTrack = document.getElementById('staking-component-track');
+document.querySelectorAll('[data-staking-slider]').forEach(button => {
+  button.addEventListener('click', () => {
+    const firstCard = stakingComponentTrack.querySelector('figure');
+    const gap = parseFloat(getComputedStyle(stakingComponentTrack).columnGap) || 0;
+    const distance = firstCard.getBoundingClientRect().width + gap;
+    stakingComponentTrack.scrollBy({ left: distance * Number(button.dataset.stakingSlider), behavior: 'smooth' });
   });
 });
 </script>
