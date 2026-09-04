@@ -317,6 +317,17 @@ nav.nav-hidden{transform:translateY(-120%);}
 }
 @keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
+/* Large desktop / Retina displays: keep the hero's visual weight proportional. */
+@media (min-width:1800px){
+  .hero{padding:clamp(150px,7vh,210px) clamp(72px,4vw,164px) clamp(88px,5vh,140px)}
+  .hero-headline{font-size:clamp(150px,8.6vw,320px)}
+  .hero-tags{font-size:clamp(24px,1.45vw,42px);gap:1.1em;margin-top:clamp(32px,2.2vh,54px)}
+  .logos-section{padding:clamp(56px,3vh,86px) 0}
+  .logo-item{height:38px;padding:0 clamp(44px,2.4vw,96px)}
+  .logo-item img{max-height:24px}
+  .hero-cta-icon{font-size:28px}
+}
+
 /* ── WORK ── */
 .work-section{
   padding:0 0 80px 0;
