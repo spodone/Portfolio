@@ -621,6 +621,8 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .cst:focus-visible{outline:1px solid var(--accent);outline-offset:3px;border-radius:2px}
 .case-content{display:flex;flex-direction:column;gap:60px;min-width:0;width:100%;max-width:100%}
 .case-content>div{min-width:0;max-width:100%}
+/* Skip layout and paint work for distant case-study sections until they approach the viewport. */
+.case-content>div,.case-content>figure{content-visibility:auto;contain-intrinsic-size:auto 700px}
 .case-intro-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .case-intro-card{padding:28px;border:1px solid var(--line);border-radius:16px;background:rgba(240,237,232,.025)}
 .case-intro-card .csh{font-size:clamp(24px,2.3vw,30px);margin-bottom:14px}
@@ -960,6 +962,7 @@ footer span{font-size:11px;color:var(--muted);letter-spacing:.04em}
 .text-reveal.delay-3 .text-reveal-inner{transition-delay:.36s}
 
 @media(max-width:768px){
+  #blob-canvas{display:none}
   .work-hero{padding:120px 20px 60px}
   .work-hero-bottom{flex-direction:column;gap:24px;align-items:flex-start}
   .work-hero-count{display:none}

@@ -20,6 +20,7 @@
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
   const isCasePage = Boolean(document.querySelector('.case-page'));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const glowMul = isCasePage
     ? (isMobile ? 0.15 : 0.2)
     : (isMobile ? 0.5 : 1);
@@ -101,7 +102,7 @@
 
     requestAnimationFrame(draw);
   }
-  draw();
+  if(!reduceMotion && !(isMobile && isCasePage)) draw();
 })();
 
 // ── SCROLL REVEAL ──
